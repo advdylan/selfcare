@@ -38,6 +38,9 @@ class Meetings(models.Model):
     doctor = models.ForeignKey(Doctor, null=True, on_delete=models.SET_NULL)
     patient = models.ForeignKey(Patient, null=True, on_delete=models.SET_NULL)
 
+    def __str__(self):
+        return f"ID: {self.id} Doctor: {self.doctor}, Patient: {self.patient}"
+
 
     def save(self,*args, **kwargs):
         if self.end_time <= self.start_time:

@@ -9,5 +9,6 @@ def index(request):
 
 def meetings(request):
     meetings = Meetings.objects.all()
+    print(meetings.first())
     
     return render(request, "patients/meetings.html")
