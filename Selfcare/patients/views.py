@@ -5,3 +5,8 @@ from django.shortcuts import render
 
 def index(request):
     return render(request, "patients/index.html")
+
+def meetings(request):
+    return render(request, "patients/meetings.html", {
+        ""
+    } )
