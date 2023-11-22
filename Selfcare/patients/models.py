@@ -9,7 +9,10 @@ class Doctor(models.Model):
     last_name = models.CharField(max_length=30)
     address = models.CharField(max_length=100)
     phone_number = models.IntegerField()
-    proteges = models.ManyToManyField('Patient', related_name="Patients")
+    proteges = models.ManyToManyField('Patient',blank=True, related_name="Patients")
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 class Patient(models.Model):
     first_name = models.CharField(max_length=30)
@@ -20,7 +23,7 @@ class Patient(models.Model):
 
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}, address: {self.address}, phone_number: {self.phone_number}"
+        return f"{self.first_name} {self.last_name}"
 
 class Meetings(models.Model):
     MEETING_TYPE = (
@@ -31,7 +34,7 @@ class Meetings(models.Model):
     meeting_place = models.CharField(max_length=100, null=True, choices=MEETING_TYPE)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    duration = models.DurationField(null=True)
+    duration = models.DurationField(null=True, blank=True)
     doctor = models.ForeignKey(Doctor, null=True, on_delete=models.SET_NULL)
     patient = models.ForeignKey(Patient, null=True, on_delete=models.SET_NULL)
 

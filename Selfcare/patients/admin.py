@@ -7,7 +7,8 @@ class MeetingsAdmin(admin.ModelAdmin):
 class PatientsAdmin(admin.ModelAdmin):
     filter_horizontal = ("meetings",)
 
-admin.site.register(Doctors)
+admin.site.register(Doctor)
+admin.site.register(Patient)
 admin.site.register(Meetings, MeetingsAdmin)
 
 
