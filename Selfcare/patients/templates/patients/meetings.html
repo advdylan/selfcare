@@ -2,6 +2,23 @@
 {% load static %}
 {% block body %}
 
-
+<table class="table table-hover meetings-table">
+    <thead>
+      <tr>
+        <th scope="col">Data</th>
+        <th scope="col">Patient</th>
+        <th scope="col">Doctor</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for meeting in meetings %}
+        <tr class="table-secondary">
+            <th scope="row">{{ meeting.start_time }}</th>
+            <td>{{ meeting.patient}}</td>
+            <td>{{ meeting.doctor}}</td>
+          </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock body %}

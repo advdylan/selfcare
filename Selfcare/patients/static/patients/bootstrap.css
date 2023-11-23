@@ -12748,3 +12748,13 @@ textarea.form-control-lg {
 .list-group-item {
   background-color: transparent;
 }
+
+.meetings-table {
+  width: 40%;
+}
+
+.meetings-table {
+  border-bottom: 5px;
+  margin: 50px;
+  width: 40%;
+}
