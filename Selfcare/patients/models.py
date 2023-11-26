@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import F
-from datetime import timedelta, datetime
+from datetime import timedelta
+from django.utils import timezone
 
 # Create your models here.
 
@@ -49,27 +50,32 @@ class Meetings(models.Model):
         return f"ID: {self.id} Doctor: {self.doctor}, Patient: {self.patient}"
 
 
-    def save(self,*args, **kwargs):
-
+    def save(self, *args, **kwargs):
         if self.end_time != None:           
             if self.end_time <= self.start_time:
                 raise ValueError("End time must be after the start time")
             
         if self.end_time:
             self.duration = self.end_time - self.start_time
-            super(Meetings,self).save(*args,**kwargs)
+
+        # Call the status method to update the progress field
+        self.status(update=False)
+
+        # Now save the object with the updated fields
+        super(Meetings, self).save(*args, **kwargs)
 
 
 
-    def status(self, *args, **kwargs):
-        now = datetime.now()
-        if self.end_time == None or self.end_time < now:
-            self.progress = 'Zakończone'
-        elif self.start_time > now:
+    def status(self, update=True):
+        now = timezone.now()
+        if self.start_time > now:
             self.progress = 'Nierozpoczęte'
+        elif self.end_time and self.end_time < now:
+            self.progress = 'Zakończone'
         else:
             self.progress = 'W trakcie'
-        super(Meetings, self).save(*args, **kwargs)
+        if update:     
+            super(Meetings, self).save()
 
             
 
