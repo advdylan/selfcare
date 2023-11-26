@@ -14,7 +14,7 @@ def meetings(request):
     #update the status of meeting
     for meeting in meetings:
         meeting.status()
-        meeting.save()
+        
     
 
 

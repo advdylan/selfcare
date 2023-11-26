@@ -5,6 +5,8 @@ from django.utils import timezone
 
 # Create your models here.
 
+NOW = timezone.now()
+
 class Doctor(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -51,31 +53,36 @@ class Meetings(models.Model):
 
 
     def save(self, *args, **kwargs):
-        if self.end_time != None:           
+        
+        if self.end_time is not None:           
             if self.end_time <= self.start_time:
                 raise ValueError("End time must be after the start time")
             
         if self.end_time:
             self.duration = self.end_time - self.start_time
 
+
         # Call the status method to update the progress field
-        self.status(update=False)
+        self.status()
 
         # Now save the object with the updated fields
         super(Meetings, self).save(*args, **kwargs)
 
+    def status(self):
 
 
-    def status(self, update=True):
-        now = timezone.now()
-        if self.start_time > now:
+        if self.start_time > NOW:
             self.progress = 'Nierozpoczęte'
-        elif self.end_time and self.end_time < now:
+        elif self.end_time and self.end_time < NOW:
             self.progress = 'Zakończone'
         else:
             self.progress = 'W trakcie'
-        if update:     
-            super(Meetings, self).save()
+
+        if self.end_time == None and self.progress == 'W trakcie':
+            duration = NOW - self.start_time
+            self.duration = duration
+        
+        self.save
 
             
 
