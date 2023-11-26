@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import F
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 # Create your models here.
 
@@ -39,29 +39,38 @@ class Meetings(models.Model):
 
     meeting_place = models.CharField(max_length=100, null=True, choices=MEETING_TYPE)
     start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    end_time = models.DateTimeField(null=True, blank=True)
     duration = models.DurationField(null=True, blank=True)
     doctor = models.ForeignKey(Doctor, null=True, on_delete=models.SET_NULL)
     patient = models.ForeignKey(Patient, null=True, on_delete=models.SET_NULL)
-    progress = models.CharField(max_length=100, null=True, choices = MEETING_STATUS)
+    progress = models.CharField(max_length=100, null=True, choices = MEETING_STATUS, blank=True)
 
     def __str__(self):
         return f"ID: {self.id} Doctor: {self.doctor}, Patient: {self.patient}"
 
 
     def save(self,*args, **kwargs):
-        if self.end_time <= self.start_time:
-            raise ValueError("End time must be after the start time")
-        
-        self.duration = self.end_time - self.start_time
-        super(Meetings,self).save(*args,**kwargs)
+
+        if self.end_time != None:           
+            if self.end_time <= self.start_time:
+                raise ValueError("End time must be after the start time")
+            
+        if self.end_time:
+            self.duration = self.end_time - self.start_time
+            super(Meetings,self).save(*args,**kwargs)
+
+
 
     def status(self, *args, **kwargs):
-        if self.end_time:
+        now = datetime.now()
+        if self.end_time == None or self.end_time < now:
             self.progress = 'Zakończone'
-        elif self.end_time == None:
+        elif self.start_time > now:
             self.progress = 'Nierozpoczęte'
-        elif 
+        else:
+            self.progress = 'W trakcie'
+        super(Meetings, self).save(*args, **kwargs)
+
             
 
     
