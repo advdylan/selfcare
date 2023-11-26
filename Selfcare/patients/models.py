@@ -5,7 +5,7 @@ from django.utils import timezone
 
 # Create your models here.
 
-NOW = timezone.now()
+
 
 class Doctor(models.Model):
     first_name = models.CharField(max_length=30)
@@ -69,20 +69,20 @@ class Meetings(models.Model):
         super(Meetings, self).save(*args, **kwargs)
 
     def status(self):
+        now = timezone.now()
 
-
-        if self.start_time > NOW:
+        if self.start_time > now:
             self.progress = 'Nierozpoczęte'
-        elif self.end_time and self.end_time < NOW:
+        elif self.end_time and self.end_time < now:
             self.progress = 'Zakończone'
         else:
             self.progress = 'W trakcie'
 
         if self.end_time == None and self.progress == 'W trakcie':
-            duration = NOW - self.start_time
+            duration = now - self.start_time
             self.duration = duration
-        
-        self.save
+            print(f"Duration: {self.duration}")
+
 
             
 
