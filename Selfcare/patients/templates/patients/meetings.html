@@ -9,6 +9,7 @@
         <th scope="col">Patient</th>
         <th scope="col">Doctor</th>
         <th scope="col">Duration</th>
+        <th scope="col">Status</th>
       </tr>
     </thead>
     <tbody>
@@ -18,6 +19,7 @@
             <td>{{ meeting.patient}}</td>
             <td>{{ meeting.doctor}}</td>
             <td>{{ meeting.duration}}</td>
+            <td> {{ meeting.status }}</td>
           </tr>
         {% endfor %}
     </tbody>

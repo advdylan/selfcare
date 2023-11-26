@@ -27,8 +27,14 @@ class Patient(models.Model):
 
 class Meetings(models.Model):
     MEETING_TYPE = (
-        ('Office', 'Office'),
-        ('Remote', ' Remote'),
+        ('Biuro', 'Biuro'),
+        ('Zdalnie', 'Zdalnie'),
+    )
+
+    MEETING_STATUS = (
+        ('Zakończone', 'Zakończone'),
+        ('W trakcie', 'W trakcie'),
+        ('Nierozpoczęte', 'Nierozpoczęte')
     )
 
     meeting_place = models.CharField(max_length=100, null=True, choices=MEETING_TYPE)
@@ -37,6 +43,7 @@ class Meetings(models.Model):
     duration = models.DurationField(null=True, blank=True)
     doctor = models.ForeignKey(Doctor, null=True, on_delete=models.SET_NULL)
     patient = models.ForeignKey(Patient, null=True, on_delete=models.SET_NULL)
+    progress = models.CharField(max_length=100, null=True, choices = MEETING_STATUS)
 
     def __str__(self):
         return f"ID: {self.id} Doctor: {self.doctor}, Patient: {self.patient}"
@@ -48,6 +55,14 @@ class Meetings(models.Model):
         
         self.duration = self.end_time - self.start_time
         super(Meetings,self).save(*args,**kwargs)
+
+    def status(self, *args, **kwargs):
+        if self.end_time:
+            self.progress = 'Zakończone'
+        elif self.end_time == None:
+            self.progress = 'Nierozpoczęte'
+        elif 
+            
 
     
 
