@@ -7,18 +7,34 @@
       <thead>
       <tr class="table-primary">
         <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Imię</th>
+        <th scope="col">Nazwisko</th>
+        <th scope="col">Telefon</th>
+        <th scope="col">Adres</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Opiekun</th>
+        <th scope="col">Informacje</th>
       </tr>
       </thead>
       <tbody>
-      <tr class="table-active">
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        {% for patient in patients  %}
+      <tr class="table-active">     
+
+        <th scope="row">{{ patient.id }}</th>
+        <td>{{ patient.first_name }}</td>
+        <td>{{ patient.last_name }}</td>
+        <td>{{ patient.phone_number}}</td>
+        <td>{{ patient.address}}</td>
+        <td>{{ patient.email}}</td>
+        <td>
+          {% for doctor in patient.curator.all %}
+            {{ doctor.first_name }} {{doctor.last_name }}
+          {% endfor %}
+        </td>
+        <td><button type="button" class="btn btn-outline-info btn-sm button-fill">Więcej informacji</button></td>
+        
       </tr>
+      {% endfor %}
       </tbody>
     </table>
 </div>
