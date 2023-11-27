@@ -13,6 +13,7 @@ class Doctor(models.Model):
     address = models.CharField(max_length=100)
     phone_number = models.IntegerField()
     proteges = models.ManyToManyField('Patient',blank=True, related_name="Patients")
+    email = models.EmailField(max_length=254)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -23,6 +24,7 @@ class Patient(models.Model):
     address = models.CharField(max_length=100)
     phone_number = models.IntegerField()
     curator = models.ManyToManyField(Doctor, related_name="Doctor")
+    email = models.EmailField(max_length=254)
 
 
     def __str__(self):
