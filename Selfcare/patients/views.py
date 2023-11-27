@@ -16,10 +16,7 @@ def meetings(request):
         meeting.status()
         meeting.save()
         
-    
-
-
-
     return render(request, "patients/meetings.html", {
         "meetings": meetings
     })
+
