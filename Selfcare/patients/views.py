@@ -20,3 +20,10 @@ def meetings(request):
         "meetings": meetings
     })
 
+def patients(request):
+
+    patients = Patient.objects.all()
+    
+    return render(request,"patients/patients.html", {
+        "patients": patients
+    })
