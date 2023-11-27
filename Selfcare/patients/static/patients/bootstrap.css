@@ -1947,7 +1947,7 @@ progress {
 .table-primary {
   --bs-table-color: #000;
   --bs-table-bg: #d7e8fe;
-  --bs-table-border-color: #acbacb;
+  --bs-table-border-color: #000000;
   --bs-table-striped-bg: #ccdcf1;
   --bs-table-striped-color: #000;
   --bs-table-active-bg: #c2d1e5;
@@ -2051,7 +2051,7 @@ progress {
   --bs-table-active-bg: #373b3e;
   --bs-table-active-color: #fff;
   --bs-table-hover-bg: #323539;
-  --bs-table-hover-color: #fff;
+  --bs-table-hover-color: #ffffff;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color);
 }
@@ -12747,4 +12747,22 @@ textarea.form-control-lg {
 
 .list-group-item {
   background-color: transparent;
+}
+
+.meetings-table {
+  width: 40%;
+}
+
+.meetings-table {
+  border-bottom: 5px;
+  margin: 50px;
+  width: 40%;
+}
+
+
+.patients-table {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px
 }

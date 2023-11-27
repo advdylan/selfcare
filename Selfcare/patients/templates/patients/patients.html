@@ -2,11 +2,10 @@
 {% load static %}
 {% block body %}
 
-
-<div class="bd-example-snippet bd-code-snippet"><div class="bd-example m-0 border-1">
-    <table class="table table-sm table-bordered">
+<div class="tables">
+    <table id="data" class="table table-bordered table-hover patients-table">
       <thead>
-      <tr>
+      <tr class="table-primary">
         <th scope="col">#</th>
         <th scope="col">First</th>
         <th scope="col">Last</th>
@@ -14,28 +13,15 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
+      <tr class="table-primary">
         <th scope="row">1</th>
         <td>Mark</td>
         <td>Otto</td>
         <td>@mdo</td>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
       </tbody>
     </table>
-    </div></div>
+</div>
 
-  </div>
-</article>
 
 {% endblock %}
