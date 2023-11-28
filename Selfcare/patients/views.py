@@ -27,3 +27,11 @@ def patients(request):
     return render(request,"patients/patients.html", {
         "patients": patients
     })
+
+def patient(request):
+
+    patients = Patient.objects.all()
+    
+    return render(request,"patients/patient.html", {
+        "patients": patients
+    })
