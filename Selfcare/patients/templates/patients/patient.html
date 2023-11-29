@@ -43,8 +43,9 @@
     <div class="card border-primary mb-3" style="width: 81rem;">
         <div class="card-header text-center fs-5">Wizyty</div>
         <div class="card-body">
-        {% if meetings.count > 0 %}
-            <table class="table table-hover">
+
+        {% if meeting.count > 0 %}
+        <table class="table table-hover">
                 <thead>
                   <tr>
                     <th scope="col">Miejsce spotkania</th>
@@ -53,12 +54,9 @@
                     <th scope="col">Status</th>
                   </tr>
                 </thead>
-
-        
         <tbody>                     
           <p class="card-text">{% for meeting in meeting  %}
             <tr class="table-active">
-                <th scope="row">Active</th>
                 <td>{{ meeting.meeting_place }}</td>
                 <td>{{ meeting.doctor }}</td>
                 <td>{{ meeting.start_time }}</td>

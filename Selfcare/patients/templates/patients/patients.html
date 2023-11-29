@@ -31,7 +31,8 @@
             {{ doctor.first_name }} {{doctor.last_name }}
           {% endfor %}
         </td>
-        <td><button type="button" class="btn btn-outline-info btn-sm button-fill">Więcej informacji</button></td>
+        <td><a class="btn btn-outline-info btn-sm button-fill" href="{% url 'patient' patient.id %}" role="button">Więcej informacji</button>
+        </td>
         
       </tr>
       {% endfor %}
