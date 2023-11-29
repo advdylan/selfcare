@@ -12781,3 +12781,13 @@ textarea.form-control-lg {
   flex-direction: row;
 
 }
+
+.container-meetings {
+  padding-top: 5%;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

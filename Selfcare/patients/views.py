@@ -28,10 +28,12 @@ def patients(request):
         "patients": patients
     })
 
-def patient(request):
+def patient(request, pk):
 
-    patients = Patient.objects.all()
-    
+    patient = Patient.objects.get(id=pk)
+    meeting = Meetings.objects.filter(patient=patient)
+   
     return render(request,"patients/patient.html", {
-        "patients": patients
+        "patient": patient,
+        "meeting": meeting
     })

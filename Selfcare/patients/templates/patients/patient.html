@@ -6,36 +6,73 @@
         padding-top: 1%;
         text-align:center;
     }
+
 </style>
-<h1>Karta informacji o pacjencie: Mateusz Kowalski</h1>
+<h1>Karta informacji o pacjencie: {{ patient.first_name }} {{ patient.last_name }}</h1>
 
 
 <div class="container">
 
-    <div class="card border-primary mb-3" style="idth: 40rem;">
-        <div class="card-header">Wizyty</div>
+    <div class="card border-primary mb-3" style="width: 40rem;">
+    <div class="card-header text-center fs-5">Dane kontaktowe</div>
+    <div class="card-body">
+        <p class="card-text">
+            <ul class="list-group">
+                <li class="list-group-item">Adres: {{ patient.address }}</li>
+                <li class="list-group-item">Telefon: {{ patient.phone_number }}</li>
+                <li class="list-group-item">Opiekun: {% for doctor in patient.curator.all %}
+                    {{ doctor.first_name }} {{doctor.last_name }}
+                  {% endfor %}</li>
+                <li class="list-group-item">E-mail: {{ patient.email }}</li>
+
+            </ul>
+        </p>
+    </div>
+    </div>
+    <div class="card border-primary mb-3" style="width: 40rem;">
+        <div class="card-header text-center fs-5">Płatności</div>
         <div class="card-body">
-          <h4 class="card-title">Primary card title</h4>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            
+            <p class="card-text">Dane dotyczące płatności</p>
+        </div>
+    </div>
+
+</div>
+
+<div class= "container-meetings">
+    <div class="card border-primary mb-3" style="width: 81rem;">
+        <div class="card-header text-center fs-5">Wizyty</div>
+        <div class="card-body">
+        {% if meetings.count > 0 %}
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Miejsce spotkania</th>
+                    <th scope="col">Terapeuta</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+
+        
+        <tbody>                     
+          <p class="card-text">{% for meeting in meeting  %}
+            <tr class="table-active">
+                <th scope="row">Active</th>
+                <td>{{ meeting.meeting_place }}</td>
+                <td>{{ meeting.doctor }}</td>
+                <td>{{ meeting.start_time }}</td>
+                <td>{{ meeting.progress }}</td>
+              </tr>  
+
+            {% endfor %}</p>
+        {% else %}
+        <h1>Brak umówionych wizyt</h1>
+
+        {% endif %}
+        </tbody>
         </div>
       </div>
-
-    <div class="card border-primary mb-3" style="width: 20rem;">
-    <div class="card-header">Dane kontaktowe</div>
-    <div class="card-body">
-        <h4 class="card-title">Primary card title</h4>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-    </div>
-
-    <div class="card border-primary mb-3" style="width: 20rem;">
-        <div class="card-header">Płatności</div>
-        <div class="card-body">
-            <h4 class="card-title">Primary card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-    </div>
-
 </div>
 
 
