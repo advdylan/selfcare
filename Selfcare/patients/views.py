@@ -37,3 +37,7 @@ def patient(request, pk):
         "patient": patient,
         "meeting": meeting
     })
+
+def newpatient(request):
+    
+    return render(request, "patients/newpatient.html")
