@@ -1,17 +1,39 @@
 {% extends "patients/layout.html" %}
 {% load static %}
 {% block body %}
-
+<style>
+    .form-newpatient {
+        width: 60%;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn {
+        margin: 2rem;
+        width: 60%;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 <div class= "container-newpatient">
-    <div class="card border-primary mb-3" style="width: 81rem;">
+    <div class="card border-primary mb-3" style="width: 70rem;">
         <div class="card-header text-center fs-5">Dodaj nowego pacjenta</div>
-        <div class="card-body">
+        <div class="form-newpatient">
+        <div class="card-body">          
             <form action="newpatient" method="POST">
                 {% csrf_token %}
-                {{ form.curator }}
-                <input type="submit">
+                {{ form }}
+                <button type="submit" class="btn btn-outline-primary" style="width: 20rem;">Dodaj pacjenta</button>
+            </form>
+            </div>
 
         </div>
+        
     </div>
 
 </div>

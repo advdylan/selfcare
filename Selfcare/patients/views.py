@@ -42,7 +42,16 @@ def patient(request, pk):
     })
 
 def newpatient(request):
+    
     form = NewPatient
+
+    if request.method == 'POST':
+        print(request.POST)
+        form = NewPatient(request.POST)
+        if form.is_valid():
+            form.save
+
+
     return render(request, "patients/newpatient.html",{
         "form": form
     })
