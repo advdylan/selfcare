@@ -6,13 +6,15 @@
     <div class="card border-primary mb-3" style="width: 81rem;">
         <div class="card-header text-center fs-5">Dodaj nowego pacjenta</div>
         <div class="card-body">
+            <form action="newpatient" method="POST">
+                {% csrf_token %}
+                {{ form.curator }}
+                <input type="submit">
 
         </div>
     </div>
 
 </div>
-
-
 
 
 {% endblock body %}
