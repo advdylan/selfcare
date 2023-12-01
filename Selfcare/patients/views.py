@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Doctor, Patient, Meetings
+from django import forms
+from django.forms import ModelForm
 
 
 # Create your views here.
@@ -40,4 +42,6 @@ def patient(request, pk):
 
 def newpatient(request):
     
+    if request.method == "POST":
+        name = 
     return render(request, "patients/newpatient.html")
