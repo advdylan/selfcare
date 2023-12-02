@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -52,6 +53,7 @@ def newpatient(request):
         form = NewPatient(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Pacjent dodany poprawnie!')
             return redirect('newpatient')
 
 
