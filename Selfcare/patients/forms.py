@@ -40,7 +40,7 @@ class NewMeeting(forms.ModelForm):
 
         widgets = {
             'meeting_place': forms.Select(attrs={'class': 'form-select'}),
-            'start_time': forms.DateField(atts={'class': 'form-control'}),
+            'start_time': forms.DateInput(format='%d/%m/%Y'),
             'doctor': forms.SelectMultiple(attrs={'class': 'form-select'}),
             'patient': forms.SelectMultiple(attrs={'class': 'form-select'})
         }

@@ -5,7 +5,7 @@ from django.urls import reverse
 from .models import Doctor, Patient, Meetings
 from django import forms
 from django.forms import ModelForm
-from .forms import NewPatient
+from .forms import NewPatient, NewMeeting
 
 
 # Create your views here.
@@ -58,5 +58,19 @@ def newpatient(request):
 
 
     return render(request, "patients/newpatient.html",{
+        "form": form
+    })
+
+def newmeeting(request):
+    form = NewMeeting
+    
+    if request.method == 'POST':
+        print(request.POST)
+        form = NewMeeting(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Spotkanie dodane poprawnie!')
+
+    return render(request, "patients/newmeeting.html", {
         "form": form
     })
