@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from .models import Doctor, Patient, Meetings
 from django import forms
 from django.forms import ModelForm
@@ -49,7 +51,8 @@ def newpatient(request):
         print(request.POST)
         form = NewPatient(request.POST)
         if form.is_valid():
-            form.save
+            form.save()
+            return redirect('newpatient')
 
 
     return render(request, "patients/newpatient.html",{

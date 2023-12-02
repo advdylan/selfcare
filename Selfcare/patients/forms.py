@@ -22,7 +22,7 @@ class NewPatient(forms.ModelForm):
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'address': forms.TextInput(attrs={'class': 'form-control'}),
             'phone_number': forms.NumberInput(attrs={'class': 'form-control'}),
-            'curator': forms.Select(attrs={'class': 'form-select'}),
+            'curator': forms.SelectMultiple(attrs={'class': 'form-select'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'type': 'email', 'placeholder': 'Email'})
         }
 
