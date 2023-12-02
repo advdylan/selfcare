@@ -29,4 +29,19 @@ class NewPatient(forms.ModelForm):
 class NewMeeting(forms.ModelForm):
     class Meta:
         model = Meetings
+        fields = ('meeting_place', 'start_time', 'doctor', 'patient',)
+
+        labels = {
+            'meeting_place': 'Rodzaj spotkania',
+            'start_time': 'Data rozpoczęcia',
+            'doctor': 'Terapeuta',
+            'patient': 'Pacjent'
+        }
+
+        widgets = {
+            'meeting_place': forms.Select(attrs={'class': 'form-select'}),
+            'start_time': forms.DateField(atts={'class': 'form-control'}),
+            'doctor': forms.SelectMultiple(attrs={'class': 'form-select'}),
+            'patient': forms.SelectMultiple(attrs={'class': 'form-select'})
+        }
 

@@ -1,0 +1,20 @@
+{% extends "patients/layout.html" %}
+{% load static %}
+{% block body %}
+
+<div class="card border-primary mb-3" style="width: 70rem;">
+    <div class="card-header text-center fs-5">Dodaj nowego pacjenta</div>
+    <div class="form-newpatient">
+    <div class="card-body">          
+        <form action="newpatient" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="btn btn-outline-primary" style="width: 20rem;">Dodaj pacjenta</button>
+        </form>
+        </div>
+
+    </div>
+    
+</div>
+
+{% endblock body %}
