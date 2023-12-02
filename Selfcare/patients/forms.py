@@ -26,3 +26,7 @@ class NewPatient(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control', 'type': 'email', 'placeholder': 'Email'})
         }
 
+class NewMeeting(forms.ModelForm):
+    class Meta:
+        model = Meetings
+
