@@ -2,17 +2,36 @@
 {% load static %}
 {% block body %}
 
-<table class="table table-sm table-hover meetings-table">
-    <thead>
-      <tr>
+<style>
+  .container-meetings {
+    padding-top: 4rem;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+</style>
+
+
+<div class= "container-meetings">
+  <div class="card border-primary mb-3" style="width: 80%;">
+      <div class="card-header text-center fs-5">Zaplanowane spotkania</div>
+      <div class="form-newpatient">
+      <div class="card-body">  
+<div class="tables">
+    <table id="data" class="table table-bordered table-hover patients-table">
+      <thead>
+      <tr class="table-primary">
         <th scope="col">Data</th>
         <th scope="col">Patient</th>
         <th scope="col">Doctor</th>
         <th scope="col">Duration</th>
         <th scope="col">Status</th>
       </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         {% for meeting in meetings %}
         <tr class="table-secondary">
             <th scope="row">{{ meeting.start_time }}</th>
@@ -22,7 +41,13 @@
             <td> {{ meeting.progress }}</td>
           </tr>
         {% endfor %}
-    </tbody>
-</table>
+
+      </tbody>
+    </table>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 {% endblock body %}
