@@ -6,8 +6,8 @@ from .models import Doctor,Patient,Meetings
 
 #calendar custom widget
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
+class DateTimeInput(forms.DateTimeInput):
+    input_type = 'datetime-local'
 
 
 class NewPatient(forms.ModelForm):
@@ -49,7 +49,7 @@ class NewMeeting(forms.ModelForm):
 
         widgets = {
             'meeting_place': forms.Select(attrs={'class': 'form-select'}),
-            'start_time': DateInput(attrs={'class': 'form-select'}),
+            'start_time': forms.DateTimeInput(attrs={'class': 'form-select'}),
             'doctor': forms.Select(attrs={'class': 'form-select'}),
             'patient': forms.Select(attrs={'class': 'form-select'})
         }
