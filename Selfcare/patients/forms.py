@@ -2,6 +2,14 @@ from django.forms import ModelForm
 from django import forms
 from .models import Doctor,Patient,Meetings
 
+
+
+#calendar custom widget
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
 class NewPatient(forms.ModelForm):
     class Meta:
         model = Patient
@@ -26,6 +34,7 @@ class NewPatient(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control', 'type': 'email', 'placeholder': 'Email'})
         }
 
+
 class NewMeeting(forms.ModelForm):
     class Meta:
         model = Meetings
@@ -40,8 +49,9 @@ class NewMeeting(forms.ModelForm):
 
         widgets = {
             'meeting_place': forms.Select(attrs={'class': 'form-select'}),
-            'start_time': forms.DateInput(format='%d/%m/%Y'),
+            'start_time': DateInput(attrs={'class': 'form-select'}),
             'doctor': forms.SelectMultiple(attrs={'class': 'form-select'}),
             'patient': forms.SelectMultiple(attrs={'class': 'form-select'})
         }
+
 
