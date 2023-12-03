@@ -69,7 +69,7 @@
     <div class="card-header text-center fs-5">Zaplanuj nową wizytę</div>
     <div class="form-newmeeting">
     <div class="card-body">          
-        <form action="newpatient" method="POST">
+        <form action="newmeeting" method="POST">
             {% csrf_token %}
             {{ form }}      
             <button type="submit" class="btn btn-outline-primary" style="width: 20rem;">Dodaj pacjenta</button>
