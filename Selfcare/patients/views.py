@@ -79,8 +79,8 @@ def dashboard(request):
 
     upcoming_meetings = Meetings.objects.all().filter(progress = 'Nierozpoczęte')
     current_meetings = Meetings.objects.all().filter(progress = 'W trakcie')
-    print(upcoming_meetings)
     print(current_meetings)
     return render(request, "patients/dashboard.html", {
-        "upcoming_meetings": upcoming_meetings
+        "upcoming_meetings": upcoming_meetings,
+        "current_meetings": current_meetings
     })

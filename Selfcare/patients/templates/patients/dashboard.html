@@ -3,42 +3,96 @@
 {% block body %}
 
 <style>
-.container-dashboard{
-    width: 80%;
-    padding-top: 4rem;
-    padding: 4rem;
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    .container-dashboard {
+        padding-top: 4rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 100%;
+    }
+    .card {
+        width: 40%;
+        margin: 2rem;
+    }
+    </style>
+    
+    <div class="container-dashboard">
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header text-center fs-5">Header</div>
+            <div class="card-body">
 
-}
-</style>
-
-<div class="container-dashboard">
-
-    <div class="card border-primary mb-3" style="max-width: 20rem;">
-        <div class="card-header">Header</div>
-        <div class="card-body">
-          <h4 class="card-title">Primary card title</h4>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <div class="tables">
+                    <table id="data" class="table table-bordered table-hover patients-table">
+                      <thead>
+                      <tr class="table-primary">
+                        <th scope="col">Data</th>
+                        <th scope="col">Patient</th>
+                        <th scope="col">Doctor</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        {% for up_meeting in upcoming_meetings %}
+                        <tr class="table-secondary">
+                            <th scope="row">{{ up_meeting.start_time }}</th>
+                            <td>{{ up_meeting.patient}}</td>
+                            <td>{{ up_meeting.doctor}}</td>
+                            <td>{{ up_meeting.duration}}</td>
+                            <td> {{ up_meeting.progress }}</td>
+                          </tr>
+                        {% endfor %}
+                
+                      </tbody>
+                    </table>
+                </div>          
+            </div>
         </div>
-      </div>
-      <div class="card border-primary mb-3" style="max-width: 20rem;">
-        <div class="card-header">Header</div>
-        <div class="card-body">
-          <h4 class="card-title">Primary card title</h4>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header text-center fs-5">Header</div>
+            <div class="card-body">
+                <div class="tables">
+                    <table id="data" class="table table-bordered table-hover patients-table">
+                      <thead>
+                      <tr class="table-primary">
+                        <th scope="col">Data</th>
+                        <th scope="col">Patient</th>
+                        <th scope="col">Doctor</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        {% for current_meeting in current_meetings %}
+                        <tr class="table-secondary">
+                            <th scope="row" class="text-center fs-7">{{ current_meeting.start_time }}</th>
+                            <td>{{ current_meeting.patient}}</td>
+                            <td>{{ current_meeting.doctor}}</td>
+                            <td>{{ current_meeting.duration}}</td>
+                            <td> {{ current_meeting.progress }}</td>
+                          </tr>
+                        {% endfor %}
+                
+                      </tbody>
+                    </table>
+                </div>          
+            </div>
         </div>
-      </div>
+
+
+              
+            </div>
+        </div>
+    
+    </div>
+    
 
 
 
 
 
 
-</div>
 
 {% endblock body %}
