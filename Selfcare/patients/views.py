@@ -6,6 +6,7 @@ from .models import Doctor, Patient, Meetings
 from django import forms
 from django.forms import ModelForm
 from .forms import NewPatient, NewMeeting
+from django.utils import timezone, dateformat, datetime_safe
 
 
 # Create your views here.
@@ -77,10 +78,13 @@ def newmeeting(request):
 
 def dashboard(request):
 
-    upcoming_meetings = Meetings.objects.all().filter(progress = 'Nierozpoczęte')
-    current_meetings = Meetings.objects.all().filter(progress = 'W trakcie')
-    print(current_meetings)
+    now = timezone.now()
+
+    upcoming_meetings = Meetings.objects.all().filter(start_time__date=now.date())
+    next_meetings = Meetings.objects.all().filter(start_time__gte=now).exclude(start_time__date=now)
+
+    print(next_meetings)
     return render(request, "patients/dashboard.html", {
         "upcoming_meetings": upcoming_meetings,
-        "current_meetings": current_meetings
+        "next_meetings": next_meetings
     })
