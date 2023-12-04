@@ -83,8 +83,6 @@ class Meetings(models.Model):
         if self.end_time == None and self.progress == 'W trakcie':
             duration = now - self.start_time
             self.duration = duration
-            print(f"Duration: {self.duration}")
-
 
             
 
