@@ -141,17 +141,18 @@ CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
 
 #: Only add pickle to this list if your broker is secured
 #: from unwanted access (see userguide/security.html)
+
 CELERY_ACCEPT_CONTENT = ['json']
-CELERY_RESULT_BACKEND = 'db+sqlite:///results.sqlite'
+CELERY_RESULT_BACKEND = 'django-db'
 CELERY_TASK_SERIALIZER = 'json'
 
 CELERY_BEAT_SCHEDULE = {
     'send-sms-every-morning': {
-        'task': 'tasks.send_sms_to_customer',
+        'task': 'patients.tasks.send_sms_to_customer',
         'schedule': crontab(minute="*/1"),
     },
 }
 
-CELERY_RESULT_BACKEND = 'django-db'
+
 
 CELERY_CACHE_BACKEND = 'django-cache'

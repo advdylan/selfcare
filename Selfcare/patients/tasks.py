@@ -12,4 +12,4 @@ def send_sms_to_customer():
     phone_number = "+48501740899"
     message = f"Z tej strony system Selfcare. Dzisiaj masz spotkanie - to jest wiadomość próbna "
 
-    send_sms(phone_number, message)
+    send_sms(message, phone_number)
