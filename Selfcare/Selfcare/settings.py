@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -126,4 +127,21 @@ STATICFILES_DIRS = [BASE_DIR / 'patients']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+#sms backend
 SMS_BACKEND = 'my.sms.backend.SmsBackend'
+
+#celery config
+
+CELERY_BROKER_URL = 'amqp://localhost'
+
+CELERY_ACCEPT_CONTENT = ['json']
+
+CELERY_TASK_SERIALIZER = 'json'
+
+CELERY_BEAT_SCHEDULE = {
+    'send-sms-every-morning': {
+        'task': 'patients.celery.tasks.send_sms_to_customer',
+        'schedule': crontab(minute="*/1"),
+    },
+}

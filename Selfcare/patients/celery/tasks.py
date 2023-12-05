@@ -1,14 +1,16 @@
 from celery import shared_task
 from django.core.mail import send_mail
+from celery import shared_task
+from sms import send_sms
+from models import Doctor, Patient, Meetings
+from django.utils import timezone, dateformat, datetime_safe
+
+
 
 @shared_task
-def send_reminder_email():
-    # Fetch the doctors' emails and the meeting details from your database
-    # Here's a basic example of how you can send an email in Django
-    send_mail(
-        'Meeting Reminder',
-        'You have a meeting scheduled for today.',
-        'from@example.com',
-        ['doctor1@example.com', 'doctor2@example.com'],
-        fail_silently=False,
-    )
+def send_sms_to_customer():
+
+    phone_number = "+48501740899"
+    message = f"Z tej strony system Selfcare. Dzisiaj masz spotkanie - to jest wiadomość próbna "
+
+    send_sms(phone_number, message)
