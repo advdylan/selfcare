@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -133,10 +134,14 @@ SMS_BACKEND = 'my.sms.backend.SmsBackend'
 
 #celery config
 
-CELERY_BROKER_URL = 'amqp://localhost'
+# Celery settings
 
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
+
+#: Only add pickle to this list if your broker is secured
+#: from unwanted access (see userguide/security.html)
 CELERY_ACCEPT_CONTENT = ['json']
-
+CELERY_RESULT_BACKEND = 'db+sqlite:///results.sqlite'
 CELERY_TASK_SERIALIZER = 'json'
 
 CELERY_BEAT_SCHEDULE = {

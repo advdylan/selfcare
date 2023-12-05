@@ -1,7 +1,5 @@
-from celery import Celery
+# This will make sure the app is always imported when
+# Django starts so that shared_task will use this app.
+from .celery import app as celery_app
 
-app = Celery('tasks', broker='pyamqp://guest@localhost//')
-
-@app.task
-def add(x, y):
-    return x + y
+__all__ = ('celery_app',)

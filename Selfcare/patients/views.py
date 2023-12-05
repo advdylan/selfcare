@@ -9,6 +9,7 @@ from .forms import NewPatient, NewMeeting
 from django.utils import timezone, dateformat, datetime_safe
 
 
+
 # Create your views here.
 
 def index(request):
