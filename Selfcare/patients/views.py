@@ -88,3 +88,14 @@ def dashboard(request):
         "upcoming_meetings": upcoming_meetings,
         "next_meetings": next_meetings
     })
+
+def meeting(request, pk):
+
+    meeting = Meetings.objects.get(id=pk)
+    print(meeting)
+    print(type(meeting))
+    
+   
+    return render(request,"patients/meeting.html", {
+        "meeting": meeting
+    })
