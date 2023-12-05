@@ -1,3 +1,4 @@
+import os
 """
 Django settings for Selfcare project.
 
@@ -146,7 +147,11 @@ CELERY_TASK_SERIALIZER = 'json'
 
 CELERY_BEAT_SCHEDULE = {
     'send-sms-every-morning': {
-        'task': 'patients.celery.tasks.send_sms_to_customer',
+        'task': 'tasks.send_sms_to_customer',
         'schedule': crontab(minute="*/1"),
     },
 }
+
+CELERY_RESULT_BACKEND = 'django-db'
+
+CELERY_CACHE_BACKEND = 'django-cache'
