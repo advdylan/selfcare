@@ -131,7 +131,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 #sms backend
-SMS_BACKEND = 'my.sms.backend.SmsBackend'
+SMS_BACKEND = 'sms.backends.twilio.SmsBackend'
+TWILIO_ACCOUNT_SID = 'live_redacted-twilio-account-sid'
+TWILIO_AUTH_TOKEN = 'live_redacted-twilio-auth-token'
 
 #celery config
 
