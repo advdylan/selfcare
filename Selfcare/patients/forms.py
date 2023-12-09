@@ -26,7 +26,7 @@ class NewPatient(forms.ModelForm):
         }
 
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control', 'label': 'OK'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control',}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'address': forms.TextInput(attrs={'class': 'form-control'}),
             'phone_number': forms.NumberInput(attrs={'class': 'form-control'}),
