@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['first_name','last_name','username', 'email', 'password']
+        fields = ['first_name','last_name','username', 'email', 'password1', 'ass']
 
         labels = {
             'first_name': 'Imię',
@@ -22,6 +22,9 @@ class CreateUserForm(UserCreationForm):
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'type': 'email'}),
-            'password': forms.TextInput(attrs={'class': 'form-control', 'type': 'password', 'placeholder': 'Hasło'}),
+            'password1': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Hasło'}),
+            'password2': forms.PasswordInput(attrs={'class': 'form-control', 'type': 'password', 'placeholder': 'Powtórz hasło'}),
+
 
         }
+
