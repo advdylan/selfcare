@@ -27,11 +27,10 @@ def register(request):
             user = user_form.save()
             patient = patient_form
             patient = patient_form.save(commit=False)
+
             patient.first_name = user_form.cleaned_data.get('first_name')
             patient.last_name = user_form.cleaned_data.get('last_name')
-            patient.email = user_form.cleaned_data.get('email')
-
-            
+            patient.email = user_form.cleaned_data.get('email')     
             patient.save()
 
             messages.success(request, 'Rejestracja przebiegła poprawnie!')
