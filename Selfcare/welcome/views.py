@@ -19,13 +19,23 @@ def register(request):
     patient_form = NewPatient
 
 
-    #if request.method == 'POST':
-        #user_form = CreateUserForm(request.POST)
-        #patient_form = NewPatient(request.POST)
-        #if form.is_valid():
-            #form.save()
-            #messages.success(request, 'Rejestracja przebiegła poprawnie!')
-            #return redirect('register')
+    if request.method == 'POST':
+        user_form = CreateUserForm(request.POST)
+        patient_form = NewPatient(request.POST)
+        if user_form.is_valid() and patient_form.is_valid():
+
+            user = user_form.save()
+            patient = patient_form
+            patient = patient_form.save(commit=False)
+            patient.first_name = user_form.cleaned_data.get('first_name')
+            patient.last_name = user_form.cleaned_data.get('last_name')
+            patient.email = user_form.cleaned_data.get('email')
+
+            
+            patient.save()
+
+            messages.success(request, 'Rejestracja przebiegła poprawnie!')
+            return redirect('register')
     
     return render(request, "welcome/register.html", {
         "user_form": user_form,
