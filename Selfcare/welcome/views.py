@@ -35,6 +35,9 @@ def register(request):
 
             messages.success(request, 'Rejestracja przebiegła poprawnie!')
             return redirect('register')
+    else:
+        user_form = CreateUserForm()
+        patient_form = NewPatient()
     
     return render(request, "welcome/register.html", {
         "user_form": user_form,
