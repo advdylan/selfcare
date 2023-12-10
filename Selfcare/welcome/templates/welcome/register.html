@@ -48,7 +48,7 @@
         <div class="alert alert-dismissible alert-success">
   <button type="button" class="btn-close {{ message.tags }}" data-bs-dismiss="alert"></button>
   {% endif %}
-  <strong>Dobra robota!</strong>{{ message }} 
+  <strong>Dobra robota! </strong>{{ message }} 
 </div>
 </div>
 
@@ -64,7 +64,18 @@
             <form action="register" method="POST">
                 {% csrf_token %}
                 {% load crispy_forms_tags %}
-                {{ form|crispy }}
+                {{ user_form|crispy }}
+
+                {{ patient_form.phone_number.label}}
+                {{ patient_form.phone_number }}
+
+                {{ patient_form.curator.label}}
+                {{ patient_form.curator }}
+
+                {{ patient_form.address.label}}
+                {{ patient_form.address }}
+ 
+                
                 <button type="submit" class="btn btn-outline-primary button-register" style="width: 20rem;">Zarejestruj się</button>
             </form>
             </div>

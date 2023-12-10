@@ -15,17 +15,20 @@ def login(request):
     return render(request, "welcome/login.html")
 
 def register(request):
-    form = CreateUserForm
+    user_form = CreateUserForm
+    patient_form = NewPatient
 
 
-    if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Rejestracja przebiegła poprawnie!')
-            return redirect('register')
+    #if request.method == 'POST':
+        #user_form = CreateUserForm(request.POST)
+        #patient_form = NewPatient(request.POST)
+        #if form.is_valid():
+            #form.save()
+            #messages.success(request, 'Rejestracja przebiegła poprawnie!')
+            #return redirect('register')
     
     return render(request, "welcome/register.html", {
-        "form": form
+        "user_form": user_form,
+        "patient_form": patient_form
     })
     
