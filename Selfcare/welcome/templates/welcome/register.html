@@ -1,13 +1,77 @@
 {% extends "welcome/layout.html" %}
 {% load static %}
 {% block body %}
+<style>
+    .container-register {
+        padding-top: 4rem;
+        width: 70%;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+    .form-register {
+        width: 60%;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+        align-items: center;
+    }
+    .button-register {
+        margin: 2rem;
+        width: 60%;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+        align-items: center;
+    }
 
-<form method="POST" action="">
-    {% load crispy_forms_tags %}
-    {% csrf_token %}
-    {{ form|crispy }}
-    <input type="submit" name="Create User">
-</form>
+    .container-alert {
+        padding-top: 4rem;
+        width: 40rem;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+{% if messages %}
+        {% for message in messages %}
+        {% if message.tags %}
+        <div class="container-alert">
+        <div class="alert alert-dismissible alert-success">
+  <button type="button" class="btn-close {{ message.tags }}" data-bs-dismiss="alert"></button>
+  {% endif %}
+  <strong>Dobra robota!</strong>{{ message }} 
+</div>
+</div>
+
+
+        {% endfor %}
+    </ul>
+    {% endif %}
+<div class= "container-register">
+    <div class="card border-primary mb-3" style="width: 70rem;">
+        <div class="card-header text-center fs-3">Rejestracja</div>
+        <div class="form-register">
+        <div class="card-body">          
+            <form action="register" method="POST">
+                {% csrf_token %}
+                {% load crispy_forms_tags %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-outline-primary button-register" style="width: 20rem;">Zarejestruj się</button>
+            </form>
+            </div>
+
+        </div>
+        
+    </div>
 
 
 {% endblock %}
