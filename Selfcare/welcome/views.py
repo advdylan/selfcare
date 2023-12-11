@@ -25,6 +25,10 @@ def index(request):
         if user is not None:
             login(request, user)
             return redirect('dashboard')
+        else:
+            messages.info(request, 'Nazwa użytkownika lub hasło jest niepoprawne')
+            return redirect('index')
+
 
 
     return render(request, "welcome/index.html", {
