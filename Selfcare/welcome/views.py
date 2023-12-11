@@ -35,6 +35,7 @@ def index(request):
         "login_form": login_form
     })
 
+
 def register(request):
     user_form = CreateUserForm
     patient_form = NewPatient
@@ -65,3 +66,5 @@ def register(request):
         "patient_form": patient_form
     })
     
+
+
