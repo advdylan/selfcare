@@ -28,4 +28,19 @@ class CreateUserForm(UserCreationForm):
 
         }
 
+class LoginUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+        labels = {
+            'username': 'Nazwa użytkownika lub adres e-mail',
+            'email': 'Adres e-mail',
+            'password': 'hasło'
+        }
+
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nazwa użytkownika lub adres e-mail'}),
+            'password': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Hasło'}),
+
+        }
 

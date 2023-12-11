@@ -12,6 +12,12 @@ from .forms import CreateUserForm
 # Create your views here.
 
 def index(request):
+
+    if request.method == "POST":
+        request.POST.get('username')
+        request.POST.get('password')
+
+
     return render(request, "welcome/index.html")
 
 def register(request):
