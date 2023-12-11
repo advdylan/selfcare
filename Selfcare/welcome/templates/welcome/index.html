@@ -1,0 +1,78 @@
+{% extends "welcome/layout.html" %}
+{% load static %}
+{% block body %}
+<style>
+.container-login {
+    padding-top: 4rem;
+    width: 20%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+.form-login {
+    width: 10%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+}
+.button-register {
+    margin: 2rem;
+    width: 25%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-alert {
+    padding-top: 4rem;
+    width: 40rem;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+}
+</style>
+
+{% if messages %}
+    {% for message in messages %}
+    {% if message.tags %}
+    <div class="container-alert">
+    <div class="alert alert-dismissible alert-success">
+<button type="button" class="btn-close {{ message.tags }}" data-bs-dismiss="alert"></button>
+{% endif %}
+<strong>Dobra robota! </strong>{{ message }} 
+</div>
+</div>
+
+
+    {% endfor %}
+</ul>
+{% endif %}
+<div class= "container-login">
+<div class="card border-primary mb-3" style="width: 70rem;">
+    <div class="card-header text-center fs-3">Zaloguj się</div>
+    <div class="form-login">
+    <div class="card-body">          
+        <form action="register" method="POST">
+            {% csrf_token %}
+            {% load crispy_forms_tags %}
+            {{ user_form|crispy }}            
+            <button type="submit" class="btn btn-outline-primary button-register" style="width: 20rem;">Zaloguj się</button>
+        </form>
+        </div>
+
+    </div>
+    
+</div>
+
+
+
+{% endblock %}

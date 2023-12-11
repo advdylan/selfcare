@@ -11,8 +11,8 @@ from .forms import CreateUserForm
 
 # Create your views here.
 
-def login(request):
-    return render(request, "welcome/login.html")
+def index(request):
+    return render(request, "welcome/index.html")
 
 def register(request):
     user_form = CreateUserForm
