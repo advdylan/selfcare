@@ -69,7 +69,7 @@
     <div class="card-header text-center fs-3">Logowanie</div>
     <div class="form-login">
     <div class="card-body">          
-        <form action="login" method="POST">
+        <form method="POST">
             {% csrf_token %}
             {% load crispy_forms_tags %}
             {{ login_form|crispy }}    
@@ -77,11 +77,15 @@
             <div class="button-container">
             <button type="submit" class="btn btn-outline-primary button-register" style="width: 8rem;">Zaloguj się</button>
         </form>
+            <form action="register", method="GET">
+            <a href="{% url 'register' %}">
+                <button class="btn btn-outline-primary button-register" style="width: 8rem;">Rejestracja</button>
+            </a>
+            </form>
         </div>        
+
         </div>
-        <a href="{% url 'register' %}">
-            <button class="btn btn-outline-primary button-register" style="width: 8rem;">Rejestracja</button>
-        </a>
+
     </div>
 
 </div>

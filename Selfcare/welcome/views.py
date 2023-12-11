@@ -7,6 +7,7 @@ from django import forms
 from django.forms import ModelForm
 from patients.forms import NewPatient, NewMeeting
 from django.utils import timezone, dateformat, datetime_safe
+from django.contrib.auth import authenticate, login, logout
 from .forms import CreateUserForm, LoginUserForm
 
 # Create your views here.
@@ -16,12 +17,18 @@ def index(request):
     login_form = LoginUserForm
 
     if request.method == "POST":
-        request.POST.get('username')
-        request.POST.get('password')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')
 
 
     return render(request, "welcome/index.html", {
-        "login": login_form
+        "login_form": login_form
     })
 
 def register(request):
