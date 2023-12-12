@@ -35,7 +35,7 @@ def index(request):
         "login_form": login_form
     })
 
-def logout(request):
+def logoutUser(request):
     logout(request)
     return redirect('index')
 
