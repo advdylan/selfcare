@@ -48,10 +48,14 @@
               <a class="dropdown-item" href="{% url 'meetings' %}">Rozpocznij spotkanie</a>
             </div>
           </li>
+          
 
 
         </ul>
-        <button action="logout" class="btn btn-outline-light" style="line-height: 0.5rem;">Wyloguj się</button>
+        <button class="btn btn-outline-info" style="line-height: 0.5rem;">Dzień dobry {{request.user}}!</button>
+        <a href="{%url 'logout'%}">
+          <button action="logout" class="btn btn-outline-light" style="line-height: 0.5rem;">Wyloguj się</button>
+        </a>
       </div>
     </div>
   </nav>
