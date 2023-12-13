@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -47,14 +48,14 @@ def patient(request, pk):
     })
 
 def newpatient(request):
-    
     form = NewPatient
-
     if request.method == 'POST':
-        #print(request.POST)
         form = NewPatient(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            patient = Patient.objects.create(user=user)
+            group = Group.objects.get(name='patients')
+            user.groups.add(group)
             messages.success(request, 'Pacjent dodany poprawnie!')
             return redirect('newpatient')
 

@@ -2,8 +2,7 @@ from django.db import models
 from django.db.models import F
 from datetime import timedelta, datetime
 from django.utils import timezone, dateformat, datetime_safe
-
-# Create your models here.
+from django.contrib.auth.models import User
 
 
 
@@ -25,7 +24,6 @@ class Patient(models.Model):
     phone_number = models.IntegerField()
     curator = models.ManyToManyField(Doctor, related_name="Doctor")
     email = models.EmailField(max_length=254)
-
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
