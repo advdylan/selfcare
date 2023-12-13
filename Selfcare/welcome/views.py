@@ -8,6 +8,7 @@ from django.forms import ModelForm
 from patients.forms import NewPatient, NewMeeting
 from django.utils import timezone, dateformat, datetime_safe
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import Group
 from .forms import CreateUserForm, LoginUserForm
 
 # Create your views here.
@@ -24,9 +25,14 @@ def index(request):
 
         if user is not None:
             login(request, user)
+            grupa = user.groups.all()
+            print(grupa)
 
-            if request.user.is_Patient:
-                return redirect('dashboard')
+            if user.groups.filter(name="patients").exists():
+                return redirect('register')
+            elif user.groups.filter(name="Doctors").exists():
+                return redirect('patients:index')
+            return redirect('dashboard')
         else:
             messages.info(request, 'Nazwa użytkownika lub hasło jest niepoprawne')
             return redirect('index')
@@ -60,6 +66,9 @@ def register(request):
             patient.last_name = user_form.cleaned_data.get('last_name')
             patient.email = user_form.cleaned_data.get('email')     
             patient.save()
+            group = Group.objects.get(name='patients')
+            user.groups.add(group)
+
 
             messages.success(request, 'Rejestracja przebiegła poprawnie!')
             return redirect('register')
