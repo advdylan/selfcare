@@ -13,6 +13,7 @@ class Doctor(models.Model):
     phone_number = models.IntegerField()
     proteges = models.ManyToManyField('Patient',blank=True, related_name="Patients")
     email = models.EmailField(max_length=254)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='doctor',null=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -24,6 +25,7 @@ class Patient(models.Model):
     phone_number = models.IntegerField()
     curator = models.ManyToManyField(Doctor, related_name="Doctor")
     email = models.EmailField(max_length=254)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='patient', null=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

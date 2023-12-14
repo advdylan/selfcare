@@ -13,7 +13,7 @@ class DateTimeInput(forms.DateTimeInput):
 class NewPatient(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ('first_name', 'last_name', 'address', 'phone_number', 'curator', 'email')
+        fields = ('first_name', 'last_name', 'address', 'phone_number', 'curator', 'email',)
 
 
         labels = {
@@ -23,6 +23,7 @@ class NewPatient(forms.ModelForm):
             'phone_number': 'Numer telefonu',
             'curator': 'Wybierz lekarza prowadzącego',
             'email': 'Adres e-mail'
+            
         }
 
         widgets = {
