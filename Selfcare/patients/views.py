@@ -53,7 +53,6 @@ def newpatient(request):
         form = NewPatient(request.POST)
         if form.is_valid():
             user = form.save()
-            patient = Patient.objects.create(user=user)
             group = Group.objects.get(name='patients')
             user.groups.add(group)
             messages.success(request, 'Pacjent dodany poprawnie!')
