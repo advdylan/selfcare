@@ -84,7 +84,6 @@ def dashboard(request):
     upcoming_meetings = Meetings.objects.all().filter(start_time__date=now.date())
     next_meetings = Meetings.objects.all().filter(start_time__gte=now).exclude(start_time__date=now)
 
-    print(next_meetings)
     return render(request, "patients/dashboard.html", {
         "upcoming_meetings": upcoming_meetings,
         "next_meetings": next_meetings
