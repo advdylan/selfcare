@@ -6,7 +6,7 @@ from django.urls import reverse
 from .models import Doctor, Patient, Meetings
 from django import forms
 from django.forms import ModelForm
-from .forms import NewPatient, NewMeeting
+from .forms import NewPatient, NewMeeting, NewDoctor
 from django.utils import timezone, dateformat, datetime_safe
 
 
@@ -59,6 +59,24 @@ def newpatient(request):
             patient.save()
             messages.success(request, 'Pacjent dodany poprawnie!')
             return redirect('newpatient')
+
+
+    return render(request, "patients/newpatient.html",{
+        "form": form
+    })
+
+def newdoctor(request):
+    form = NewDoctor
+    if request.method == 'POST':
+        form = NewDoctor(request.POST)
+        if form.is_valid():
+            user = form.save()
+            group = Group.objects.get(name='doctors')
+            user.groups.add(group)
+            doctor = Doctor(user=user)
+            doctor.save()
+            messages.success(request, 'Lekarz dodany poprawnie!')
+            return redirect('newdoctor')
 
 
     return render(request, "patients/newpatient.html",{
