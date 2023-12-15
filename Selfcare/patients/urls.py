@@ -11,5 +11,6 @@ urlpatterns = [
     path("dashboard", views.dashboard, name="dashboard"),
     path("meeting/<str:pk>", views.meeting, name="meeting"),
     path('newdoctor', views.newdoctor, name="newdoctor"),
-    path('doctors', views.doctors, name="doctors")
+    path('doctors', views.doctors, name="doctors"),
+    path("doctor/<str:pk>", views.doctor, name="doctor")
 ]

@@ -55,6 +55,16 @@ def patient(request, pk):
         "meeting": meeting
     })
 
+def doctor(request, pk):
+
+    doctor = Doctor.objects.get(id=pk)
+    meeting = Meetings.objects.filter(doctor=doctor)
+   
+    return render(request,"patients/doctor.html", {
+        "doctor": doctor,
+        "meeting": meeting
+    })
+
 def newpatient(request):
     form = NewPatient
     if request.method == 'POST':
