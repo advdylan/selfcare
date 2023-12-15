@@ -43,6 +43,14 @@
           </li>
 
           <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Baza lekarzy</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'doctors' %}">Lista zarejestrowanych lekarzy</a>
+              <a class="dropdown-item" href="{% url 'newdoctor' %}">Dodaj nowego lekarza</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Zarządzaj spotkaniem</a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="{% url 'meetings' %}">Rozpocznij spotkanie</a>

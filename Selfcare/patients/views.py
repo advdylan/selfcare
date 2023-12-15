@@ -37,6 +37,14 @@ def patients(request):
         "patients": patients
     })
 
+def doctors(request):
+
+    doctors = Doctor.objects.all()
+    
+    return render(request,"patients/doctors.html", {
+        "doctors": doctors
+    })
+
 def patient(request, pk):
 
     patient = Patient.objects.get(id=pk)
@@ -79,7 +87,7 @@ def newdoctor(request):
             return redirect('newdoctor')
 
 
-    return render(request, "patients/newpatient.html",{
+    return render(request, "patients/newdoctor.html",{
         "form": form
     })
 

@@ -1,0 +1,67 @@
+{% extends "patients/layout.html" %}
+{% load static %}
+{% block body %}
+<style>
+  .container-patients {
+    padding-top: 4rem;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+</style>
+
+
+<div class= "container-patients">
+  <div class="card border-primary mb-3" style="width: 80%;">
+      <div class="card-header text-center fs-5">Baza lekarzy</div>
+      <div class="form-newpatient">
+      <div class="card-body">  
+<div class="tables">
+    <table id="data" class="table table-bordered table-hover patients-table">
+      <thead>
+      <tr class="table-primary">
+        <th scope="col">#</th>
+        <th scope="col">Imię</th>
+        <th scope="col">Nazwisko</th>
+        <th scope="col">Telefon</th>
+        <th scope="col">Adres</th>
+        <th scope="col">E-mail</th>
+   
+        <th scope="col">Informacje</th>
+      </tr>
+      </thead>
+      <tbody>
+        {% for doctor in doctors  %}
+      <tr class="table-secondary">     
+
+        <th scope="row">{{ doctor.id }}</th>
+        <td>{{ doctor.first_name }}</td>
+        <td>{{ doctor.last_name }}</td>
+        <td>{{ doctor.phone_number}}</td>
+        <td>{{ doctor.address}}</td>
+        <td>{{ doctor.email}}</td>
+        
+        <!-- 
+        <td><a class="btn btn-outline-info btn-sm button-fill" href="{% url 'doctor' doctor.id %}" role="button">Więcej informacji</button>
+        </td>
+        -->
+        
+      </tr>
+      {% endfor %}
+
+      </tbody>
+    </table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+{% endblock %}
