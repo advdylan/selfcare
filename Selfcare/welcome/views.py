@@ -61,6 +61,7 @@ def register(request):
             user = user_form.save()
             patient = patient_form
             patient = patient_form.save(commit=False)
+            patient.user = user
 
             group = Group.objects.get(name='patients')
             user.groups.add(group)
