@@ -55,6 +55,8 @@ def newpatient(request):
             user = form.save()
             group = Group.objects.get(name='patients')
             user.groups.add(group)
+            patient = Patient(user=user)
+            patient.save()
             messages.success(request, 'Pacjent dodany poprawnie!')
             return redirect('newpatient')
 

@@ -62,12 +62,14 @@ def register(request):
             patient = patient_form
             patient = patient_form.save(commit=False)
 
+            group = Group.objects.get(name='patients')
+            user.groups.add(group)
+
             patient.first_name = user_form.cleaned_data.get('first_name')
             patient.last_name = user_form.cleaned_data.get('last_name')
             patient.email = user_form.cleaned_data.get('email')     
             patient.save()
-            group = Group.objects.get(name='patients')
-            user.groups.add(group)
+            
 
 
             messages.success(request, 'Rejestracja przebiegła poprawnie!')
