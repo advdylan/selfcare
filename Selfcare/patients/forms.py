@@ -13,13 +13,15 @@ class DateTimeInput(forms.DateTimeInput):
 class NewPatient(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ('first_name', 'last_name', 'address', 'phone_number', 'curator', 'email',)
+        fields = ('first_name', 'last_name', 'street','code','city', 'phone_number', 'curator', 'email',)
 
 
         labels = {
             'first_name': 'Imię',
             'last_name': 'Nazwisko',
-            'address': 'Adres',
+            'street': 'Ulica i numer domu',
+            'code': 'Kod pocztowy',
+            'city': 'Miejscowość',
             'phone_number': 'Numer telefonu',
             'curator': 'Wybierz lekarza prowadzącego',
             'email': 'Adres e-mail'
@@ -59,13 +61,15 @@ class NewMeeting(forms.ModelForm):
 class NewDoctor(forms.ModelForm):
     class Meta:
         model = Doctor
-        fields = ('first_name', 'last_name', 'address', 'phone_number', 'proteges', 'email',)
+        fields = ('first_name', 'last_name', 'street','code','city', 'phone_number', 'proteges', 'email',)
 
 
         labels = {
             'first_name': 'Imię',
             'last_name': 'Nazwisko',
-            'address': 'Adres',
+            'street': 'Ulica i numer domu',
+            'code': 'Kod pocztowy',
+            'city': 'Miejscowość',
             'phone_number': 'Numer telefonu',
             'proteges': 'Wybierz pacjentów',
             'email': 'Adres e-mail'
