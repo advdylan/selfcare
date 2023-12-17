@@ -13,7 +13,7 @@ class Doctor(models.Model):
     code = models.CharField(max_length=6, null=True)
     city = models.CharField(max_length = 40, null=True)
     phone_number = models.IntegerField()
-    proteges = models.ManyToManyField('Patient',blank=True, related_name="Patients")
+    proteges = models.ManyToManyField('Patient',blank=True, related_name="proteges")
     email = models.EmailField(max_length=254)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='doctor',null=True)
 
@@ -27,7 +27,7 @@ class Patient(models.Model):
     code = models.CharField(max_length=15, null=True)
     city = models.CharField(max_length = 40, null=True)
     phone_number = models.IntegerField()
-    curator = models.ManyToManyField(Doctor, related_name="Doctor")
+    curator = models.ManyToManyField(Doctor, related_name="curator")
     email = models.EmailField(max_length=254)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='patient', null=True)
 

@@ -49,6 +49,7 @@ def patient(request, pk):
 
     patient = Patient.objects.get(id=pk)
     meeting = Meetings.objects.filter(patient=patient)
+
    
     return render(request,"patients/patient.html", {
         "patient": patient,
@@ -71,10 +72,10 @@ def newpatient(request):
         form = NewPatient(request.POST)
         if form.is_valid():
             user = form.save()
-            group = Group.objects.get(name='patients')
-            user.groups.add(group)
-            patient = Patient(user=user)
-            patient.save()
+            #group = Group.objects.get(name='patients')
+            #user.groups.add(group)
+            #patient = Patient(user=user)
+            #patient.save()
             messages.success(request, 'Pacjent dodany poprawnie!')
             return redirect('newpatient')
 
