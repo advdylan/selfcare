@@ -10,7 +10,7 @@ class Doctor(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     street = models.CharField(max_length=100, blank=True)
-    code = models.CharField(max_lengtht=6, blank=True)
+    code = models.CharField(max_length=6, blank=True)
     city = models.CharField(max_length = 40, blank=True)
     phone_number = models.IntegerField()
     proteges = models.ManyToManyField('Patient',blank=True, related_name="Patients")
