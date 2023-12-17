@@ -18,7 +18,9 @@
     <div class="card-body">
         <p class="card-text">
             <ul class="list-group">
-                <li class="list-group-item">Adres: {{ patient.address }}</li>
+                <li class="list-group-item">Ulica: {{ patient.street }}</li>
+                <li class="list-group-item">Kod pocztowy: {{ patient.code }}</li>
+                <li class="list-group-item">Miejscowość: {{ patient.city }}</li>
                 <li class="list-group-item">Telefon: {{ patient.phone_number }}</li>
                 <li class="list-group-item">Opiekun: {% for doctor in patient.curator.all %}
                     {{ doctor.first_name }} {{doctor.last_name }}
