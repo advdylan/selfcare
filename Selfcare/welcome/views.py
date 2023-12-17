@@ -69,9 +69,9 @@ def register(request):
             patient.first_name = user_form.cleaned_data.get('first_name')
             patient.last_name = user_form.cleaned_data.get('last_name')
             patient.email = user_form.cleaned_data.get('email')   
-            patient.street = user_form.cleaned_data.get('street')
-            patient.code = user_form.cleaned_data.get('code')
-            patient.city = user_form.cleaned_data.get('city')  
+            patient.street = patient_form.cleaned_data.get('street')
+            patient.code = patient_form.cleaned_data.get('code')
+            patient.city = patient_form.cleaned_data.get('city')  
             patient.save()
             
             
