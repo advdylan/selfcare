@@ -24,7 +24,7 @@ class Patient(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     street = models.CharField(max_length=100, null=True)
-    code = models.CharField(max_length=6, null=True)
+    code = models.CharField(max_length=15, null=True)
     city = models.CharField(max_length = 40, null=True)
     phone_number = models.IntegerField()
     curator = models.ManyToManyField(Doctor, related_name="Doctor")

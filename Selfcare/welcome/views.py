@@ -74,6 +74,7 @@ def register(request):
             patient.city = user_form.cleaned_data.get('city')  
             patient.save()
             
+            
 
 
             messages.success(request, 'Rejestracja przebiegła poprawnie!')
