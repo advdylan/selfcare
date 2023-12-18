@@ -16,6 +16,8 @@ class Doctor(models.Model):
     proteges = models.ManyToManyField('Patient',blank=True, related_name="proteges")
     email = models.EmailField(max_length=254)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='doctor',null=True)
+    captcha_score = models.FloatField(default = 0.0)
+    
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -30,6 +32,7 @@ class Patient(models.Model):
     curator = models.ManyToManyField(Doctor, related_name="curator")
     email = models.EmailField(max_length=254)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='patient', null=True)
+    captcha_score = models.FloatField(default = 0.0)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

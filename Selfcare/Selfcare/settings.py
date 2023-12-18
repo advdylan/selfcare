@@ -127,6 +127,14 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'patients']
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn' )
+
+GOOGLE_API_KEY = "AIzaSyCDlNLMGvjsnikZAJ7jnzpwrwFI4g5q59s"
+
+RECAPTCHA_KEY = "6Lc7kDUpAAAAAN0wI6zkCW1q_hnS0LybhY5Uixx5"
+
+RECAPTCHA_SECRET_KEY = "6Lc7kDUpAAAAAIoHM6IR2IydT3Lu3DAsj5CX0uXV"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -162,3 +170,8 @@ CELERY_BEAT_SCHEDULE = {
 
 CELERY_CACHE_BACKEND = 'django-cache'
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+LOGIN_URL = "welcome"
+LOGIN_REDIRECT_URL = "patients:dashboard"
+LOGOUT_REDIRECT_URL = "welcome"
+BASE_COUNTRY = "PL"
