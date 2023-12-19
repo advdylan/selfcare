@@ -8,6 +8,8 @@ from django import forms
 from django.forms import ModelForm
 from .forms import NewPatient, NewMeeting, NewDoctor
 from django.utils import timezone, dateformat, datetime_safe
+from .calendar_API import test_calendar\
+from decouple import config
 
 
 
@@ -136,4 +138,12 @@ def meeting(request, pk):
     
     return render(request,"patients/meeting.html", {
         "meeting": meeting
+    })
+
+def calendar(request):
+
+
+    results = test_calendar()
+    return render(request,"patients/calendar.html", {
+        'results': results
     })

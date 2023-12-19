@@ -12,5 +12,6 @@ urlpatterns = [
     path("meeting/<str:pk>", views.meeting, name="meeting"),
     path('newdoctor', views.newdoctor, name="newdoctor"),
     path('doctors', views.doctors, name="doctors"),
-    path("doctor/<str:pk>", views.doctor, name="doctor")
+    path("doctor/<str:pk>", views.doctor, name="doctor"),
+    path('calendar', views.calendar, name="calendar")
 ]
