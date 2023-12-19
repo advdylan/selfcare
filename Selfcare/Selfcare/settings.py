@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django_celery_results',
     'crispy_forms',
     'crispy_bootstrap4',
-    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -170,9 +169,7 @@ CELERY_BEAT_SCHEDULE = {
 
 
 CELERY_CACHE_BACKEND = 'django-cache'
+
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-LOGIN_URL = "welcome"
-LOGIN_REDIRECT_URL = "patients:dashboard"
-LOGOUT_REDIRECT_URL = "welcome"
 BASE_COUNTRY = "PL"
