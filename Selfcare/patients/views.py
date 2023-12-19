@@ -142,7 +142,6 @@ def meeting(request, pk):
 
 def calendar(request):
 
-
     results = test_calendar()
     return render(request,"patients/calendar.html", {
         'results': results
