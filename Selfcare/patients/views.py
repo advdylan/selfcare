@@ -4,11 +4,12 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import Doctor, Patient, Meetings
+from datetime import datetime
 from django import forms
 from django.forms import ModelForm
 from .forms import NewPatient, NewMeeting, NewDoctor
-from django.utils import timezone, dateformat, datetime_safe
-from .calendar_API import test_calendar\
+
+from .calendar_API import test_calendar
 from decouple import config
 
 
@@ -120,7 +121,7 @@ def newmeeting(request):
 
 def dashboard(request):
 
-    now = timezone.now()
+    now = datetime.datetime.now()
 
     upcoming_meetings = Meetings.objects.all().filter(start_time__date=now.date())
     next_meetings = Meetings.objects.all().filter(start_time__gte=now).exclude(start_time__date=now)

@@ -2,7 +2,8 @@ from celery import shared_task
 from django.core.mail import send_mail
 from celery import shared_task
 from sms import send_sms
-from django.utils import timezone, dateformat, datetime_safe
+#from django.utils import timezone, dateformat, datetime_safe
+from datetime import datetime
 
 
 
