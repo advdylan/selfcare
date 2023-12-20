@@ -2,6 +2,7 @@ from decouple import config
 from google.oauth2 import service_account
 import googleapiclient.discovery
 import datetime
+#dokończ to jutro
 
 CAL_ID = config('CAL_ID')
 SCOPES = ['https://www.googleapis.com/auth/calendar']
