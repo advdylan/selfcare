@@ -9,7 +9,7 @@ from django import forms
 from django.forms import ModelForm
 from .forms import NewPatient, NewMeeting, NewDoctor
 
-from .calendar_API import test_calendar
+#from .calendar_API import test_calendar
 from decouple import config
 
 
@@ -121,7 +121,7 @@ def newmeeting(request):
 
 def dashboard(request):
 
-    now = datetime.datetime.now()
+    now = datetime.now()
 
     upcoming_meetings = Meetings.objects.all().filter(start_time__date=now.date())
     next_meetings = Meetings.objects.all().filter(start_time__gte=now).exclude(start_time__date=now)
@@ -141,7 +141,7 @@ def meeting(request, pk):
         "meeting": meeting
     })
 
-def calendar(request):
+#def calendar(request):
 
     results = test_calendar()
     return render(request,"patients/calendar.html", {

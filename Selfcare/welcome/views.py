@@ -6,7 +6,6 @@ from patients.models import Doctor, Patient, Meetings
 from django import forms
 from django.forms import ModelForm
 from patients.forms import NewPatient, NewMeeting
-from django.utils import timezone, dateformat, datetime_safe
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group
 from .forms import CreateUserForm, LoginUserForm

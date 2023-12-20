@@ -13,5 +13,5 @@ urlpatterns = [
     path('newdoctor', views.newdoctor, name="newdoctor"),
     path('doctors', views.doctors, name="doctors"),
     path("doctor/<str:pk>", views.doctor, name="doctor"),
-    path('calendar', views.calendar, name="calendar")
+    #path('calendar', views.calendar, name="calendar")
 ]

@@ -1,7 +1,8 @@
 from django.db import models
 from django.db.models import F
 from datetime import timedelta, datetime
-#from django.utils import timezone, dateformat, datetime_safe
+from django.utils import timezone, dateformat
+from django.template.defaultfilters import date as _date
 from django.contrib.auth.models import User
 
 
@@ -82,7 +83,8 @@ class Meetings(models.Model):
         super(Meetings, self).save(*args, **kwargs)
 
     def status(self):
-        now = datetime.datetime.now()
+        now = timezone.now()
+        formatted_now = _date(now, "SHORT_DATETIME_FORMAT")
 
         if self.start_time > now:
             self.progress = 'Nierozpoczęte'
