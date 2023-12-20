@@ -84,7 +84,7 @@ class Meetings(models.Model):
 
     def status(self):
         now = timezone.now()
-        formatted_now = _date(now, "SHORT_DATETIME_FORMAT")
+        #formatted_now = _date(now, "SHORT_DATETIME_FORMAT")
 
         if self.start_time > now:
             self.progress = 'Nierozpoczęte'
