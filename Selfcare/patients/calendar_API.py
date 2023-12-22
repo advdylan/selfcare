@@ -2,7 +2,7 @@ from decouple import config
 from google.oauth2 import service_account
 import googleapiclient.discovery
 import datetime
-#dokończ to jutro
+#dokończ to jutro. Edytuj dane podane poniżej z Twoich form NewMeeting
 
 CAL_ID = config('CAL_ID')
 SCOPES = ['https://www.googleapis.com/auth/calendar']
