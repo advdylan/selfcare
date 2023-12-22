@@ -5,10 +5,6 @@
 
 <h1>calendar</h1>
 
-<ul>
-    {% for result in results %}
-    <li>{{result.start.date}}{% if result.end.date %}-{% endif%}{{result.end.date}}: {{result.summary}}</li>
-    {% endfor %}
-  </ul>
 
-{% endblock %}
+  <iframe src="https://calendar.google.com/calendar/embed?height=760&wkst=1&bgcolor=%23ffffff&ctz=Europe%2FWarsaw&hl=pl&src=c2VsZmNhcmVzb2Z0d2FyZUBnbWFpbC5jb20&color=%23039BE5" style="border-width:0" width="1024" height="760" frameborder="0" scrolling="yes"></iframe>
+  {% endblock %}
