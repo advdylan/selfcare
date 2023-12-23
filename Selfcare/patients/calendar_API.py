@@ -39,11 +39,11 @@ def test_calendar():
     # LOG THEM ALL OUT IN DEV TOOLS CONSOLE
     for e in events:
 
-        print(e)
+        #print(e)
 
     #uncomment the following lines to delete each existing item in the calendar
-    #event_id = e['id']
-        # service.events().delete(calendarId=CAL_ID, eventId=event_id).execute()
+        event_id = e['id']
+        service.events().delete(calendarId=CAL_ID, eventId=event_id).execute()
 
 
     return events

@@ -134,7 +134,7 @@ def dashboard(request):
 
 def meeting(request, pk):
 
-    #przerwałem bo nie mam jeszcze logowania użytkowników a tą podstrone chciałbym filtrować po lekarzu który akurat się zaloguje
+    #przerwałem bo nie mam jeszcze logowania użytkowników a tą podstrone chciałbym filtrować po lekarzu i pacjencie który akurat się zaloguje
 
     meeting = Meetings.objects.get(id=pk)
     
@@ -143,8 +143,17 @@ def meeting(request, pk):
     })
 
 def calendar(request):
-
+    form = NewMeeting
     results = test_calendar()
+    now = timezone.now()
+
+    upcoming_meetings = Meetings.objects.all().filter(start_time__date=now.date())
+    next_meetings = Meetings.objects.all().filter(start_time__gte=now).exclude(start_time__date=now)
+
+
     return render(request,"patients/calendar.html", {
-        'results': results
+        'results': results,
+        'form': form,
+        "upcoming_meetings": upcoming_meetings,
+        "next_meetings": next_meetings
     })
