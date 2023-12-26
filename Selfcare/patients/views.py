@@ -160,10 +160,11 @@ def calendar(request):
         if form.is_valid():
             new_meeting = form.save()
             description = f'Lekarz: {new_meeting.doctor}. Pacjent: {new_meeting.patient}'
+            doctor = new_meeting.doctor
             location = new_meeting.meeting_place
             start = new_meeting.start_time
             end = new_meeting.end_time
-            new_event(location, description, start,end)
+            new_event(location, description, start, end, doctor)
 
         return render(request,"patients/calendar.html", {
         'form': form,

@@ -49,14 +49,14 @@ def test_calendar():
 
     return events
 
-def new_event(location, description, start, end):
+def new_event(location, description, start, end, doctor):
 
     credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
     service = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials)
     end = start + timedelta(hours=1)
 
     new_event = {
-        'summary': "Wizyta",
+        'summary': f'{doctor} - {location}',
         'location': location,
         'description': description,
         'start': {
@@ -66,7 +66,8 @@ def new_event(location, description, start, end):
         'end': {
             'dateTime': end.isoformat(),
             'timeZone': 'Europe/Warsaw'
-        }
+        },
+        'colorId': '5'
     }
 
 
