@@ -113,7 +113,12 @@ def newmeeting(request):
         print(request.POST)
         form = NewMeeting(request.POST)
         if form.is_valid():
-            form.save()
+            new_meeting = form.save()
+            description = f'Lekarz: {new_meeting.doctor}. Pacjent: {new_meeting.patient}'
+            location = new_meeting.meeting_place
+            start = new_meeting.start_time
+            end = new_meeting.end_time
+            new_event(location, description, start,end)
             messages.success(request, 'Spotkanie dodane poprawnie!')
 
     return render(request, "patients/newmeeting.html", {
