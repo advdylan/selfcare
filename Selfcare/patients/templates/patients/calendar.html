@@ -75,7 +75,10 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     <h4 class="alert-heading">Uwaga!</h4>
     <p class="mb-0">Jeśli do kalendarza zostały dodane spotkania po za aplikacją, użyj przycisku Synchronizacja by dodać spotkania do bazy danych programu Selfcare.</p>
-    <button type="button" class="btn btn-outline-primary">Synchronizacja</button>
+    <form method="POST" action="{% url 'synchro' %}">
+      {% csrf_token %}
+    <button type="submit" class="btn btn-outline-primary">Synchronizacja</button>
+    </form>
   </div>
 </div>
 

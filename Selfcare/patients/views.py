@@ -10,7 +10,9 @@ from django import forms
 from django.forms import ModelForm
 from .forms import NewPatient, NewMeeting, NewDoctor
 
-from .calendar_API import test_calendar, new_event, fetch_calendar
+
+
+from .calendar_API import test_calendar, new_event, fetch_calendar, parse_calendar
 from decouple import config
 
 
@@ -181,6 +183,8 @@ def calendar(request):
 
 
 def synchro(request):
+
     events = fetch_calendar()
-    print(events)
+    parse_calendar(events)
+    
     return render(request, "patients/calendar.html")

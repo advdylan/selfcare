@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from google.oauth2 import service_account
 import googleapiclient.discovery
 import datetime
+import json
 #dokończ to jutro. Edytuj dane podane poniżej z Twoich form NewMeeting
 
 CAL_ID = config('CAL_ID')
@@ -87,4 +88,48 @@ def fetch_calendar():
     orderBy='startTime'
     ).execute()
 
+    if isinstance(events, dict):
+        print("Events is a dictionary.")
+    else:
+        print("Events is not a dictionary. It is a " + str(type(events)))
+
     return events
+
+def parse_calendar(events):
+
+    data_dict = events
+    items = data_dict.get('items')
+    kind = data_dict.get('kind')
+    etag = data_dict.get('etag')
+    summary = data_dict.get('summary')
+    description = data_dict.get('description')
+    updated = data_dict.get('updated')
+    timeZone = data_dict.get('timeZone')
+    accessRole = data_dict.get('accessRole')
+    defaultReminders = data_dict.get('defaultReminders')
+
+    for item in items:
+        item_kind = item.get('kind')
+        item_etag = item.get('etag')
+        item_id = item.get('id')
+        item_status = item.get('status')
+        item_htmlLink = item.get('htmlLink')
+        item_created = item.get('created')
+        item_updated = item.get('updated')
+        item_summary = item.get('summary')
+        item_description = item.get('description')
+        item_location = item.get('location')
+        item_creator = item.get('creator')
+        item_organizer = item.get('organizer')
+        item_start = item.get('start')
+        item_end = item.get('end')
+        item_iCalUID = item.get('iCalUID')
+        item_sequence = item.get('sequence')
+        item_reminders = item.get('reminders')
+        item_eventType = item.get('eventType')
+        print(item_location, item_start, item_end, item_description)
+
+    # Return the extracted data
+    return kind, etag, summary, description, updated, timeZone, accessRole, defaultReminders, items
+
+
