@@ -10,7 +10,7 @@ from django import forms
 from django.forms import ModelForm
 from .forms import NewPatient, NewMeeting, NewDoctor
 
-from .calendar_API import test_calendar
+from .calendar_API import test_calendar, new_event
 from decouple import config
 
 
@@ -144,15 +144,30 @@ def meeting(request, pk):
 
 def calendar(request):
     form = NewMeeting
-    results = test_calendar()
+    #results = test_calendar()
     now = timezone.now()
 
     upcoming_meetings = Meetings.objects.all().filter(start_time__date=now.date())
     next_meetings = Meetings.objects.all().filter(start_time__gte=now).exclude(start_time__date=now)
 
+    if request.method == "POST":
+        form = NewMeeting(request.POST)
+        if form.is_valid():
+            new_meeting = form.save()
+            description = f'Lekarz: {new_meeting.doctor}. Pacjent: {new_meeting.patient}'
+            location = new_meeting.meeting_place
+            start = new_meeting.start_time
+            end = new_meeting.end_time
+            new_event(location, description, start,end)
+
+        return render(request,"patients/calendar.html", {
+        'form': form,
+        "upcoming_meetings": upcoming_meetings,
+        "next_meetings": next_meetings
+    })
+        
 
     return render(request,"patients/calendar.html", {
-        'results': results,
         'form': form,
         "upcoming_meetings": upcoming_meetings,
         "next_meetings": next_meetings

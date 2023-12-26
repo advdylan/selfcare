@@ -41,7 +41,7 @@
         <div class="card-header text-center fs-4">Dodaj spotkanie</div>
         <div class="card-body">
 
-          <form action="newmeeting" method="POST">
+          <form action="calendar" method="POST">
             {% csrf_token %}
             {{ form }}      
             <button type="submit" class="btn btn-outline-primary button-nw" style="width: 20rem; margin-top: 3rem;">Dodaj spotkanie</button>
@@ -57,5 +57,4 @@
 {% include 'patients/dashboard-control.html'%}
 
 
-
-    {% endblock %}
+{% endblock %}

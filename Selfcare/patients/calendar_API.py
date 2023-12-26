@@ -1,4 +1,5 @@
 from decouple import config
+from datetime import datetime, timedelta
 from google.oauth2 import service_account
 import googleapiclient.discovery
 import datetime
@@ -47,3 +48,26 @@ def test_calendar():
 
 
     return events
+
+def new_event(location, description, start, end):
+
+    credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    service = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials)
+    end = start + timedelta(hours=1)
+
+    new_event = {
+        'summary': "Wizyta",
+        'location': location,
+        'description': description,
+        'start': {
+            'date': start.isoformat(),
+            'timeZone': 'Europe/Warsaw',
+        },
+        'end': {
+            'date': end.isoformat(),
+            'timeZone': 'Europe/Warsaw'
+        }
+    }
+
+    print(new_event)
+    service.events().insert(calendarId=CAL_ID, body=new_event).execute()
