@@ -10,6 +10,8 @@ SCOPES = ['https://www.googleapis.com/auth/calendar']
 SERVICE_ACCOUNT_FILE = './google-credentials.json'
 
 
+
+
 def test_calendar():
     print("RUNNING TEST_CALENDAR()")
 
@@ -73,21 +75,16 @@ def new_event(location, description, start, end, doctor):
 
     service.events().insert(calendarId=CAL_ID, body=new_event).execute()
 
-    def sync(request):
-    # Fetch all meetings from your database
-    meetings = Meetings.objects.all()
 
-    # Fetch all events from the Google Calendar
-    events = fetch_events()
+def fetch_calendar():
+    credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    service = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials)
 
-    # For each meeting in the database, check if it exists in the Google Calendar
-    for meeting in meetings:
-        if not event_exists(meeting, events):
-            # If the meeting does not exist in the Google Calendar, add it
-            add_event(meeting)
+    events = service.events().list(
+    calendarId=CAL_ID,  # replace with your calendar ID
+    maxResults=1000,  # adjust this value as needed
+    singleEvents=True,
+    orderBy='startTime'
+    ).execute()
 
-    # For each event in the Google Calendar, check if it exists in the database
-    for event in events:
-        if not meeting_exists(event, meetings):
-            # If the event does not exist in the database, add it
-            add_meeting(event)
+    return events

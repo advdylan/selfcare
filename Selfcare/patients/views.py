@@ -178,3 +178,7 @@ def calendar(request):
         "upcoming_meetings": upcoming_meetings,
         "next_meetings": next_meetings
     })
+
+
+def synchro(request):
+    return render(request, "patients/calendar.html")
