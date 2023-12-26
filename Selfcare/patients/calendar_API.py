@@ -60,14 +60,14 @@ def new_event(location, description, start, end):
         'location': location,
         'description': description,
         'start': {
-            'date': start.isoformat(),
+            'dateTime': start.isoformat(),
             'timeZone': 'Europe/Warsaw',
         },
         'end': {
-            'date': end.isoformat(),
+            'dateTime': end.isoformat(),
             'timeZone': 'Europe/Warsaw'
         }
     }
 
-    print(new_event)
+
     service.events().insert(calendarId=CAL_ID, body=new_event).execute()
