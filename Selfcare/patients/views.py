@@ -184,7 +184,10 @@ def calendar(request):
 
 def synchro(request):
 
+    #getting the information from Google Calendar
     events = fetch_calendar()
+
+    
     parse_calendar(events)
     
     return render(request, "patients/calendar.html")

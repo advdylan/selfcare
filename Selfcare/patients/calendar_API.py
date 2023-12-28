@@ -54,6 +54,8 @@ def test_calendar():
 
 def new_event(location, description, start, end, doctor):
 
+    #this function adds a new event into Google Calendar
+
     credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
     service = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials)
     end = start + timedelta(hours=1)
@@ -82,16 +84,12 @@ def fetch_calendar():
     service = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials)
 
     events = service.events().list(
-    calendarId=CAL_ID,  # replace with your calendar ID
+    calendarId=CAL_ID,  
     maxResults=1000,  # adjust this value as needed
     singleEvents=True,
     orderBy='startTime'
     ).execute()
 
-    if isinstance(events, dict):
-        print("Events is a dictionary.")
-    else:
-        print("Events is not a dictionary. It is a " + str(type(events)))
 
     return events
 
@@ -128,6 +126,12 @@ def parse_calendar(events):
         item_reminders = item.get('reminders')
         item_eventType = item.get('eventType')
         print(item_location, item_start, item_end, item_description)
+
+
+    #add it to the Django Database
+        
+    for meeting in items:
+        
 
     # Return the extracted data
     return kind, etag, summary, description, updated, timeZone, accessRole, defaultReminders, items
