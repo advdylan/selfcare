@@ -1,6 +1,7 @@
 from decouple import config
 from datetime import datetime, timedelta
 from google.oauth2 import service_account
+from .models import Doctor, Patient, Meetings
 import googleapiclient.discovery
 import datetime
 import json
@@ -125,12 +126,24 @@ def parse_calendar(events):
         item_sequence = item.get('sequence')
         item_reminders = item.get('reminders')
         item_eventType = item.get('eventType')
+
         print(item_location, item_start, item_end, item_description)
+
+        #meeting = Meetings.objects.create(
+            #meeting_place = item_location,
+            #start_time = item_start,
+            #end_time = item_end
+            #doctor = 
+
+
+        #)
+
 
 
     #add it to the Django Database
         
-    for meeting in items:
+    
+        
         
 
     # Return the extracted data
