@@ -138,17 +138,13 @@ def parse_calendar(request,events):
         #add it to the Django Database
         meeting = Meetings.objects.create(
             meeting_place = item_location,
-            start_time = item_start,
-            end_time = item_end,
+            start_time = start_time,
+            end_time = end_time,
             doctor = doctor,
             patient = patient
         )
         meeting.save()
     
-        
-    
-        
-        
 
     # Return the extracted data
     return kind, etag, summary, description, updated, timeZone, accessRole, defaultReminders, items

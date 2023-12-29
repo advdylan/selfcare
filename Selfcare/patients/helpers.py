@@ -16,10 +16,10 @@ def extract(request, description):
         patient = Patient.objects.get(first_name=patient_first_name, last_name=patient_last_name)
     except Doctor.DoesNotExist:
         messages.error(request, f'Nie znaleziono lekarza {doctor_first_name} {doctor_last_name} w bazie danych')
-        return redirect('your_view_name')
+        return redirect('calendar')
     except Patient.DoesNotExist:
         messages.error(request, f'Nie znaleziono pacjenta {patient_first_name} {patient_last_name} w bazie danych')
-        return redirect('your_view_name')
+        return redirect('calendar')
 
     return doctor, patient
 
