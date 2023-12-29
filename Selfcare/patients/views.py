@@ -13,6 +13,7 @@ from .forms import NewPatient, NewMeeting, NewDoctor
 
 
 from .calendar_API import test_calendar, new_event, fetch_calendar, parse_calendar
+from .helpers import extract
 from decouple import config
 
 
@@ -184,10 +185,13 @@ def calendar(request):
 
 def synchro(request):
 
+    #deleting the existent meetings in Django Database 
+    #Meetings.objects.all().delete()
+
     #getting the information from Google Calendar
     events = fetch_calendar()
 
-    
+    #parsing the Google Calendar data and transfering it to the Django Database
     parse_calendar(events)
     
     return render(request, "patients/calendar.html")
