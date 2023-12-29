@@ -184,6 +184,8 @@ def calendar(request):
 
 
 def synchro(request):
+    #synchronizacja działa ale nie sprawdza czy w Django Database są już te spotkania z kalendarza.
+    #Zalecam usunąć najpierw całe ORM albo ruszyć dupę i napisać funkcje która sprawdzi czy spotkanie jest w bazie
 
     #deleting the existent meetings in Django Database 
     #Meetings.objects.all().delete()
