@@ -1,3 +1,4 @@
+from dateutil.parser import parse
 from decouple import config
 from datetime import datetime, timedelta
 from google.oauth2 import service_account
@@ -130,16 +131,19 @@ def parse_calendar(request,events):
 
 
         doctor, patient = extract(request, item_description)
+        start_time = parse(item_start['dateTime'])
+        end_time = parse(item_end['dateTime'])
+       
        
         #add it to the Django Database
-        #meeting = Meetings.objects.create(
-            #meeting_place = item_location,
-            #start_time = item_start,
-            #end_time = item_end,
-            #doctor = doctor,
-            #patient = patient
-        #)
-        #meeting.save()
+        meeting = Meetings.objects.create(
+            meeting_place = item_location,
+            start_time = item_start,
+            end_time = item_end,
+            doctor = doctor,
+            patient = patient
+        )
+        meeting.save()
     
         
     

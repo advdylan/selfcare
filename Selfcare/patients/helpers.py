@@ -11,16 +11,18 @@ def extract(request, description):
     _, patient_fullname = patient_label.split(': ')
     patient_first_name, patient_last_name = patient_fullname.split(' ')
 
-    #print(doctor_first_name, doctor_last_name, patient_first_name, patient_last_name)
-
-    doctor = Doctor.objects.filter(first_name = doctor_first_name, last_name = doctor_last_name)
-    patient = Patient.objects.filter(first_name = patient_first_name, last_name = patient_last_name)
-    if doctor.exists() and patient.exists:
-        return doctor, patient
-    
-    else:
-        messages.error(request, 'Nie znaleziono pacjenta lub lekarza w bazie danych')
+    try:
+        doctor = Doctor.objects.get(first_name=doctor_first_name, last_name=doctor_last_name)
+        patient = Patient.objects.get(first_name=patient_first_name, last_name=patient_last_name)
+    except Doctor.DoesNotExist:
+        messages.error(request, f'Nie znaleziono lekarza {doctor_first_name} {doctor_last_name} w bazie danych')
         return redirect('your_view_name')
+    except Patient.DoesNotExist:
+        messages.error(request, f'Nie znaleziono pacjenta {patient_first_name} {patient_last_name} w bazie danych')
+        return redirect('your_view_name')
+
+    return doctor, patient
+
 
     
 
