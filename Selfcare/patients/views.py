@@ -192,6 +192,6 @@ def synchro(request):
     events = fetch_calendar()
 
     #parsing the Google Calendar data and transfering it to the Django Database
-    parse_calendar(events)
+    parse_calendar(request,events)
     
     return render(request, "patients/calendar.html")

@@ -1,25 +1,28 @@
 from .models import Doctor, Patient, Meetings
+from django.contrib import messages
+from django.shortcuts import render, redirect
 
-def extract(description):
-    parts = description.split('. ')
+def extract(request, description):
+    doctor_label, patient_label = description.split('. ')
 
-    doctor_fullname = parts[0].split(': ')
-    doctor_split = doctor_fullname[1].split(',')
-    doctor_name = doctor_split[0].split(' ')
+    _, doctor_fullname = doctor_label.split(': ')
+    doctor_first_name, doctor_last_name = doctor_fullname.split(' ')
+
+    _, patient_fullname = patient_label.split(': ')
+    patient_first_name, patient_last_name = patient_fullname.split(' ')
+
+    #print(doctor_first_name, doctor_last_name, patient_first_name, patient_last_name)
+
+    doctor = Doctor.objects.filter(first_name = doctor_first_name, last_name = doctor_last_name)
+    patient = Patient.objects.filter(first_name = patient_first_name, last_name = patient_last_name)
+    if doctor.exists() and patient.exists:
+        return doctor, patient
     
-    patient_fullname = parts[1].split(': ')
-    patient_split = patient_fullname[1].split(',')
-    patient_name = patient_split[0].split(' ')
-
-    doctor_first_name = doctor_name[0]
-    doctor_last_name = doctor_name[1]
-
-    patient_first_name = patient_name[0]
-    patient_last_name = patient_name[1]
+    else:
+        messages.error(request, 'Nie znaleziono pacjenta lub lekarza w bazie danych')
+        return redirect('your_view_name')
 
     
 
-    print(doctor_first_name, doctor_last_name, patient_first_name, patient_last_name)
-    
 
-    return doctor_name, patient_name
+    

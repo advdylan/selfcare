@@ -95,7 +95,7 @@ def fetch_calendar():
 
     return events
 
-def parse_calendar(events):
+def parse_calendar(request,events):
 
     data_dict = events
     items = data_dict.get('items')
@@ -129,7 +129,7 @@ def parse_calendar(events):
         item_eventType = item.get('eventType')
 
 
-        doctor_name , patient_name = extract(item_description)
+        doctor, patient = extract(request, item_description)
        
         #add it to the Django Database
         #meeting = Meetings.objects.create(

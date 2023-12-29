@@ -31,6 +31,17 @@
     align-items: center;
 }
   </style>
+
+  {% if messages %}
+        {% for message in messages %}
+        {% if message.tags %}
+        <div class="container-alert">
+        <div class="alert alert-dismissible alert-success">
+  <button type="button" class="btn-close {{ message.tags }}" data-bs-dismiss="alert"></button>
+  {% endif %}
+  <strong>Błąd!</strong> {{ message }} 
+</div>
+</div>
   
 
   <div class="container-calendar">
