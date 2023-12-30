@@ -13,7 +13,7 @@ from .forms import NewPatient, NewMeeting, NewDoctor
 
 
 from .calendar_API import test_calendar, new_event, fetch_calendar, parse_calendar
-from .helpers import extract, get_doctor_id, get_patient_id
+from .helpers import extract
 from decouple import config
 
 
@@ -117,9 +117,6 @@ def newmeeting(request):
         if form.is_valid():
             new_meeting = form.save()
 
-            
-            
-
             description = f'Lekarz: {new_meeting.doctor}.Pacjent: {new_meeting.patient} <a href=""'
             
 
@@ -168,17 +165,19 @@ def calendar(request):
         if form.is_valid():
             new_meeting = form.save()
 
-            patient_id = get_patient_id(new_meeting.patient)
-            doctor_id = get_doctor_id(new_meeting.doctor)
-
-            print(patient_id, doctor_id)
-
-            patient_url = request.build_absolute_uri(reverse('patient', args=[patient_id]))
-            doctor_url = request.build_absolute_urli(reverse('doctor', args=[doctor_id]))
             
-            print(patient_url, doctor_url)
 
-            description = f'Lekarz: {new_meeting.doctor}. Pacjent: {new_meeting.patient}'
+            #patient_id = get_patient_id(request, new_meeting.patient)
+            #doctor_id = get_doctor_id(request, new_meeting.doctor)
+
+            #print(patient_id, doctor_id)
+
+            patient_url = request.build_absolute_uri(reverse('patient', args=[new_meeting.patient.id]))
+            doctor_url = request.build_absolute_uri(reverse('doctor', args=[new_meeting.doctor.id]))
+            
+            
+
+            description = f'Lekarz: <a href="{doctor_url}"> {new_meeting.doctor}</a>. Pacjent:<a href="{patient_url}">  {new_meeting.patient}</a>'
             doctor = new_meeting.doctor
             location = new_meeting.meeting_place
             start = new_meeting.start_time

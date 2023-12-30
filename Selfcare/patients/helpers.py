@@ -1,7 +1,20 @@
 from .models import Doctor, Patient, Meetings
 from django.contrib import messages
 from django.shortcuts import render, redirect
+import re
 
+def extract(request, description):
+    
+    pattern = r'http://127\.0\.0\.1:8000/patients/(doctor|patient)/(\d+)'
+
+    # Find matches
+    matches = re.findall(pattern, description)
+    print(matches)
+
+    # Print matches
+    #for match in matches:
+        #print(f'Model: {match[0]}, ID: {match[1]}')
+""""
 def extract(request, description):
     doctor_label, patient_label = description.split('. ')
 
@@ -22,10 +35,11 @@ def extract(request, description):
         return redirect('calendar')
 
     return doctor, patient
+    """
 
 
-    
-def get_doctor_id(request, doctor):
+""""
+#def get_doctor_id(request, doctor):
 
     try:
         person = Doctor.objects.get(doctor=doctor)
@@ -35,7 +49,7 @@ def get_doctor_id(request, doctor):
         return redirect('calendar')
     return doctor_id
 
-def get_patient_id(request, patient):
+#def get_patient_id(request, patient):
 
     try:
         person = Patient.objects.get(patient=patient)
@@ -44,6 +58,6 @@ def get_patient_id(request, patient):
         messages.error(request, f'Nie znaleziono lekarza {patient} w bazie danych')
         return redirect('calendar')
     return patient_id
-
+    """
 
     
