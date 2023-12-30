@@ -25,6 +25,25 @@ def extract(request, description):
 
 
     
+def get_doctor_id(request, doctor):
+
+    try:
+        person = Doctor.objects.get(doctor=doctor)
+        doctor_id = person.id
+    except Doctor.DoesNotExist:
+        messages.error(request, f'Nie znaleziono lekarza {doctor} w bazie danych')
+        return redirect('calendar')
+    return doctor_id
+
+def get_patient_id(request, patient):
+
+    try:
+        person = Patient.objects.get(patient=patient)
+        patient_id = person.id
+    except Patient.DoesNotExist:
+        messages.error(request, f'Nie znaleziono lekarza {patient} w bazie danych')
+        return redirect('calendar')
+    return patient_id
 
 
     

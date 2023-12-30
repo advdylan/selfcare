@@ -13,7 +13,7 @@ from .forms import NewPatient, NewMeeting, NewDoctor
 
 
 from .calendar_API import test_calendar, new_event, fetch_calendar, parse_calendar
-from .helpers import extract
+from .helpers import extract, get_doctor_id, get_patient_id
 from decouple import config
 
 
@@ -113,11 +113,16 @@ def newmeeting(request):
     form = NewMeeting
     
     if request.method == 'POST':
-        print(request.POST)
         form = NewMeeting(request.POST)
         if form.is_valid():
             new_meeting = form.save()
-            description = f'Lekarz: {new_meeting.doctor}. Pacjent: {new_meeting.patient}'
+
+            
+            
+
+            description = f'Lekarz: {new_meeting.doctor}.Pacjent: {new_meeting.patient} <a href=""'
+            
+
             location = new_meeting.meeting_place
             start = new_meeting.start_time
             end = new_meeting.end_time
@@ -162,6 +167,17 @@ def calendar(request):
         form = NewMeeting(request.POST)
         if form.is_valid():
             new_meeting = form.save()
+
+            patient_id = get_patient_id(new_meeting.patient)
+            doctor_id = get_doctor_id(new_meeting.doctor)
+
+            print(patient_id, doctor_id)
+
+            patient_url = request.build_absolute_uri(reverse('patient', args=[patient_id]))
+            doctor_url = request.build_absolute_urli(reverse('doctor', args=[doctor_id]))
+            
+            print(patient_url, doctor_url)
+
             description = f'Lekarz: {new_meeting.doctor}. Pacjent: {new_meeting.patient}'
             doctor = new_meeting.doctor
             location = new_meeting.meeting_place
