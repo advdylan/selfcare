@@ -5,10 +5,14 @@ class MeetingsAdmin(admin.ModelAdmin):
     list_display = ("meeting_place", "duration", "doctor","patient", 'progress')
 
 class PatientsAdmin(admin.ModelAdmin):
-    filter_horizontal = ("meetings",)
+    list_display = ("id", "first_name", "last_name","email")
+    #filter_horizontal = ("meetings")
 
-admin.site.register(Doctor)
-admin.site.register(Patient)
+class DoctorAdmin(admin.ModelAdmin):
+    list_display = ("id", "first_name", "last_name", "email")
+
+admin.site.register(Doctor, DoctorAdmin)
+admin.site.register(Patient, PatientsAdmin)
 admin.site.register(Meetings, MeetingsAdmin)
 
 

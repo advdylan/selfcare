@@ -9,11 +9,21 @@ def extract(request, description):
 
     # Find matches
     matches = re.findall(pattern, description)
-    print(matches)
-
+   
     # Print matches
-    #for match in matches:
-        #print(f'Model: {match[0]}, ID: {match[1]}')
+    doctor_id = 0
+    patient_id = 0
+    for match in matches:
+        
+        if match[0] == 'doctor':
+            doctor_id = match[1]
+            #print(doctor_id)
+        elif match[0] == 'patient':
+            patient_id = match[1]
+            #print(patient_id)
+
+
+    return doctor_id , patient_id
 """"
 def extract(request, description):
     doctor_label, patient_label = description.split('. ')

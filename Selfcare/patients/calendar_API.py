@@ -130,23 +130,25 @@ def parse_calendar(request,events):
         item_eventType = item.get('eventType')
 
         #print(item_description)
-        #doctor, patient = extract(request, item_description)
+        doctor, patient = extract(request, item_description)
         extract(request, item_description)
+        
         start_time = parse(item_start['dateTime'])
         end_time = parse(item_end['dateTime'])
+        #print(f"Lekarz id: {doctor}, Pacjent id: {patient}")
 
         #print(start_time, end_time)
        
        
         #add it to the Django Database
-        #meeting = Meetings.objects.create(
-            #meeting_place = item_location,
-            #start_time = start_time,
-            #end_time = end_time,
-            #doctor = doctor,
-            #patient = patient
-        #)
-        #meeting.save()
+        meeting = Meetings.objects.create(
+            meeting_place = item_location,
+            start_time = start_time,
+            end_time = end_time,
+            doctor = doctor,
+            patient = patient
+        )
+        meeting.save()
     
 
     # Return the extracted data
