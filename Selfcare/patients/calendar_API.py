@@ -67,7 +67,7 @@ def new_event(location, description, start, end, doctor, patient):
     patient_mail = patient.email
 
     new_event = {
-        "conferenceDataVersion": 1,
+        
         'summary': f'{doctor} - {location}',
         'location': location,
         'description': description,
@@ -80,6 +80,7 @@ def new_event(location, description, start, end, doctor, patient):
             'timeZone': 'Europe/Warsaw'
         },
         'colorId': '5',
+        "conferenceDataVersion": 1,
         "conferenceData": {
         "createRequest": {
           "conferenceSolutionKey": {
