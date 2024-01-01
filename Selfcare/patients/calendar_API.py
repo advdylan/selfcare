@@ -2,6 +2,7 @@ from dateutil.parser import parse
 from decouple import config
 from datetime import datetime, timedelta
 from google.oauth2 import service_account
+from uuid import uuid4
 from .models import Doctor, Patient, Meetings
 from .helpers import extract
 import googleapiclient.discovery
@@ -75,11 +76,18 @@ def new_event(location, description, start, end, doctor):
             'dateTime': end.isoformat(),
             'timeZone': 'Europe/Warsaw'
         },
-        'colorId': '5'
+        'colorId': '5',
+        'conferenceData': {
+            'createRequest': {
+                'requestId': f'{uuid4().hex}',
+                'conferenceSolutionKey': {'type': 'hangoutsMeet'}
+            }
+        }
     }
 
 
-    service.events().insert(calendarId=CAL_ID, body=new_event).execute()
+
+    service.events().insert(calendarId=CAL_ID, body=new_event, conferenceDataVersion = 1).execute()
 
 
 def fetch_calendar():

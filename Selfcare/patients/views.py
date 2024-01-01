@@ -165,8 +165,6 @@ def calendar(request):
         if form.is_valid():
             new_meeting = form.save()
 
-            
-
             #patient_id = get_patient_id(request, new_meeting.patient)
             #doctor_id = get_doctor_id(request, new_meeting.doctor)
 
@@ -175,8 +173,6 @@ def calendar(request):
             patient_url = request.build_absolute_uri(reverse('patient', args=[new_meeting.patient.id]))
             doctor_url = request.build_absolute_uri(reverse('doctor', args=[new_meeting.doctor.id]))
             
-            
-
             description = f'Lekarz: <a href="{doctor_url}"> {new_meeting.doctor}</a>. Pacjent:<a href="{patient_url}">  {new_meeting.patient}</a>'
             doctor = new_meeting.doctor
             location = new_meeting.meeting_place
