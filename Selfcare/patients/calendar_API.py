@@ -80,20 +80,20 @@ def new_event(location, description, start, end, doctor, patient):
             'timeZone': 'Europe/Warsaw'
         },
         'colorId': '5',
-        "conferenceDataVersion": 1,
         "conferenceData": {
         "createRequest": {
           "conferenceSolutionKey": {
-                "type": "hangoutsMeet"
+                "type": "meet"
             },
             "requestId": "RandomString"
             }
         },           
     }
 
-
-
-    service.events().insert(calendarId=CAL_ID, body=new_event, ).execute()
+    try:
+        service.events().insert(calendarId=CAL_ID, body=new_event, conferenceDataVersion=1).execute()
+    except Exception as e:
+        print(f"Error: {e}")
 
 
 def fetch_calendar():
