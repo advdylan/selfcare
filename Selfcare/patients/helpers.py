@@ -22,8 +22,9 @@ def extract(request, description):
             patient_id = match[1]
             #print(patient_id)
 
-
-    return doctor_id , patient_id
+    doctor = Doctor.objects.get(id = doctor_id)
+    patient = Patient.objects.get(id = patient_id)
+    return doctor, patient
 """"
 def extract(request, description):
     doctor_label, patient_label = description.split('. ')
