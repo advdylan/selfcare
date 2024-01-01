@@ -175,10 +175,11 @@ def calendar(request):
             
             description = f'Lekarz: <a href="{doctor_url}"> {new_meeting.doctor}</a>. Pacjent:<a href="{patient_url}">  {new_meeting.patient}</a>'
             doctor = new_meeting.doctor
+            patient = new_meeting.patient
             location = new_meeting.meeting_place
             start = new_meeting.start_time
             end = new_meeting.end_time
-            new_event(location, description, start, end, doctor)
+            new_event(location, description, start, end, doctor, patient)
 
         return render(request,"patients/calendar.html", {
         'form': form,

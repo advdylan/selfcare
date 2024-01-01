@@ -56,13 +56,15 @@ def test_calendar():
 
     return events
 
-def new_event(location, description, start, end, doctor):
+def new_event(location, description, start, end, doctor, patient):
 
     #this function adds a new event into Google Calendar
 
     credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
     service = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials)
     end = start + timedelta(hours=1)
+    doctor_mail = doctor.email
+    patient_mail = patient.email
 
     new_event = {
         'summary': f'{doctor} - {location}',
@@ -76,18 +78,22 @@ def new_event(location, description, start, end, doctor):
             'dateTime': end.isoformat(),
             'timeZone': 'Europe/Warsaw'
         },
+        'attendees': [
+            {'email' : doctor_mail},
+            {'email' : patient_mail}
+        ],
         'colorId': '5',
         'conferenceData': {
             'createRequest': {
-                'requestId': f'{uuid4().hex}',
-                'conferenceSolutionKey': {'type': 'hangoutsMeet'}
+                'requestId': f"{uuid4().hex}",
+                'conferenceSolutionKey': {'type': 'eventNamedHangout'}
             }
         }
     }
 
 
 
-    service.events().insert(calendarId=CAL_ID, body=new_event, conferenceDataVersion = 1).execute()
+    service.events().insert(calendarId=CAL_ID, body=new_event, conferenceDataVersion=1).execute()
 
 
 def fetch_calendar():
