@@ -14,5 +14,6 @@ urlpatterns = [
     path('doctors', views.doctors, name="doctors"),
     path("doctor/<str:pk>", views.doctor, name="doctor"),
     path('calendar', views.calendar, name="calendar"),
-    path('synchro', views.synchro, name="synchro")
+    path('synchro', views.synchro, name="synchro"),
+    path('apisettings', views.apisettings, name="apisettings")
 ]

@@ -12,7 +12,7 @@ from .forms import NewPatient, NewMeeting, NewDoctor
 
 
 
-from .calendar_API import test_calendar, new_event, fetch_calendar, parse_calendar
+from .calendar_API import test_calendar, new_event, fetch_calendar, parse_calendar, get_settings
 from .helpers import extract
 from decouple import config
 
@@ -209,3 +209,9 @@ def synchro(request):
     parse_calendar(request,events)
     
     return render(request, "patients/calendar.html")
+
+def apisettings(request):
+    
+    get_settings()
+    return redirect('calendar')
+

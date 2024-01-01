@@ -67,6 +67,7 @@ def new_event(location, description, start, end, doctor, patient):
     patient_mail = patient.email
 
     new_event = {
+        "conferenceDataVersion": 1,
         'summary': f'{doctor} - {location}',
         'location': location,
         'description': description,
@@ -78,22 +79,20 @@ def new_event(location, description, start, end, doctor, patient):
             'dateTime': end.isoformat(),
             'timeZone': 'Europe/Warsaw'
         },
-        'attendees': [
-            {'email' : doctor_mail},
-            {'email' : patient_mail}
-        ],
         'colorId': '5',
-        'conferenceData': {
-            'createRequest': {
-                'requestId': f"{uuid4().hex}",
-                'conferenceSolutionKey': {'type': 'eventNamedHangout'}
+        "conferenceData": {
+        "createRequest": {
+          "conferenceSolutionKey": {
+                "type": "hangoutsMeet"
+            },
+            "requestId": "RandomString"
             }
-        }
+        },           
     }
 
 
 
-    service.events().insert(calendarId=CAL_ID, body=new_event, conferenceDataVersion=1).execute()
+    service.events().insert(calendarId=CAL_ID, body=new_event, ).execute()
 
 
 def fetch_calendar():
@@ -169,3 +168,21 @@ def parse_calendar(request,events):
     return kind, etag, summary, description, updated, timeZone, accessRole, defaultReminders, items
 
 
+def get_settings():
+
+    credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    service = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials)
+
+    setting = service.settings().get(setting='conferenceProperties.allowedConferenceSolutionTypes[]').execute()
+    print(setting['id'], setting['value'])
+
+    #calendar = service.calendars().get(calendarId='primary').execute()
+    #print(calendar['summary'])
+
+    
+
+    #settings = service.settings().list().execute()
+
+    #for setting in settings['items']:
+        #print(setting['id'], setting['value'])
+    
