@@ -137,7 +137,7 @@ def parse_calendar(request,events):
         end_time = parse(item_end['dateTime'])
         #print(f"Lekarz id: {doctor}, Pacjent id: {patient}")
 
-        #print(start_time, end_time)
+        print(start_time, end_time)
        
        
         #add it to the Django Database
