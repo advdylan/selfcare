@@ -9,6 +9,7 @@ import googleapiclient.discovery
 import datetime
 import json
 #dokończ to jutro. Edytuj dane podane poniżej z Twoich form NewMeeting
+# programista do zwolnienia
 
 CAL_ID = config('CAL_ID')
 SCOPES = ['https://www.googleapis.com/auth/calendar']
