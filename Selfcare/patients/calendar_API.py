@@ -9,8 +9,7 @@ import googleapiclient.discovery
 import datetime
 import json
 #dokończ to jutro. Edytuj dane podane poniżej z Twoich form NewMeeting
-# programista do zwolnienia
-# drugi raz sciema 
+#Google Meets works only for Workspace users. I'm not 
 
 CAL_ID = config('CAL_ID')
 SCOPES = ['https://www.googleapis.com/auth/calendar']
@@ -82,6 +81,7 @@ def new_event(location, description, start, end, doctor, patient):
             'timeZone': 'Europe/Warsaw'
         },
         'colorId': '5',
+        
         "conferenceData": {
         "createRequest": {
           "conferenceSolutionKey": {
