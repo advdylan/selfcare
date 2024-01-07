@@ -8,6 +8,7 @@ from .helpers import extract
 import googleapiclient.discovery
 import datetime
 import json
+
 #dokończ to jutro. Edytuj dane podane poniżej z Twoich form NewMeeting
 #Google Meets works only for Workspace users. I'm not 
 

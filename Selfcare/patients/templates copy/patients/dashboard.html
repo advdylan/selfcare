@@ -1,0 +1,93 @@
+{% extends "patients/layout.html" %}
+{% load static %}
+{% block body %}
+
+<style>
+    .container-dashboard {
+        padding-top: 4rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        height: 100%;
+    }
+    .card {
+        width: 40%;
+        margin: 2rem;
+    }
+    </style>
+
+    
+    <div class="container-dashboard">
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header text-center fs-4">Spotkania zaplanowane na dzisiaj</div>
+            <div class="card-body">
+
+                <div class="tables">
+                    <table id="data" class="table table-bordered table-striped table-hover patients-table">
+                      <thead>
+                      <tr class="table-primary">
+                        <th scope="col">Data</th>
+                        <th scope="col">Patient</th>
+                        <th scope="col">Doctor</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        {% for up_meeting in upcoming_meetings %}
+                        <tr class="table-secondary">
+                            <th scope="row">{{ up_meeting.start_time }}</th>
+                            <td><a href="{% url 'patient' up_meeting.patient.id %}" class="link-info"> {{ up_meeting.patient }}</td>
+                            <td>{{ up_meeting.doctor}}</td>
+                            <td> {{ up_meeting.progress }}</td>
+                          </tr>
+                        {% endfor %}
+                
+                      </tbody>
+                    </table>
+                </div>          
+            </div>
+        </div>
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header text-center fs-4">Spotkania nadchodzących dniach...</div>
+            <div class="card-body">
+                <div class="tables">
+                    <table id="data" class="table table-bordered table-striped table-hover patients-table">
+                      <thead>
+                      <tr class="table-primary">
+                        <th scope="col">Data</th>
+                        <th scope="col">Patient</th>
+                        <th scope="col">Doctor</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        {% for next_meeting in next_meetings %}
+                        <tr class="table-secondary">
+                            <th scope="row" class="text-center fs-7">{{ next_meeting.start_time }}</th>
+                            <td><a href="{% url 'patient' next_meeting.patient.id %}" class="link-info"> {{ next_meeting.patient }}</td>
+                            <td>{{ next_meeting.doctor }}</td>
+                          </tr>
+                        {% endfor %}
+                
+                      </tbody>
+                    </table>
+                </div>          
+            </div>
+        </div>
+
+
+              
+            </div>
+        </div>
+    
+    </div>
+    
+
+
+
+
+
+
+
+{% endblock body %}
