@@ -81,16 +81,7 @@ def new_event(location, description, start, end, doctor, patient):
             'dateTime': end.isoformat(),
             'timeZone': 'Europe/Warsaw'
         },
-        'colorId': '5',
-        
-        "conferenceData": {
-        "createRequest": {
-          "conferenceSolutionKey": {
-                "type": "meet"
-            },
-            "requestId": "RandomString"
-            }
-        },           
+        'colorId': '5',     
     }
 
     try:
