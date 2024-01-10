@@ -177,16 +177,16 @@ def get_settings():
     credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
     service = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials)
 
-    setting = service.settings().get(setting='conferenceProperties.allowedConferenceSolutionTypes[]').execute()
-    print(setting['id'], setting['value'])
+    #setting = service.settings().get(setting='conferenceProperties.allowedConferenceSolutionTypes[]').execute()
+    #print(setting['id'], setting['value'])
 
     #calendar = service.calendars().get(calendarId='primary').execute()
     #print(calendar['summary'])
 
     
 
-    #settings = service.settings().list().execute()
+    settings = service.settings().list().execute()
 
-    #for setting in settings['items']:
-        #print(setting['id'], setting['value'])
+    for setting in settings['items']:
+        print(setting['id'], setting['value'])
     
