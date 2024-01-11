@@ -97,10 +97,6 @@ def newdoctor(request):
         form = NewDoctor(request.POST)
         if form.is_valid():
             user = form.save()
-            #group = Group.objects.get(name='doctors')
-            #user.groups.add(group)
-            #doctor = Doctor(user=user)
-            #doctor.save()
             messages.success(request, 'Lekarz dodany poprawnie!')
             return redirect('newdoctor')
 
@@ -116,12 +112,13 @@ def newmeeting(request):
         form = NewMeeting(request.POST)
         if form.is_valid():
             new_meeting = form.save()
-            print(type(new_meeting))
+            print(new_meeting.id)
 
             patient_url = request.build_absolute_uri(reverse('patient', args=[new_meeting.patient.id]))
             doctor_url = request.build_absolute_uri(reverse('doctor', args=[new_meeting.doctor.id]))
-            
-            description = f'Lekarz: <a href="{doctor_url}"> {new_meeting.doctor}</a>. Pacjent:<a href="{patient_url}">  {new_meeting.patient}</a>'
+            meeting_url = request.build_absolute_uri(reverse('meeting', args=[new_meeting.id]))
+
+            description = f'<a href="{meeting_url}"> Przejdź do spotkania </a> Lekarz: <a href="{doctor_url}"> {new_meeting.doctor}</a>. Pacjent:<a href="{patient_url}">  {new_meeting.patient}</a>'
            
             doctor = new_meeting.doctor
             patient = new_meeting.patient
