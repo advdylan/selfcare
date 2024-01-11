@@ -81,7 +81,7 @@ def new_event(location, description, start, end, doctor, patient):
             'dateTime': end.isoformat(),
             'timeZone': 'Europe/Warsaw'
         },
-        'colorId': '5',     
+        'colorId': '4',     
     }
 
     try:

@@ -112,8 +112,7 @@ def newmeeting(request):
         form = NewMeeting(request.POST)
         if form.is_valid():
             new_meeting = form.save()
-            print(new_meeting.id)
-
+            
             patient_url = request.build_absolute_uri(reverse('patient', args=[new_meeting.patient.id]))
             doctor_url = request.build_absolute_uri(reverse('doctor', args=[new_meeting.doctor.id]))
             meeting_url = request.build_absolute_uri(reverse('meeting', args=[new_meeting.id]))
@@ -166,22 +165,20 @@ def calendar(request):
         form = NewMeeting(request.POST)
         if form.is_valid():
             new_meeting = form.save()
-
-            #patient_id = get_patient_id(request, new_meeting.patient)
-            #doctor_id = get_doctor_id(request, new_meeting.doctor)
-
-            #print(patient_id, doctor_id)
-
+            
             patient_url = request.build_absolute_uri(reverse('patient', args=[new_meeting.patient.id]))
             doctor_url = request.build_absolute_uri(reverse('doctor', args=[new_meeting.doctor.id]))
-            
-            description = f'Lekarz: <a href="{doctor_url}"> {new_meeting.doctor}</a>. Pacjent:<a href="{patient_url}">  {new_meeting.patient}</a>'
+            meeting_url = request.build_absolute_uri(reverse('meeting', args=[new_meeting.id]))
+
+            description = f'<a href="{meeting_url}"> Przejdź do spotkania </a> Lekarz: <a href="{doctor_url}"> {new_meeting.doctor}</a>. Pacjent:<a href="{patient_url}">  {new_meeting.patient}</a>'
+           
             doctor = new_meeting.doctor
             patient = new_meeting.patient
             location = new_meeting.meeting_place
             start = new_meeting.start_time
             end = new_meeting.end_time
             new_event(location, description, start, end, doctor, patient)
+            messages.success(request, 'Spotkanie dodane poprawnie!')
 
         return render(request,"patients/calendar.html", {
         'form': form,
