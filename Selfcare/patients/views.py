@@ -14,8 +14,8 @@ from .forms import NewPatient, NewMeeting, NewDoctor
 
 
 
-from .calendar_API import test_calendar, new_event, fetch_calendar, parse_calendar, get_settings, group_required
-from .helpers import extract
+from .calendar_API import test_calendar, new_event, fetch_calendar, parse_calendar, get_settings
+from .helpers import extract, group_required
 from decouple import config
 
 

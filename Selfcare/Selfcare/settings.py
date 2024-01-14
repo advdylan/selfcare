@@ -173,3 +173,5 @@ CELERY_CACHE_BACKEND = 'django-cache'
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 BASE_COUNTRY = "PL"
+
+LOGIN_URL = '/welcome'
