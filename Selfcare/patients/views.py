@@ -1,5 +1,7 @@
 from django.contrib import messages
-from django.contrib.auth.models import Group
+
+from django.contrib.auth.models import Group, Permission
+from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -12,7 +14,7 @@ from .forms import NewPatient, NewMeeting, NewDoctor
 
 
 
-from .calendar_API import test_calendar, new_event, fetch_calendar, parse_calendar, get_settings
+from .calendar_API import test_calendar, new_event, fetch_calendar, parse_calendar, get_settings, group_required
 from .helpers import extract
 from decouple import config
 
@@ -91,6 +93,7 @@ def newpatient(request):
         "form": form
     })
 
+@group_required('doctors')
 def newdoctor(request):
     form = NewDoctor
     if request.method == 'POST':
@@ -212,5 +215,18 @@ def synchro(request):
 def apisettings(request):
     
     get_settings()
+    return redirect('calendar')
+
+def permissions(request):
+    """"
+    doctors = Group.objects.get(name="doctors")
+    ct = ContentType.objects.get_for_model(Doctor)
+
+    permission, created = Permission.objects.get_or_create(codename = 'doctor_permission',
+                                       name = 'doctor_permission',
+                                            content_type = ct)
+    
+    doctors.permissions.add(permission)
+    """
     return redirect('calendar')
 
