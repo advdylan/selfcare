@@ -27,10 +27,10 @@ def index(request):
             grupa = user.groups.all()
             print(grupa)
 
-            if user.groups.filter(name="patients").exists():
-                return redirect('register')
-            elif user.groups.filter(name="Doctors").exists():
-                return redirect('patients:index')
+            #if user.groups.filter(name="patients").exists():
+                #return redirect('dashboard')
+            #elif user.groups.filter(name="Doctors").exists():
+                #return redirect('patients:index')
             return redirect('dashboard')
         else:
             messages.info(request, 'Nazwa użytkownika lub hasło jest niepoprawne')
