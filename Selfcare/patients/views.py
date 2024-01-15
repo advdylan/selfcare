@@ -11,15 +11,18 @@ from datetime import datetime
 from django import forms
 from django.forms import ModelForm
 from .forms import NewPatient, NewMeeting, NewDoctor
+from django import template
 
-
+register = template.Library() 
 
 from .calendar_API import test_calendar, new_event, fetch_calendar, parse_calendar, get_settings
 from .helpers import extract, group_required
 from decouple import config
 
 
-
+@register.filter(name='has_group') 
+def has_group(user, group_name):
+    return user.groups.filter(name=group_name).exists() 
 # Create your views here.
 
 def index(request):
@@ -35,7 +38,8 @@ def meetings(request):
         meeting.save()
         
     return render(request, "patients/meetings.html", {
-        "meetings": meetings
+        "meetings": meetings,
+        'user': request.user
     })
 
 def patients(request):
@@ -43,7 +47,8 @@ def patients(request):
     patients = Patient.objects.all()
     
     return render(request,"patients/patients.html", {
-        "patients": patients
+        "patients": patients,
+        'user': request.user
     })
 
 def doctors(request):
@@ -51,7 +56,8 @@ def doctors(request):
     doctors = Doctor.objects.all()
     
     return render(request,"patients/doctors.html", {
-        "doctors": doctors
+        "doctors": doctors,
+        'user': request.user
     })
 
 def patient(request, pk):
@@ -62,7 +68,8 @@ def patient(request, pk):
    
     return render(request,"patients/patient.html", {
         "patient": patient,
-        "meeting": meeting
+        "meeting": meeting,
+        'user': request.user
     })
 
 def doctor(request, pk):
@@ -72,7 +79,8 @@ def doctor(request, pk):
    
     return render(request,"patients/doctor.html", {
         "doctor": doctor,
-        "meeting": meeting
+        "meeting": meeting,
+        'user': request.user
     })
 
 def newpatient(request):
@@ -90,7 +98,8 @@ def newpatient(request):
 
 
     return render(request, "patients/newpatient.html",{
-        "form": form
+        "form": form,
+        'user': request.user
     })
 
 @group_required('doctors')
@@ -105,7 +114,8 @@ def newdoctor(request):
 
 
     return render(request, "patients/newdoctor.html",{
-        "form": form
+        "form": form,
+        'user': request.user
     })
 
 def newmeeting(request):
@@ -131,7 +141,8 @@ def newmeeting(request):
             messages.success(request, 'Spotkanie dodane poprawnie!')
 
     return render(request, "patients/newmeeting.html", {
-        "form": form
+        "form": form,
+        'user': request.user
     })
 
 def dashboard(request):
@@ -143,7 +154,8 @@ def dashboard(request):
 
     return render(request, "patients/dashboard.html", {
         "upcoming_meetings": upcoming_meetings,
-        "next_meetings": next_meetings
+        "next_meetings": next_meetings,
+        'user': request.user
     })
 
 def meeting(request, pk):

@@ -4,7 +4,11 @@ import six
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, redirect
+from django import template
+
 import re
+
+register = template.Library() 
 
 def extract(request, description):
     
@@ -96,3 +100,6 @@ def group_required(group, login_url=None, raise_exception=False):
         # As the last resort, show the login form
         return False
     return user_passes_test(check_perms, login_url=login_url)
+
+
+
