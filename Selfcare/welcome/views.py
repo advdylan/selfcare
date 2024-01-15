@@ -55,30 +55,34 @@ def register(request):
     if request.method == 'POST':
         user_form = CreateUserForm(request.POST)
         patient_form = NewPatient(request.POST)
-        if user_form.is_valid() and patient_form.is_valid():
+        print("CO JEST")
+        try:
+            if user_form.is_valid() and patient_form.is_valid():
 
-            user = user_form.save()
-            patient = patient_form
-            patient = patient_form.save(commit=False)
-            patient.user = user
+                user = user_form.save()
+                patient = patient_form
+                patient = patient_form.save(commit=False)
+                patient.user = user
 
-            group = Group.objects.get(name='patients')
-            user.groups.add(group)
+                group = Group.objects.get(name='patients')
+                user.groups.add(group)
 
-            patient.first_name = user_form.cleaned_data.get('first_name')
-            patient.last_name = user_form.cleaned_data.get('last_name')
-            patient.email = user_form.cleaned_data.get('email')   
-            patient.street = patient_form.cleaned_data.get('street')
-            patient.code = patient_form.cleaned_data.get('code')
-            patient.city = patient_form.cleaned_data.get('city')  
-            patient.save()
+                patient.first_name = user_form.cleaned_data.get('first_name')
+                patient.last_name = user_form.cleaned_data.get('last_name')
+                patient.email = user_form.cleaned_data.get('email')   
+                patient.street = patient_form.cleaned_data.get('street')
+                patient.code = patient_form.cleaned_data.get('code')
+                patient.city = patient_form.cleaned_data.get('city')  
+                patient.save()
+                
+                
+                messages.success(request, 'Rejestracja przebiegła poprawnie!')
+                return redirect('register')
+        except Exception as e:
+            print(f"Error: {e}")
             
-            
-
-
-            messages.success(request, 'Rejestracja przebiegła poprawnie!')
-            return redirect('register')
     else:
+        print("ERROR KUŹWA")
         user_form = CreateUserForm()
         patient_form = NewPatient()
     
