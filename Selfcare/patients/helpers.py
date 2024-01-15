@@ -4,11 +4,11 @@ import six
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, redirect
-from django import template
+
 
 import re
 
-register = template.Library() 
+
 
 def extract(request, description):
     

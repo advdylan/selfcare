@@ -11,18 +11,13 @@ from datetime import datetime
 from django import forms
 from django.forms import ModelForm
 from .forms import NewPatient, NewMeeting, NewDoctor
-from django import template
-
-register = template.Library() 
 
 from .calendar_API import test_calendar, new_event, fetch_calendar, parse_calendar, get_settings
 from .helpers import extract, group_required
 from decouple import config
 
 
-@register.filter(name='has_group') 
-def has_group(user, group_name):
-    return user.groups.filter(name=group_name).exists() 
+
 # Create your views here.
 
 def index(request):
