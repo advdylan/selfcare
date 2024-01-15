@@ -4,9 +4,11 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 class CreateUserForm(UserCreationForm):
+    """"
     token = forms.CharField(
         widget=forms.HiddenInput()
     )
+    """
     class Meta:
         model = User
         fields = ['first_name','last_name','username', 'email', 'password1', 'password2', ]

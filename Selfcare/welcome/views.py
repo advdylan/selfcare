@@ -74,10 +74,15 @@ def register(request):
                 patient.code = patient_form.cleaned_data.get('code')
                 patient.city = patient_form.cleaned_data.get('city')  
                 patient.save()
+                print("NIBY SIE UDALO")
                 
                 
                 messages.success(request, 'Rejestracja przebiegła poprawnie!')
                 return redirect('register')
+            else:
+                print(f"User form errors: {user_form.errors}")
+                print(f"Patient form errors: {patient_form.errors}")
+
         except Exception as e:
             print(f"Error: {e}")
             
