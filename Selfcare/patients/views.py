@@ -112,7 +112,7 @@ def newdoctor(request):
         "form": form,
         'user': request.user
     })
-
+@group_required('doctors')
 def newmeeting(request):
     form = NewMeeting
     
