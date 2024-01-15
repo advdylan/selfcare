@@ -9,6 +9,8 @@
 </head>
 <body>
 
+  {% if user.groups.filter(name="admin").exists %}
+
   <nav class="navbar navbar-expand-lg bg-primary " data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'dashboard' %}">Selfcare</a>
@@ -67,6 +69,94 @@
       </div>
     </div>
   </nav>
+
+  {% elif user.groups.filter(name="doctors").exists %}
+
+  <nav class="navbar navbar-expand-lg bg-primary " data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'dashboard' %}">Selfcare</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'dashboard' %}">Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'calendar'%}">Kalendarz</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Wizyty</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'meetings' %}">Pełna lista wizyt</a>
+              <a class="dropdown-item" href="{% url 'newmeeting' %}">Dodaj wizytę</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Baza pacjentów</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'patients' %}">Lista zarejestrowanych pacjentów</a>
+              <a class="dropdown-item" href="{% url 'newpatient' %}">Dodaj nowego pacjenta</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Zarządzaj spotkaniem</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'meetings' %}">Rozpocznij spotkanie</a>
+            </div>
+          </li>
+          
+
+
+        </ul>
+        <button class="btn btn-outline-info" style="line-height: 0.5rem; margin-right:2rem;">Dzień dobry {{request.user}}!</button>
+        <a href="{%url 'logoutUser'%}">
+          <button action="logoutUser" class="btn btn-outline-light" style="line-height: 0.5rem;">Wyloguj się</button>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+
+
+  {% elif user.groups.filter(name="patients").exists %}
+
+  <nav class="navbar navbar-expand-lg bg-primary " data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'dashboard' %}">Selfcare</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'dashboard' %}">Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'calendar'%}">Kalendarz</a>
+          </li>
+        </ul>
+        <button class="btn btn-outline-info" style="line-height: 0.5rem; margin-right:2rem;">Dzień dobry {{request.user}}!</button>
+        <a href="{%url 'logoutUser'%}">
+          <button action="logoutUser" class="btn btn-outline-light" style="line-height: 0.5rem;">Wyloguj się</button>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  {% else %}
+
+  <h1> BLOCK ERROR - GROUP ERROR </h1>
+
+  {% endif %}
 
     {% block body %}
 

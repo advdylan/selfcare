@@ -23,7 +23,7 @@ from decouple import config
 # Create your views here.
 
 def index(request):
-    return render(request, "patients/index.html")
+    return render(request, "patients/index.html", {'user': request.user})
 
 def meetings(request):
 
