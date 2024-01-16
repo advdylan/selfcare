@@ -23,6 +23,7 @@ from decouple import config
 def index(request):
     return render(request, "patients/index.html", {'user': request.user})
 
+@group_required('doctors')
 def meetings(request):
 
     meetings = Meetings.objects.all()
@@ -37,6 +38,7 @@ def meetings(request):
         'user': request.user
     })
 
+@group_required('doctors')
 def patients(request):
 
     patients = Patient.objects.all()
@@ -46,6 +48,7 @@ def patients(request):
         'user': request.user
     })
 
+@group_required('admin')
 def doctors(request):
 
     doctors = Doctor.objects.all()
@@ -55,6 +58,7 @@ def doctors(request):
         'user': request.user
     })
 
+@group_required('doctors')
 def patient(request, pk):
 
     patient = Patient.objects.get(id=pk)
@@ -67,6 +71,7 @@ def patient(request, pk):
         'user': request.user
     })
 
+@group_required('doctors')
 def doctor(request, pk):
 
     doctor = Doctor.objects.get(id=pk)
@@ -78,6 +83,7 @@ def doctor(request, pk):
         'user': request.user
     })
 
+@group_required('doctors')
 def newpatient(request):
     form = NewPatient
     if request.method == 'POST':
@@ -203,7 +209,7 @@ def calendar(request):
         "next_meetings": next_meetings
     })
 
-
+@group_required('admin')
 def synchro(request):
     #synchronizacja działa ale nie sprawdza czy w Django Database są już te spotkania z kalendarza.
     #Zalecam usunąć najpierw całe ORM albo ruszyć dupę i napisać funkcje która sprawdzi czy spotkanie jest w bazie
@@ -218,12 +224,13 @@ def synchro(request):
     parse_calendar(request,events)
     
     return render(request, "patients/calendar.html")
-
+@group_required('admin')
 def apisettings(request):
     
     get_settings()
     return redirect('calendar')
 
+@group_required('admin')
 def permissions(request):
     """"
     doctors = Group.objects.get(name="doctors")

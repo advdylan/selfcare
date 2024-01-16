@@ -84,6 +84,8 @@
 
 {% include 'patients/dashboard-control.html'%}
 
+{% if request.user|has_group:"admin" %}
+
 <div class="container-alert">
   <div class="alert alert-dismissible alert-warning">
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -95,6 +97,8 @@
     </form>
   </div>
 </div>
+
+{% endif %}
 
 
 {% endblock %}
