@@ -24,6 +24,7 @@ def index(request):
     return render(request, "patients/index.html", {'user': request.user})
 
 @group_required('doctors')
+
 def meetings(request):
 
     meetings = Meetings.objects.all()
