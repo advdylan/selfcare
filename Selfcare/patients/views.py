@@ -210,6 +210,11 @@ def calendar(request):
         "next_meetings": next_meetings
     })
 
+@group_required('doctors')
+def doctors_meetings(request):
+    return render(request, 'patients/meetings')
+
+
 @group_required('admin')
 def synchro(request):
     #synchronizacja działa ale nie sprawdza czy w Django Database są już te spotkania z kalendarza.
