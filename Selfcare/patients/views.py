@@ -41,11 +41,14 @@ def meetings(request):
 
 @group_required('doctors')
 def doctors_meetings(request):
-    doctor = request.user
-    print(doctor)
-    #meetings = Meetings.objects.get()
+
+    doctor = Doctor.objects.get(user=request.user)  
+    meetings = Meetings.objects.filter(doctor=doctor)
     
-    return render(request, 'patients/meetings')
+    return render(request, 'patients/doctorsmeetings.html', {
+        "meetings": meetings,
+        'user': request.user
+    })
 
 
 @group_required('doctors')
