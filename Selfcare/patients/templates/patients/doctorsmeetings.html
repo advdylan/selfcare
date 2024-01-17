@@ -21,7 +21,7 @@
       <div class="form-newpatient">
       <div class="card-body">  
 <div class="tables">
-    <table id="data" class="table table-bordered table-hover patients-table">
+    <table id="data" class="table table-bordered table-striped table-hover patients-table">
       <thead>
       <tr class="table-primary">
         <th scope="col">Data</th>
@@ -40,6 +40,7 @@
             <td>{{ meeting.doctor}}</td>
             <td>{{ meeting.duration}}</td>
             <td> {{ meeting.progress }}</td>
+            <td> <a class="btn btn-outline-info btn-sm button-fill" href="{% url 'meeting' meeting.id %}" role="button">Przejdź do spotkania</button> </td>           
           </tr>
         {% endfor %}
 
