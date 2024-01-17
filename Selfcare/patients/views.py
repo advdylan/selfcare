@@ -24,7 +24,6 @@ def index(request):
     return render(request, "patients/index.html", {'user': request.user})
 
 @group_required('doctors')
-
 def meetings(request):
 
     meetings = Meetings.objects.all()
@@ -38,6 +37,16 @@ def meetings(request):
         "meetings": meetings,
         'user': request.user
     })
+
+
+@group_required('doctors')
+def doctors_meetings(request):
+    doctor = request.user
+    print(doctor)
+    #meetings = Meetings.objects.get()
+    
+    return render(request, 'patients/meetings')
+
 
 @group_required('doctors')
 def patients(request):
@@ -210,9 +219,7 @@ def calendar(request):
         "next_meetings": next_meetings
     })
 
-@group_required('doctors')
-def doctors_meetings(request):
-    return render(request, 'patients/meetings')
+
 
 
 @group_required('admin')
