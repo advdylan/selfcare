@@ -188,8 +188,10 @@ def end_meeting(request):
         print(request.POST)
         meeting_id = request.POST.get('meeting_id')
         meeting = get_object_or_404(Meetings, id=meeting_id)
-        meeting.status = 'Zakończone'
-        return redirect('doctors_meetings')
+        meeting.progress = 'Zakończone'
+        meeting.save()
+
+    return redirect('doctors_meetings')
 
 
 def calendar(request):

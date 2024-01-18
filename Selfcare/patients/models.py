@@ -91,19 +91,22 @@ class Meetings(models.Model):
         super(Meetings, self).save(*args, **kwargs)
 
     def status(self):
-        now = timezone.now()
+        #now = timezone.now()
         #formatted_now = _date(now, "SHORT_DATETIME_FORMAT")
 
-        if self.start_time > now:
-            self.progress = 'Nierozpoczęte'
-        elif self.end_time and self.end_time < now:
-            self.progress = 'Zakończone'
-        else:
-            self.progress = 'W trakcie'
+        if not self.progress:  # Only set progress if it hasn't been set yet
+            now = timezone.now()
 
-        if self.end_time == None and self.progress == 'W trakcie':
-            duration = now - self.start_time
-            self.duration = duration
+            if self.start_time > now:
+                self.progress = 'Nierozpoczęte'
+            elif self.end_time and self.end_time < now:
+                self.progress = 'Zakończone'
+            else:
+                self.progress = 'W trakcie'
+
+            if self.end_time == None and self.progress == 'W trakcie':
+                duration = now - self.start_time
+                self.duration = duration
 
             
 
