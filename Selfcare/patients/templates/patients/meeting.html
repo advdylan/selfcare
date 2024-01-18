@@ -16,9 +16,8 @@
     }
     .card-body {
         padding-top: 4rem;
-        display: flex;
-        justify-content: space-around;
-        align-items: flex-start;
+        
+        justify-items: right;
         height: 100%;
     }
     </style>
@@ -39,7 +38,11 @@
             <div class="card-body">
                 
                 <button type="button" class="btn btn-outline-info">Info</button>
-                <button type="button" class="btn btn-outline-success">Success</button>
+                <form method="POST" action = "{% url 'end_meeting'%}">
+                    {% csrf_token %}
+                    <input type="hidden" name = "meeting_id" value = "{{ meeting.id }}">
+                <button type="submit" class="btn btn-outline-success">Success {{ meeting.id }}</button>
+                </form>
                 <button type="button" class="btn btn-outline-danger">Danger</button>
                 
             </div>

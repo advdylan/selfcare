@@ -17,5 +17,6 @@ urlpatterns = [
     path('synchro', views.synchro, name="synchro"),
     path('apisettings', views.apisettings, name="apisettings"),
     path('permissions', views.permissions, name="permissions"),
-    path('doctors_meetings', views.doctors_meetings, name="doctors_meetings")
+    path('doctors_meetings', views.doctors_meetings, name="doctors_meetings"),
+    path('end_meeting', views.end_meeting, name="end_meeting")
 ]

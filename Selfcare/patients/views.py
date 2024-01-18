@@ -2,7 +2,7 @@ from django.contrib import messages
 
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import Doctor, Patient, Meetings
@@ -181,6 +181,16 @@ def meeting(request, pk):
     return render(request,"patients/meeting.html", {
         "meeting": meeting
     })
+
+def end_meeting(request):
+
+    if request.method == "POST":
+        print(request.POST)
+        meeting_id = request.POST.get('meeting_id')
+        meeting = get_object_or_404(Meetings, id=meeting_id)
+        meeting.status = 'Zakończone'
+        return redirect('doctors_meetings')
+
 
 def calendar(request):
     form = NewMeeting
