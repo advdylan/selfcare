@@ -235,7 +235,8 @@ def calendar(request):
     })
 
 
-
+def notes(request):
+    return render(request, "patients/notes.html" )
 
 @group_required('admin')
 def synchro(request):

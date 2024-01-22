@@ -108,6 +108,11 @@ class Meetings(models.Model):
                 duration = now - self.start_time
                 self.duration = duration
 
+
+class Images(models.Model):
+    name = models.CharField(max_lenght= 100)
+
+
             
 
     
