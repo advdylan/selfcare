@@ -5,7 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import Doctor, Patient, Meetings
+from .models import Doctor, Patient, Meetings, Image
 from django.utils import timezone
 from datetime import datetime
 from django import forms
@@ -248,8 +248,13 @@ def upload_images(request):
             form.save()
     else:
             form = ImageForm()
+
+
+
+    images = Image.objects.filter(user = request.user)      
     return render(request, "patients/notes.html", {
-            'form': form
+            'form': form,
+            'images': images
         } )
 
 @group_required('admin')

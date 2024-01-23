@@ -8,4 +8,8 @@
     <button type="submit">Upload</button>
 </form>
 
+{% for image in images %}
+    <img src="{{ image.image.url }}" alt="User Image">
+{% endfor %}
+
 {% endblock body %}
