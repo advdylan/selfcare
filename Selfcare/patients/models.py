@@ -112,7 +112,7 @@ class Meetings(models.Model):
 class Image(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='')
 
 
             
