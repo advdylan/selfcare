@@ -109,8 +109,10 @@ class Meetings(models.Model):
                 self.duration = duration
 
 
-class Images(models.Model):
-    name = models.CharField(max_lenght= 100)
+class Image(models.Model):
+    name = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    image = models.ImageField(upload_to='images/')
 
 
             

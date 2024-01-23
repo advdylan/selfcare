@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import Doctor,Patient,Meetings
+from .models import Doctor,Patient,Meetings, Image
 
 
 
@@ -89,3 +89,15 @@ class NewDoctor(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control', 'type': 'email', 'placeholder': 'Email'})
         }
 
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ('image',)
+
+        labels = {
+            'image': 'Obraz',
+        }
+        widgets = {
+            'image': forms.ImageField(attrs={'class': 'form-control', 'type': 'file', 'placeholder': 'Obraz'})
+        }
