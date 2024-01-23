@@ -10,7 +10,7 @@ from django.utils import timezone
 from datetime import datetime
 from django import forms
 from django.forms import ModelForm
-from .forms import NewPatient, NewMeeting, NewDoctor
+from .forms import NewPatient, NewMeeting, NewDoctor, ImageForm
 
 from .calendar_API import test_calendar, new_event, fetch_calendar, parse_calendar, get_settings
 from .helpers import extract, group_required
@@ -237,6 +237,18 @@ def calendar(request):
 
 def notes(request):
     return render(request, "patients/notes.html" )
+
+def upload_images(request):
+
+    if request.method == "POST":
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save
+    else:
+            form = ImageForm()
+    return render(request, "patients/notes.html", {
+            'form': form
+        } )
 
 @group_required('admin')
 def synchro(request):

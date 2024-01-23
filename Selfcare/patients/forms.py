@@ -91,13 +91,11 @@ class NewDoctor(forms.ModelForm):
 
 
 class ImageForm(forms.ModelForm):
+    image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control', 'type': 'file', 'placeholder': 'Obraz'}))
+
     class Meta:
         model = Image
         fields = ('image',)
-
         labels = {
             'image': 'Obraz',
-        }
-        widgets = {
-            'image': forms.ImageField(attrs={'class': 'form-control', 'type': 'file', 'placeholder': 'Obraz'})
         }

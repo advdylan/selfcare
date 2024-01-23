@@ -18,5 +18,6 @@ urlpatterns = [
     path('apisettings', views.apisettings, name="apisettings"),
     path('permissions', views.permissions, name="permissions"),
     path('doctors_meetings', views.doctors_meetings, name="doctors_meetings"),
-    path('end_meeting', views.end_meeting, name="end_meeting")
+    path('end_meeting', views.end_meeting, name="end_meeting"),
+    path('upload_images', views.upload_images, name="upload_images")
 ]
