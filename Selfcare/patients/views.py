@@ -185,13 +185,26 @@ def meeting(request, pk):
 def end_meeting(request):
 
     if request.method == "POST":
-        print(request.POST)
+        now = timezone.now()
         meeting_id = request.POST.get('meeting_id')
         meeting = get_object_or_404(Meetings, id=meeting_id)
         meeting.progress = 'Zakończone'
+        meeting.real_end_time = now
         meeting.save()
 
     return redirect('doctors_meetings')
+
+def start_meeting(request):
+    if request.method == "POST":
+        now = timezone.now()
+        meeting_id = request.POST.get('meeting_id')
+        meeting = get_object_or_404(Meetings,id=meeting_id)
+        meeting.progress = 'Rozpoczęto'
+        meeting.real_start_time = now
+        meeting.save()
+
+    return redirect('doctors_meetings')
+
 
 
 def calendar(request):

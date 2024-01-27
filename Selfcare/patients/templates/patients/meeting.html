@@ -28,7 +28,7 @@
         <div class="card border-primary mb-3 card-dashboard" >
             <div class="card-header text-center fs-4">Informacje dotyczące spotkania</div>
             <div class="card-body">
-
+                <p>Lekarz : Korowaj</p>
                 
             </div>
         </div>
@@ -38,12 +38,20 @@
             <div class="card-body">
                 
                 <button type="button" class="btn btn-outline-info">Info</button>
+
                 <form method="POST" action = "{% url 'end_meeting'%}">
                     {% csrf_token %}
                     <input type="hidden" name = "meeting_id" value = "{{ meeting.id }}">
-                <button type="submit" class="btn btn-outline-success">Success {{ meeting.id }}</button>
+                <button type="submit" class="btn btn-outline-danger">Zakończ spoktanie {{ meeting.id }}</button>
                 </form>
-                <button type="button" class="btn btn-outline-danger">Danger</button>
+                
+                <form method="POST" action = "{% url 'start_meeting'%}">
+                    {% csrf_token %}
+                    <input type="hidden" name = "meeting_id" value = "{{ meeting.id }}">
+                <button type="submit" class="btn btn-outline-success">Rozpocznij spotkanie {{ meeting.id }}</button>
+                
+                </form>
+                
                 
             </div>
         </div>

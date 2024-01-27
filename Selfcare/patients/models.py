@@ -65,6 +65,7 @@ class Meetings(models.Model):
     start_time = models.DateTimeField()
     real_start_time = models.DateTimeField(null=True, blank=True)
     end_time = models.DateTimeField(null=True, blank=True)
+    real_end_time = models.DateTimeField(null=True, blank=True)
     duration = models.DurationField(null=True, blank=True)
     doctor = models.ForeignKey(Doctor, null=True, on_delete=models.SET_NULL)
     patient = models.ForeignKey(Patient, null=True, on_delete=models.SET_NULL)
