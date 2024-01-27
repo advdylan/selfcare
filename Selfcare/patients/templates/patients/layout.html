@@ -60,12 +60,15 @@
             </div>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'upload_images'%}">Notatki i materiały</a>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Notatki i materiały</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'upload_images'%}">Notatki i materiały</a>
+            </div>
           </li>
           
-
-
+          
         </ul>
         <button class="btn btn-outline-info" style="line-height: 0.5rem; margin-right:2rem;">Dzień dobry {{request.user}}!</button>
         <a href="{%url 'logoutUser'%}">

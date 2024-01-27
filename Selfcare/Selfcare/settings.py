@@ -21,6 +21,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -36,10 +37,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'welcome',
     'patients',
     'sms',
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -48,8 +49,7 @@ INSTALLED_APPS = [
     'django_celery_results',
     'crispy_forms',
     'crispy_bootstrap4',
-    'grapelli',
-    'filebrowser'
+    
 ]
 
 MIDDLEWARE = [
