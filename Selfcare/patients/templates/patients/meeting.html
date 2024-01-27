@@ -28,7 +28,12 @@
         <div class="card border-primary mb-3 card-dashboard" >
             <div class="card-header text-center fs-4">Informacje dotyczące spotkania</div>
             <div class="card-body">
-                <p>Lekarz : Korowaj</p>
+                <p class="card-text">
+                    <ul class="list-group">
+                        <li class="list-group-item">Lekarz: {{ meeting.doctor }}</li>
+        
+                    </ul>
+                </p>
                 
             </div>
         </div>
