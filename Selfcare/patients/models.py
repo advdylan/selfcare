@@ -112,7 +112,8 @@ class Meetings(models.Model):
 
 def user_directory_path(instance, filename):
     # This will save the image in a directory named after the user's id
-    return 'user_{0}/{1}'.format(instance.user.id, filename)
+    string = f'user_{instance.user.id}/{filename}'
+    return string
 
 class Image(models.Model):
     name = models.CharField(max_length=100)

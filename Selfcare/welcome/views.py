@@ -55,7 +55,6 @@ def register(request):
     if request.method == 'POST':
         user_form = CreateUserForm(request.POST)
         patient_form = NewPatient(request.POST)
-        print("CO JEST")
         try:
             if user_form.is_valid() and patient_form.is_valid():
 
@@ -73,9 +72,7 @@ def register(request):
                 patient.street = patient_form.cleaned_data.get('street')
                 patient.code = patient_form.cleaned_data.get('code')
                 patient.city = patient_form.cleaned_data.get('city')  
-                patient.save()
-                print("NIBY SIE UDALO")
-                
+                patient.save()               
                 
                 messages.success(request, 'Rejestracja przebiegła poprawnie!')
                 return redirect('register')
@@ -95,6 +92,9 @@ def register(request):
         "user_form": user_form,
         "patient_form": patient_form
     })
+
+
+
     
 
 
