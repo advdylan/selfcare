@@ -110,10 +110,14 @@ class Meetings(models.Model):
                 self.duration = duration
 
 
+def user_directory_path(instance, filename):
+    # This will save the image in a directory named after the user's id
+    return 'user_{0}/{1}'.format(instance.user.id, filename)
+
 class Image(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
-    image = models.ImageField(upload_to='')
+    image = models.ImageField(upload_to=user_directory_path)
 
 
             
