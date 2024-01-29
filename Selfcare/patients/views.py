@@ -258,6 +258,7 @@ def upload_images(request):
         if form.is_valid():
             image = form.save(commit=False)
             image.user = request.user
+            print(image)
             form.save()
     else:
             form = ImageForm()

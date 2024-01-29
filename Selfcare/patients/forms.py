@@ -1,6 +1,6 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, MultiValueField, FileInput, MultiWidget
 from django import forms
-from .models import Doctor,Patient,Meetings, Image
+from .models import Doctor,Patient,Meetings, Image, Document
 
 
 
@@ -98,4 +98,14 @@ class ImageForm(forms.ModelForm):
         fields = ('image',)
         labels = {
             'image': 'Obraz',
+        }
+
+class DocumentForm(forms.ModelForm):
+    document = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-control', 'type': 'file', 'placeholder': 'Obraz'}))
+
+    class Meta:
+        model = Document
+        fields = ('document',)
+        labels = {
+            'document': 'Pliki',
         }
