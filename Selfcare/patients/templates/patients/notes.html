@@ -4,7 +4,12 @@
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ image_form.as_p }}
+    <button type="submit">Upload</button>
+</form>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ image_form.as_p }}
     <button type="submit">Upload</button>
 </form>
 

@@ -10,7 +10,7 @@ from django.utils import timezone
 from datetime import datetime
 from django import forms
 from django.forms import ModelForm
-from .forms import NewPatient, NewMeeting, NewDoctor, ImageForm
+from .forms import NewPatient, NewMeeting, NewDoctor, ImageForm, DocumentForm
 
 from .calendar_API import test_calendar, new_event, fetch_calendar, parse_calendar, get_settings
 from .helpers import extract, group_required
@@ -261,13 +261,15 @@ def upload_images(request):
             print(image)
             form.save()
     else:
-            form = ImageForm()
+            image_form = ImageForm()
+            file_form = DocumentForm()
 
 
 
     images = Image.objects.filter(user = request.user)      
     return render(request, "patients/notes.html", {
-            'form': form,
+            'image_form': image_form,
+            'file_form': file_form,
             'images': images
         } )
 
