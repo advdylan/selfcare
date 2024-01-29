@@ -84,7 +84,6 @@ def register(request):
             print(f"Error: {e}")
             
     else:
-        print("ERROR KUŹWA")
         user_form = CreateUserForm()
         patient_form = NewPatient()
     

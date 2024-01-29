@@ -110,15 +110,25 @@ class Meetings(models.Model):
                 self.duration = duration
 
 
-def user_directory_path(instance, filename):
+def images_user_directory_path(instance, filename):
     # This will save the image in a directory named after the user's id
-    string = f'user_{instance.user.id}/{filename}'
+    string = f'images/user_{instance.user.id}/{filename}'
+    return string
+
+def documents_user_directory_path(instance, filename):
+    # This will save the documents in a directory named after the user's id
+    string = f'documents/user_{instance.user.id}/{filename}'
     return string
 
 class Image(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
-    image = models.ImageField(upload_to=user_directory_path)
+    image = models.ImageField(upload_to=images_user_directory_path)
+
+class Document(models.Model):
+    name = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    document = models.FileField(upload_to=documents_user_directory_path)
 
 
             
