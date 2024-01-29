@@ -292,7 +292,6 @@ def upload_files(request):
     except Exception as e:
             print(f"Error: {e}")\
             
-
     return redirect('calendar')
 
 @group_required('admin')
