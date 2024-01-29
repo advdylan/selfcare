@@ -247,10 +247,11 @@ def calendar(request):
         "next_meetings": next_meetings
     })
 
-
+@group_required('doctors')
 def notes(request):
     return render(request, "patients/notes.html" )
 
+@group_required('doctors')
 def upload_images(request):
 
     if request.method == "POST":
@@ -264,14 +265,35 @@ def upload_images(request):
             image_form = ImageForm()
             file_form = DocumentForm()
 
-
-
     images = Image.objects.filter(user = request.user)      
     return render(request, "patients/notes.html", {
             'image_form': image_form,
             'file_form': file_form,
             'images': images
         } )
+
+@group_required('doctors')
+def upload_files(request):
+
+    try:
+        if request.method == "POST":
+            form = DocumentForm(request.POST, request.FILES)
+            print(form)
+            if form.is_valid():
+                document = form.save(commit=False)
+                document.user = request.user
+                print(document)
+                form.save()
+            
+        else:
+            file_form = DocumentForm()
+
+            
+    except Exception as e:
+            print(f"Error: {e}")\
+            
+
+    return redirect('calendar')
 
 @group_required('admin')
 def synchro(request):

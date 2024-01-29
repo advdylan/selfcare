@@ -20,5 +20,6 @@ urlpatterns = [
     path('doctors_meetings', views.doctors_meetings, name="doctors_meetings"),
     path('end_meeting', views.end_meeting, name="end_meeting"),
     path('start_meeting', views.start_meeting, name="start_meeting"),
-    path('upload_images', views.upload_images, name="upload_images")
+    path('upload_images', views.upload_images, name="upload_images"),
+    path('upload_files', views.upload_files, name='upload_files')
 ]

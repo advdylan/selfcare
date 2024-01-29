@@ -2,14 +2,12 @@
 {% load static %}
 {% block body %}
 
-<form method="post" enctype="multipart/form-data">
+
+
+
+<form method="post" action="upload_files" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ image_form.as_p }}
-    <button type="submit">Upload</button>
-</form>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ image_form.as_p }}
+    {{ file_form.as_p }}
     <button type="submit">Upload</button>
 </form>
 
