@@ -95,17 +95,20 @@ class ImageForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        fields = ('image',)
+        fields = ('image', 'date')
+
         labels = {
             'image': 'Obraz',
+            'date': 'Data'
         }
 
 class DocumentForm(forms.ModelForm):
-    document = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-control', 'type': 'file', 'placeholder': 'Obraz'}))
+    document = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-control', 'type': 'file', 'placeholder': 'Dokument'}))
 
     class Meta:
         model = Document
-        fields = ('document',)
+        fields = ('document', 'date')
         labels = {
             'document': 'Pliki',
+            'date': 'Data'
         }

@@ -259,7 +259,7 @@ def upload_images(request):
         if form.is_valid():
             image = form.save(commit=False)
             image.user = request.user
-            print(image)
+            
             form.save()
     else:
             image_form = ImageForm()
@@ -278,10 +278,13 @@ def upload_files(request):
     try:
         if request.method == "POST":
             form = DocumentForm(request.POST, request.FILES)
-            print(form)
+            now = timezone.now()
+            
             if form.is_valid():
                 document = form.save(commit=False)
                 document.user = request.user
+                document.name = request.FILES['document']
+                document.date = now
                 form.save()
             
         else:
