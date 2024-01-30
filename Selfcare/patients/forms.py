@@ -95,11 +95,10 @@ class ImageForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        fields = ('image', 'date')
+        fields = ('image', )
 
         labels = {
             'image': 'Obraz',
-            'date': 'Data'
         }
 
 class DocumentForm(forms.ModelForm):
@@ -107,8 +106,8 @@ class DocumentForm(forms.ModelForm):
 
     class Meta:
         model = Document
-        fields = ('document', 'date')
+        fields = ('document',)
         labels = {
             'document': 'Pliki',
-            'date': 'Data'
+
         }

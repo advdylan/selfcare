@@ -290,7 +290,7 @@ def upload_files(request):
         else:
             file_form = DocumentForm()
 
-            
+    
     except Exception as e:
             print(f"Error: {e}")\
             
