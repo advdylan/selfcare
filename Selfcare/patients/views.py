@@ -282,7 +282,6 @@ def upload_files(request):
             if form.is_valid():
                 document = form.save(commit=False)
                 document.user = request.user
-                print(document)
                 form.save()
             
         else:
