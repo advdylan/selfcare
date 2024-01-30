@@ -35,7 +35,7 @@
                       <tbody>
                         {% for up_meeting in upcoming_meetings %}
                         <tr class="table-secondary">
-                            <th scope="row">{{ up_meeting.start_time }}</th>
+                            <th scope="row">{{ up_meeting.start_time|date:"d-m-Y, H:i" }}</th>
                             <td><a href="{% url 'patient' up_meeting.patient.id %}" class="link-info"> {{ up_meeting.patient }}</td>
                             <td>{{ up_meeting.doctor}}</td>
                             <td> {{ up_meeting.progress }}</td>
@@ -63,7 +63,7 @@
                       <tbody>
                         {% for next_meeting in next_meetings %}
                         <tr class="table-secondary">
-                            <th scope="row" class="text-center fs-7">{{ next_meeting.start_time }}</th>
+                            <th scope="row" class="text-center fs-7">{{ next_meeting.start_time|date:"d-m-Y, H:i" }}</th>
                             <td><a href="{% url 'patient' next_meeting.patient.id %}" class="link-info"> {{ next_meeting.patient }}</td>
                             <td>{{ next_meeting.doctor }}</td>
                           </tr>

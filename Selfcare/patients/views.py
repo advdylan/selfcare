@@ -175,8 +175,6 @@ def dashboard(request):
 
 def meeting(request, pk):
 
-    #przerwałem bo nie mam jeszcze logowania użytkowników a tą podstrone chciałbym filtrować po lekarzu i pacjencie który akurat się zaloguje
-
     meeting = Meetings.objects.get(id=pk)
     
     return render(request,"patients/meeting.html", {
