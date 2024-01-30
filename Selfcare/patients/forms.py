@@ -54,7 +54,7 @@ class NewMeeting(forms.ModelForm):
 
         widgets = {
             'meeting_place': forms.Select(attrs={'class': 'form-select'}),
-            'start_time': DateTimeInput(attrs={'class': 'form-select'}),
+            'start_time': DateTimeInput(attrs={'class': 'form-select'}, format='%d-%m-%Y, %H:%M'),
             'doctor': forms.Select(attrs={'class': 'form-select'}),
             'patient': forms.Select(attrs={'class': 'form-select'})
         }

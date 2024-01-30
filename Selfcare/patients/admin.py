@@ -2,7 +2,7 @@ from django.contrib import admin
 from.models import Patient, Doctor, Meetings, Image, Document
 
 class MeetingsAdmin(admin.ModelAdmin):
-    list_display = ("meeting_place", "duration", "doctor","patient", 'progress')
+    list_display = ("meeting_place", "duration", "doctor","patient", 'progress', 'start_time')
 
 class PatientsAdmin(admin.ModelAdmin):
     list_display = ("id", "first_name", "last_name","email")

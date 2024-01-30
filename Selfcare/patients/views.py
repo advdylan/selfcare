@@ -151,6 +151,7 @@ def newmeeting(request):
             location = new_meeting.meeting_place
             start = new_meeting.start_time
             end = new_meeting.end_time
+            print(f"START: {start} END: {end}")
             new_event(location, description, start, end, doctor, patient)
             messages.success(request, 'Spotkanie dodane poprawnie!')
 
