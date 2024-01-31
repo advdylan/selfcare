@@ -4,6 +4,7 @@ from datetime import timedelta, datetime
 from django.utils import timezone, dateformat
 from django.template.defaultfilters import date as _date
 from django.contrib.auth.models import User, Group
+import os
 
 
 
@@ -125,6 +126,7 @@ class Image(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     image = models.ImageField(upload_to=images_user_directory_path)
     date = models.DateTimeField()
+
 
 class Document(models.Model):
     name = models.CharField(max_length=100)
