@@ -91,23 +91,18 @@ class NewDoctor(forms.ModelForm):
 
 
 class ImageForm(forms.ModelForm):
-    image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control', 'type': 'file', 'placeholder': 'Obraz'}))
+    image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control', 'type': 'file',}))
 
     class Meta:
         model = Image
         fields = ('image', )
 
-        labels = {
-            'image': 'Obraz',
-        }
-
 class DocumentForm(forms.ModelForm):
-    document = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-control', 'type': 'file', 'placeholder': 'Dokument'}))
+    document = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-control', 'type': 'file',}))
 
     class Meta:
         model = Document
         fields = ('document',)
         labels = {
-            'document': 'Pliki',
-
+            'Document': 'OMG'
         }

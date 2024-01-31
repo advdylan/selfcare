@@ -1,15 +1,53 @@
 {% extends "patients/layout.html" %}
 {% load static %}
 {% block body %}
+<style>
+.container-uploadfile {
+    padding-top: 4rem;
+    width: 70%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 
+  .upload-form {
+    width: 80%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
 
+  }
 
+.button-nw {
+    margin: 2rem;
+    width: 60%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+}
+</style>
 
+<div class= "container-uploadfile">
+    <div class="card border-primary mb-3" style="width: 50rem;">
+        <div class="card-header text-center fs-5">Prześlij plik</div>
 <form method="post" action="{%url 'upload_files'%}" enctype="multipart/form-data">
+    <div class="upload-form">
     {% csrf_token %}
     {{ file_form }}
-    <button type="submit">Upload</button>
+</div>
+    
+    <button type="submit" class="btn btn-outline-primary button-nw" style="width: 10rem;">Dodaj plik</button>
 </form>
+</div>
+</div>
+</div>
 
 {% for image in images %}
     <img src="{{ image.image.url }}" alt="User Image">
