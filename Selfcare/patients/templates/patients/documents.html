@@ -11,6 +11,17 @@
       align-items: center;
       height: 100%;
     }
+
+    .container-buttons {
+        display: flex;
+        justify-content: space-between;
+}
+
+    .container-buttons .button {
+        flex-grow: 1;
+        text-align: center;
+}
+
   </style>
   
   
@@ -26,7 +37,7 @@
           <th scope="col">ID</th>
           <th scope="col">Nazwa pliku</th>
           <th scope="col">Data utworzenia</th>
-          <th scope="col">Akcja</th>
+          <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -35,8 +46,15 @@
           <th scope="row">{{ document.id }}</th>
           <td>{{ document.name }}</td>
           <td>{{ document.date|date:"d-m-Y, H:i"  }}</td>
-          <td><a class="btn btn-outline-danger btn-sm button" href="" role="button">Usuń plik</button><a class="btn btn-outline-success btn-sm button" href="{{ document.document.url }}" role="button">Otwórz plik</button>
+
+          <td>
+            <div class="container-buttons">
+            <a class="btn btn-outline-success btn-sm button" href="{{ document.document.url }}" role="button">Otwórz w przeglądarce</button>
+            <a class="btn btn-outline-primary btn-sm button" href="{{ document.document.url }}" download="Bez_Nazwy" role="button">Pobierz</button>
+            <a class="btn btn-outline-danger btn-sm button" href="" role="button">Usuń</button>
           </td>
+
+        </div>
         </tr>
         {% endfor %}
   

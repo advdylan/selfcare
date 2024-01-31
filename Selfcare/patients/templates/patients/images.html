@@ -35,7 +35,9 @@
           <th scope="row">{{ document.id }}</th>
           <td>{{ document.name }}</td>
           <td>{{ document.date|date:"d-m-Y, H:i"  }}</td>
-          <td><a class="btn btn-outline-danger btn-sm button" href="" role="button">Usuń plik</button><a class="btn btn-outline-success btn-sm button" href="{{ document.document.url }}" role="button">Otwórz plik</button>
+          <td><a class="btn btn-outline-danger btn-sm button" href="" role="button">Usuń plik</button>
+          <a class="btn btn-outline-success btn-sm button" href="{{ document.document.url }}" role="button">Otwórz plik</button>
+          <a class="btn btn-outline-primary btn-sm button" href="{{ document.document.url }}" download="Bez_Nazwy" role="button">Pobierz plik</button>
           </td>
         </tr>
         {% endfor %}
