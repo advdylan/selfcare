@@ -5,7 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import Doctor, Patient, Meetings, Image
+from .models import Doctor, Patient, Meetings, Image, Document
 from django.utils import timezone
 from datetime import datetime
 from django import forms
@@ -248,11 +248,13 @@ def calendar(request):
 
 @group_required('doctors')
 def notes(request):
-    return render(request, "patients/notes.html" )
+    return render(request, "patients/notes.html")
+
 
 @group_required('doctors')
 def upload_images(request):
 
+    documents = Document.objects.all()
     if request.method == "POST":
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
@@ -268,7 +270,8 @@ def upload_images(request):
     return render(request, "patients/notes.html", {
             'image_form': image_form,
             'file_form': file_form,
-            'images': images
+            'images': images,
+            'documents': documents
         } )
 
 @group_required('doctors')

@@ -16,7 +16,7 @@
   
   <div class= "container-patients">
     <div class="card border-primary mb-3" style="width: 80%;">
-        <div class="card-header text-center fs-5">Dokumenty</div>
+        <div class="card-header text-center fs-5">Zdjęcia</div>
         <div class="form-newpatient">
         <div class="card-body">  
   <div class="tables">
@@ -30,7 +30,7 @@
         </tr>
         </thead>
         <tbody>
-          {% for document in documents  %}
+          {% for image in images  %}
         <tr class="table-secondary">       
           <th scope="row">{{ document.id }}</th>
           <td>{{ document.name }}</td>
