@@ -101,5 +101,12 @@ def group_required(group, login_url=None, raise_exception=False):
         return False
     return user_passes_test(check_perms, login_url=login_url)
 
+def add_permission(request, user, document):
+    
 
+
+
+    pass
+    
+    
 

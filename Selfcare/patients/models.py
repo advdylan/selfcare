@@ -131,6 +131,7 @@ class Image(models.Model):
 class Document(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
+    allowed_users = models.ManyToManyField(User, related_name='allowedUsersAsUser')
     document = models.FileField(upload_to=documents_user_directory_path)
     date = models.DateTimeField()
 
