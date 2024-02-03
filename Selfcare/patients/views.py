@@ -259,14 +259,14 @@ def upload_images(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
-            image.user = request.user
+            image.user_owner = request.user
             
             form.save()
     else:
             image_form = ImageForm()
             file_form = DocumentForm()
 
-    images = Image.objects.filter(user = request.user)      
+    images = Image.objects.filter(user_owner = request.user)      
     return render(request, "patients/notes.html", {
             'image_form': image_form,
             'file_form': file_form,
@@ -284,10 +284,10 @@ def upload_files(request):
             
             if form.is_valid():
                 document = form.save(commit=False)
-                document.user = request.user
+                document.user_owner = request.user
                 document.name = request.FILES['document']
                 document.date = now
-                form.save()
+                document.save()
             
         else:
             file_form = DocumentForm()
