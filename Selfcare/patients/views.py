@@ -254,19 +254,19 @@ def notes(request):
 @group_required('doctors')
 def upload_images(request):
 
-    documents = Document.objects.all()
+    documents = Document.objects.filter(allowed_users = request.user)
     if request.method == "POST":
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
-            image.user_owner = request.user
+            image.user = request.user
             
             form.save()
     else:
             image_form = ImageForm()
             file_form = DocumentForm()
 
-    images = Image.objects.filter(user_owner = request.user)      
+    images = Image.objects.filter(user = request.user)      
     return render(request, "patients/notes.html", {
             'image_form': image_form,
             'file_form': file_form,
@@ -284,7 +284,7 @@ def upload_files(request):
             
             if form.is_valid():
                 document = form.save(commit=False)
-                document.user_owner = request.user
+                document.user = request.user
                 document.name = request.FILES['document']
                 document.date = now
                 document.save()

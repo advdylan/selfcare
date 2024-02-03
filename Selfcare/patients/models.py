@@ -123,14 +123,14 @@ def documents_user_directory_path(instance, filename):
 
 class Image(models.Model):
     name = models.CharField(max_length=100)
-    user_owner = models.ForeignKey(User, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
     image = models.ImageField(upload_to=images_user_directory_path)
     date = models.DateTimeField()
 
 
 class Document(models.Model):
     name = models.CharField(max_length=100)
-    user_owner = models.ForeignKey(User, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
     allowed_users = models.ManyToManyField(User, related_name="allowed_users")
     document = models.FileField(upload_to=documents_user_directory_path)
     date = models.DateTimeField()
