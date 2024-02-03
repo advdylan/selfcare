@@ -103,9 +103,6 @@ def group_required(group, login_url=None, raise_exception=False):
 
 def add_permission(request, user, document):
     
-
-
-
     pass
     
     
