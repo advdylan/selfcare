@@ -1,6 +1,6 @@
 from django.contrib import messages
 
-from django.contrib.auth.models import Group, Permission
+from django.contrib.auth.models import Group, Permission, User
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
@@ -253,7 +253,7 @@ def notes(request):
 
 @group_required('doctors')
 def upload_images(request):
-
+    users = User.objects.all()
     documents = Document.objects.filter(allowed_users = request.user)
     if request.method == "POST":
         form = ImageForm(request.POST, request.FILES)
@@ -271,11 +271,13 @@ def upload_images(request):
             'image_form': image_form,
             'file_form': file_form,
             'images': images,
-            'documents': documents
+            'documents': documents,
+            'users': users
         } )
 
 @group_required('doctors')
 def upload_files(request):
+
 
     try:
         if request.method == "POST":
