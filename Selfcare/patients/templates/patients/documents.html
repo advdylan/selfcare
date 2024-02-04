@@ -12,19 +12,11 @@
       height: 100%;
     }
 
-    .container-buttons {
-        display: flex;
-        justify-content: space-between;
-}
-
-    .container-buttons .button {
-        flex-grow: 1;
-        text-align: center;
-}
 
     label[for=id_document] {
         display: none;
     }
+
 
   </style>
   
@@ -41,7 +33,7 @@
           <th scope="col">ID</th>
           <th scope="col">Nazwa pliku</th>
           <th scope="col">Data utworzenia</th>
-          <th scope="col"></th>
+          <th scope="col">Opcje</th>
         </tr>
         </thead>
         <tbody>
@@ -51,12 +43,18 @@
           <td>{{ document.name }}</td>
           <td>{{ document.date|date:"d-m-Y, H:i"  }}</td>
 
-          <td>
-            <div class="container-buttons">
-            <a class="btn btn-outline-success btn-sm button" href="{{ document.document.url }}" role="button">Otwórz w przeglądarce</button>           
-            <a class="btn btn-outline-primary btn-sm button" href="{{ document.document.url }}" download="Bez_Nazwy" role="button">Pobierz</button>
-            <a class="btn btn-outline-danger btn-sm button" href="" role="button">Usuń</button>
-            <button type="button" class="btn btn-outline-success btn-sm button" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-bs-original-title="Popover Title">Top</button>
+          <td style="text-align: center;">   
+              <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="display: inline-block; width: 50%; height: 50%">
+                <button type="button" class="btn btn-info" style="width: 50%; height: 20%;">Info</button>
+                <div class="btn-group" role="group">
+                  <button id="btnGroupDrop3" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop3">
+                    <a class="dropdown-item" href="{{ document.document.url }}">Otwórz</a>
+                    <a class="dropdown-item" download="Bez_Nazwy" href="{{ document.document.url }}">Pobierz</a>
+                    <a class="dropdown-item" download="Bez_Nazwy" href="#">Usuń</a>
+                  </div>
+                </div>
+              </div>
           </td>
 
         </div>
