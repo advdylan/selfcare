@@ -1,5 +1,16 @@
 {% load static %}
 {% block body %}
+<script>
+  $('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('document-id') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-title').text('New message to ' + recipient)
+  modal.find('.modal-body input').val(recipient)
+})
+</script>
 
 <style>
     .container-patients {
@@ -52,6 +63,7 @@
                     <a class="dropdown-item" href="{{ document.document.url }}">Otwórz</a>
                     <a class="dropdown-item" download="Bez_Nazwy" href="{{ document.document.url }}">Pobierz</a>
                     <a class="dropdown-item" download="Bez_Nazwy" href="#">Usuń</a>
+                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#shareModal">Udostępnij</a>
                   </div>
                 </div>
               </div>
@@ -60,6 +72,28 @@
         </div>
         </tr>
         {% endfor %}
+
+        <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="shareModalLabel">Udostępnij dokument</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form method="post" action="{}">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Share</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
   
         </tbody>
       </table>

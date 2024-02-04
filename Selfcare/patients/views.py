@@ -288,6 +288,7 @@ def upload_files(request):
                 document.name = request.FILES['document']
                 document.date = now
                 document.save()
+                document.allowed_users.add(request.user)
             
         else:
             file_form = DocumentForm()
