@@ -1,9 +1,10 @@
-from .models import Doctor, Patient, Meetings
+from .models import Doctor, Patient, Meetings, Document, Image, User
 from django.contrib import messages
 import six
 from django.core.exceptions import PermissionDenied
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import user_passes_test
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 
 
 import re
@@ -105,11 +106,22 @@ def add_permission(request):
 
     if request.method == "POST":
         try:
-            data = request.POST
+            #data = request.POST
             #<QueryDict:'docId': ['4'], 'username': ['ziolo']}>
             #doc_id = request.POST['docId']
             #username = request.POST['username']
-            
+            username = request.POST['username']
+            user = get_user_by_username(username)
+            if user is None:
+                messages.error(request, 'Brak użytkownika o podanej nazwie!')
+            else:
+                document = get_object_or_404(Document, id= request.POST['docId'])
+                if document is None:
+                    messages.error(request, 'Błąd dokumentu')
+                else:
+                    document.allowed_users.add(user)
+                    messages.success(request, f'Udostępniono poprawnie dla uzytkownika {user}')
+
 
         except Exception as e:
             print(f"Error: {e}")
@@ -119,5 +131,22 @@ def add_permission(request):
     
     pass
     
-    
+
+def get_user_by_username(username):
+    try:
+        return User.objects.get(username=username)
+    except User.DoesNotExist:
+        pass
+
+    try:
+        return Patient.objects.get(user__username=username)
+    except Patient.DoesNotExist:
+        pass
+
+    try:
+        return Doctor.objects.get(user__username=username)
+    except Doctor.DoesNotExist:
+        pass
+
+    return None
 

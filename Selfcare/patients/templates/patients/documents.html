@@ -21,6 +21,19 @@
 
   </style>
   
+  {% if messages %}
+        {% for message in messages %}
+        {% if message.tags %}
+        <div class="container-alert">
+        <div class="alert alert-dismissible alert-success">
+  <button type="button" class="btn-close {{ message.tags }}" data-bs-dismiss="alert"></button>
+  {% endif %}
+  <strong>Dobra robota!</strong> {{ message }} <a href="{% url 'meetings'%}" class="alert-link">
+</div>
+</div>
+{% endfor %}
+</ul>
+{% endif %}
   
   <div class= "container-patients">
     <div class="card border-primary mb-3" style="width: 80%;">
