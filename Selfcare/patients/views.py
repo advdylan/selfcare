@@ -254,7 +254,8 @@ def notes(request):
 @group_required('doctors')
 def upload_images(request):
     users = User.objects.all()
-    documents = Document.objects.filter(allowed_users = request.user)
+    owned_documents = Document.objects.filter(allowed_users = request.user)
+    received_documents = Document.objects.filter(user=request.user)
     if request.method == "POST":
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
@@ -271,7 +272,8 @@ def upload_images(request):
             'image_form': image_form,
             'file_form': file_form,
             'images': images,
-            'documents': documents,
+            'documents': owned_documents,
+            'received_documents': received_documents,
             'users': users
         } )
 

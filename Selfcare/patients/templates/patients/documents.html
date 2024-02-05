@@ -47,15 +47,17 @@
           <th scope="col">ID</th>
           <th scope="col">Nazwa pliku</th>
           <th scope="col">Data utworzenia</th>
+          <th scope="col">Użytkownicy z dostępem</th>
           <th scope="col">Opcje</th>
         </tr>
         </thead>
         <tbody>
-          {% for document in documents  %}
+          {% for document in owned_documents  %}
         <tr class="table-secondary">       
-          <th scope="row">{{ document.id }}</th>
-          <td>{{ document.name }}</td>
-          <td>{{ document.date|date:"d-m-Y, H:i"  }}</td>
+          <th scope="row">{{ owned_document.id }}</th>
+          <td>{{ owned_document.name }}</td>
+          <td>{{ owned_document.date|date:"d-m-Y, H:i"  }}</td>
+          <td>{{ owned_document.allowed_users  }}</td>
 
           <td style="text-align: center;">   
               <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="display: inline-block; width: 50%; height: 50%">
