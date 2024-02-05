@@ -101,7 +101,21 @@ def group_required(group, login_url=None, raise_exception=False):
         return False
     return user_passes_test(check_perms, login_url=login_url)
 
-def add_permission(request, user, document):
+def add_permission(request):
+
+    if request.method == "POST":
+        try:
+            data = request.POST
+            #<QueryDict:'docId': ['4'], 'username': ['ziolo']}>
+            #doc_id = request.POST['docId']
+            #username = request.POST['username']
+            
+
+        except Exception as e:
+            print(f"Error: {e}")
+        else:
+            return redirect('upload_images')
+        return redirect('upload_images')
     
     pass
     
