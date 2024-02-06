@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'welcome',
     'patients',
+    'files',
     'sms',
     'django.contrib.auth',
     'django.contrib.contenttypes',

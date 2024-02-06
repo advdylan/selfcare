@@ -246,62 +246,6 @@ def calendar(request):
         "next_meetings": next_meetings
     })
 
-@group_required('doctors')
-def notes(request):
-    return render(request, "patients/notes.html")
-
-
-@group_required('doctors')
-def upload_images(request):
-    users = User.objects.all()
-    owned_document = Document.objects.filter(user=request.user)
-    received_document = Document.objects.filter(allowed_users = request.user).exclude(user=request.user)
-    if request.method == "POST":
-        form = ImageForm(request.POST, request.FILES)
-        if form.is_valid():
-            image = form.save(commit=False)
-            image.user = request.user
-            
-            form.save()
-    else:
-            image_form = ImageForm()
-            file_form = DocumentForm()
-
-    images = Image.objects.filter(user = request.user)      
-    return render(request, "patients/notes.html", {
-            'image_form': image_form,
-            'file_form': file_form,
-            'images': images,
-            'owned_document': owned_document,
-            'received_document': received_document,
-            'users': users
-        } )
-
-@group_required('doctors')
-def upload_files(request):
-
-
-    try:
-        if request.method == "POST":
-            form = DocumentForm(request.POST, request.FILES)
-            now = timezone.now()
-            
-            if form.is_valid():
-                document = form.save(commit=False)
-                document.user = request.user
-                document.name = request.FILES['document']
-                document.date = now
-                document.save()
-                document.allowed_users.add(request.user)
-            
-        else:
-            file_form = DocumentForm()
-
-    
-    except Exception as e:
-            print(f"Error: {e}")
-            
-    return redirect('calendar')
 
 @group_required('admin')
 def synchro(request):
