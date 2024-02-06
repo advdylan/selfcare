@@ -47,7 +47,7 @@ def upload_images(request):
             file_form = DocumentForm()
 
     images = Image.objects.filter(user = request.user)      
-    return render(request, "patients/notes.html", {
+    return render(request, "files/notes.html", {
             'image_form': image_form,
             'file_form': file_form,
             'images': images,
@@ -80,5 +80,5 @@ def upload_files(request):
     except Exception as e:
             print(f"Error: {e}")
             
-    return redirect('files/calendar')
+    return redirect('files/upload_images')
 
