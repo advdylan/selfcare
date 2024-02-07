@@ -5,6 +5,9 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
+from django.http import JsonResponse
+from django.views import View
+from patients.models import User
 
 
 import re
@@ -150,3 +153,13 @@ def get_user_by_username(username):
 
     return None
 
+
+class UserAutoComplete(View):
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get('query', '')
+
+        users = User.objects.filter(username__icontains=query)
+        user_list = list(users.values('username'))
+  
+        return JsonResponse(user_list, safe=False)
+    
