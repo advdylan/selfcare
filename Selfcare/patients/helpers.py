@@ -157,9 +157,8 @@ def get_user_by_username(username):
 class UserAutoComplete(View):
     def get(self, request, *args, **kwargs):
         query = request.GET.get('query', '')
-
         users = User.objects.filter(username__icontains=query)
-        user_list = list(users.values('username'))
-  
+        user_list = [user.username for user in users]
+        print(user_list)
         return JsonResponse(user_list, safe=False)
     

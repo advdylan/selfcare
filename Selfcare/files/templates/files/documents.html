@@ -94,15 +94,16 @@
                   <input type="hidden" name="docId">
                   <div class="mb-3">
                     <label for="username" class="form-label">Nazwa użytkownika</label>
-                    <div id="app">
-                      <input type="text" v-model="query" class="form-control" id="username" name="username" autocomplete="off">
-                      <div v-if="results.length" class="user-autocomplete-results">
-                        <div v-for="result in results" @click="selectResult(result)">
-                          {{ result.username }}
+                    {% verbatim %}
+                      <div id="app">
+                        <input type="text" v-model="query" class="form-control" id="username" name="username" autocomplete="off">
+                        <div v-if="results.length" class="user-autocomplete-results">
+                          <div v-for="result in results" @click="selectResult(result)">
+                            {{ result }}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                      {% endverbatim %}
                   <button type="submit" class="btn btn-primary">Udostępnij</button>
                 </form>
               </div>
@@ -177,30 +178,27 @@
 
 <script>
 
-  new Vue({
-    el: '#app',
-    data: {
-      query: '',
-      results: []
-    },
-    watch: {
-      query: function(newQuery) {
-        console.log('New query:', newQuery);
-        axios.get('api/user-autocomplete/', {params: {query: newQuery}})
-          .then(response => {
-            console.log('Response data:', response.data);
-            this.results = response.data;
-          });
-      }
-    },
-    methods: {
-      selectResult(result) {
-        this.query = result.username;
-        this.results = [];
-      }
+new Vue({
+  el: '#app',
+  data: {
+    query: '',
+    results: []
+  },
+  watch: {
+    query: function(newQuery) {
+      axios.get('api/user-autocomplete/', {params: {query: newQuery}})
+        .then(response => {
+          this.results = response.data;
+        });
     }
-  });
-  
+  },
+  methods: {
+    selectResult(result) {
+      this.query = result;
+      this.results = [];
+    },
+  }
+});
 </script>
 
 
