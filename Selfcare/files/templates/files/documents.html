@@ -99,13 +99,14 @@
                         <input type="text" v-model="query" class="form-control" id="username" name="username" autocomplete="off">
                         <div v-if="results.length" class="user-autocomplete-results">
                           <div v-for="result in results" @click="selectResult(result)">
-                            {{ result }}
+                            <li>{{ result }}</li>
                           </div>
                         </div>
                       </div>
+                      <button type="submit" class="btn btn-primary">Udostępnij</button>
+                      </form>
                       {% endverbatim %}
-                  <button type="submit" class="btn btn-primary">Udostępnij</button>
-                </form>
+                  
               </div>
               
             </div>
@@ -195,7 +196,6 @@ new Vue({
   methods: {
     selectResult(result) {
       this.query = result;
-      this.results = [];
     },
   }
 });

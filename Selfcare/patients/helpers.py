@@ -108,11 +108,9 @@ def group_required(group, login_url=None, raise_exception=False):
 def add_permission(request):
 
     if request.method == "POST":
-        try:
-            #data = request.POST
-            #<QueryDict:'docId': ['4'], 'username': ['ziolo']}>
-            #doc_id = request.POST['docId']
-            #username = request.POST['username']
+        data = request.POST
+        print(f"POST DATA: {data}")
+        try:       
             username = request.POST['username']
             user = get_user_by_username(username)
             if user is None:
@@ -127,12 +125,11 @@ def add_permission(request):
 
 
         except Exception as e:
-            print(f"Error: {e}")
+            print(f"Error in add_permission: {e}")
         else:
             return redirect('upload_images')
         return redirect('upload_images')
     
-    pass
     
 
 def get_user_by_username(username):
@@ -159,6 +156,5 @@ class UserAutoComplete(View):
         query = request.GET.get('query', '')
         users = User.objects.filter(username__icontains=query)
         user_list = [user.username for user in users]
-        print(user_list)
         return JsonResponse(user_list, safe=False)
     
