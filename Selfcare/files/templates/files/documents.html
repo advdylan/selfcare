@@ -96,7 +96,7 @@
                     <label for="username" class="form-label">Nazwa użytkownika</label>
                     {% verbatim %}
                       <div id="app">
-                        <input type="text" v-model="query" class="form-control" id="username" name="username" autocomplete="off">
+                        <input type="text" v-model="query" class="form-control" id="username" name="username" autocomplete="off" value="{{ result }}">
                         <div v-if="results.length" class="user-autocomplete-results">
                           <div v-for="result in results" @click="selectResult(result)">
                             <li>{{ result }}</li>
@@ -177,29 +177,7 @@
   </div>
 
 
-<script>
 
-new Vue({
-  el: '#app',
-  data: {
-    query: '',
-    results: []
-  },
-  watch: {
-    query: function(newQuery) {
-      axios.get('api/user-autocomplete/', {params: {query: newQuery}})
-        .then(response => {
-          this.results = response.data;
-        });
-    }
-  },
-  methods: {
-    selectResult(result) {
-      this.query = result;
-    },
-  }
-});
-</script>
 
 
 
@@ -214,4 +192,30 @@ new Vue({
         })
     });
     </script>
+
+<script>
+
+  new Vue({
+    el: '#app',
+    data: {
+      query: '',
+      results: []
+    },
+    watch: {
+      query: function(newQuery) {
+        axios.get('api/user-autocomplete/', {params: {query: newQuery}})
+          .then(response => {
+            this.results = response.data;
+            console.log("Query updated: " + newQuery);
+          });
+      }
+    },
+    methods: {
+      selectResult(result) {
+        this.query = result;
+        console.log("Result clicked: " + result);
+      },
+    }
+  });
+  </script>
 {% endblock body %}

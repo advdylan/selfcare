@@ -111,7 +111,7 @@ def add_permission(request):
         data = request.POST
         print(f"POST DATA: {data}")
         try:       
-            username = request.POST['username']
+            username = request.POST.get('username')          
             user = get_user_by_username(username)
             if user is None:
                 messages.error(request, 'Brak użytkownika o podanej nazwie!')
