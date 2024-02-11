@@ -96,7 +96,7 @@
                     <label for="username" class="form-label">Nazwa użytkownika</label>
                     {% verbatim %}
                       <div id="app">
-                        <input type="text" v-model="query" class="form-control" id="username" name="username" autocomplete="off" value="{{ result }}">
+                        <input v-model="query" class="form-control" id="username" name="username" autocomplete="off">
                         <div v-if="results.length" class="user-autocomplete-results">
                           <div v-for="result in results" @click="selectResult(result)">
                             <li>{{ result }}</li>
