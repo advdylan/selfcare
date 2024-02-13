@@ -21,10 +21,6 @@ from decouple import config
 def index(request):
      pass
 
-
-
-
-
 @group_required('doctors')
 def notes(request):
     return render(request, "patients/notes.html")

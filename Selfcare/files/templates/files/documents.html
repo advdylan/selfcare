@@ -93,22 +93,11 @@
                   {% csrf_token %}
                   <input type="hidden" name="docId">
                   <div class="mb-3">
-                    <label for="username" class="form-label">Nazwa użytkownika</label>
-                    {% verbatim %}
-                      <div id="app">
-                        <input v-model="query" class="form-control" id="username" name="username" autocomplete="off">
-                        <div v-if="results.length" class="user-autocomplete-results">
-                          <div v-for="result in results" @click="selectResult(result)">
-                            <li>{{ result }}</li>
-                          </div>
-                        </div>
-                      </div>
-                      <button type="submit" class="btn btn-primary">Udostępnij</button>
-                      </form>
-                      {% endverbatim %}
-                  
+                    <label for="username" class="form-label">Nazwa użytkownika</label>                     
+                    <input type="text" class="form-control" id="username" name="username" autocomplete="off">               
+                    <button type="submit" class="btn btn-primary">Udostępnij</button>
+                </form>
               </div>
-              
             </div>
           </div>
         </div>
