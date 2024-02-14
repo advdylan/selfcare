@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from patients.helpers import testUserAutoComplete, UserAutocomplete
 from dal import autocomplete
-from django.urls import re_path as url
+from django.urls import include, re_path as url
 
 from patients import helpers
 

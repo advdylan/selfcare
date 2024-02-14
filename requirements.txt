@@ -46,3 +46,24 @@ urllib3==2.1.0
 vine==5.1.0
 wcwidth==0.2.12
 zope.interface==6.1
+coverage
+django-extensions
+django-generic-m2m
+django-gm2m
+django-querysetsequence
+django-nested-admin
+django-taggit
+django-tagging
+mock
+selenium
+pytest
+splinter
+pytest-django
+pytest-cov
+pytest-splinter
+tenacity
+whitenoise
+django-debug-toolbar
+sqlparse>=0.4.2 # not directly required, pinned by Snyk to avoid a vulnerability
+djhacker
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability

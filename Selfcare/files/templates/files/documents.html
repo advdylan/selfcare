@@ -93,12 +93,16 @@
                   {% csrf_token %}
                   <input type="hidden" name="docId">
                   <div class="mb-3">
-                    <label for="username" class="form-label">Nazwa użytkownika</label>                     
-                    <input type="text" data-provide="autocomplete" data-autocomplete-field="user_autocomplete" data-autocomplete-url="{% url 'autocomplete_light:user-autocomplete' %}" class="form-control" id="username" name="username" autocomplete="off">               
-                    <button type="submit" class="btn btn-primary">Udostępnij</button>
-                </form>
+                    <label for="username" class="form-label">Nazwa użytkownika</label>   
+                         
+                    {{ user_autocomplete.username }}
+                    <button type="submit" class="btn btn-primary">Udostępnij</button>               
               </div>
+            </form>
             </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            {{ user_autocomplete.media }}
+           
           </div>
         </div>
 
