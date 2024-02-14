@@ -8,8 +8,7 @@ from django.shortcuts import render, redirect, get_list_or_404, get_object_or_40
 from django.http import JsonResponse
 from django.views import View
 from patients.models import User
-from django_autocomplete_light import AutocompleteModelField
-
+from dal import autocomplete
 
 import re
 
@@ -152,14 +151,25 @@ def get_user_by_username(username):
     return None
 
 
-class UserAutoComplete(View):
+class testUserAutoComplete(View):
     def get(self, request, *args, **kwargs):
         query = request.GET.get('query', '')
         users = User.objects.filter(username__icontains=query)
         user_list = [user.username for user in users]
+        print(user_list)
         return JsonResponse(user_list, safe=False)
     
-class UserAutocomplete(AutocompleteModelField):
-    model = User
-    search_fields = ['username', 'email']
+class UserAutocomplete(autocomplete.Select2QuerySetView):
+    def get(self, request, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return User.objects.none()
+               
+        qs = User.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs
+
+    
 

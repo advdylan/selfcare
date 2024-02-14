@@ -12,7 +12,7 @@ from datetime import datetime
 from django import forms
 from django.forms import ModelForm
 from patients.forms import NewPatient, NewMeeting, NewDoctor, ImageForm, DocumentForm
-from patients.helpers import extract, group_required, UserAutoComplete
+from patients.helpers import extract, group_required, testUserAutoComplete
 from django.http import JsonResponse
 
 from decouple import config
@@ -32,7 +32,7 @@ def upload_images(request):
     users = User.objects.all()
     owned_document = Document.objects.filter(user=request.user)
     received_document = Document.objects.filter(allowed_users = request.user).exclude(user=request.user)
-    user_autocomplete = UserAutoComplete()
+    user_autocomplete = testUserAutoComplete()
     if request.method == "POST":
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
