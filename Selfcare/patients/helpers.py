@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect, get_list_or_404, get_object_or_40
 from django.http import JsonResponse
 from django.views import View
 from patients.models import User
+from django_autocomplete_light import AutocompleteModelField
 
 
 import re
@@ -158,3 +159,7 @@ class UserAutoComplete(View):
         user_list = [user.username for user in users]
         return JsonResponse(user_list, safe=False)
     
+class UserAutocomplete(AutocompleteModelField):
+    model = User
+    search_fields = ['username', 'email']
+

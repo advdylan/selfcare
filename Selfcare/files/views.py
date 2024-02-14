@@ -12,7 +12,8 @@ from datetime import datetime
 from django import forms
 from django.forms import ModelForm
 from patients.forms import NewPatient, NewMeeting, NewDoctor, ImageForm, DocumentForm
-from patients.helpers import extract, group_required
+from patients.helpers import extract, group_required, UserAutoComplete
+from django.http import JsonResponse
 
 from decouple import config
 
@@ -31,6 +32,7 @@ def upload_images(request):
     users = User.objects.all()
     owned_document = Document.objects.filter(user=request.user)
     received_document = Document.objects.filter(allowed_users = request.user).exclude(user=request.user)
+    user_autocomplete = UserAutoComplete()
     if request.method == "POST":
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
@@ -49,7 +51,8 @@ def upload_images(request):
             'images': images,
             'owned_document': owned_document,
             'received_document': received_document,
-            'users': users
+            'users': users,
+            'user_autocomplete': user_autocomplete
         } )
 
 @group_required('doctors')
@@ -78,3 +81,8 @@ def upload_files(request):
             
     return redirect('files/upload_images')
 
+def autocomplete_user(request):
+    query = request.GET.get('q')
+    results = User.objects.filter(username__icontains=query)[:10]
+    data = [{'pk': user.pk, 'value': user.username} for user in results]
+    return JsonResponse({'results': data})

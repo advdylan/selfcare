@@ -94,7 +94,7 @@
                   <input type="hidden" name="docId">
                   <div class="mb-3">
                     <label for="username" class="form-label">Nazwa użytkownika</label>                     
-                    <input type="text" class="form-control" id="username" name="username" autocomplete="off">               
+                    <input type="text" data-provide="autocomplete" data-autocomplete-field="user_autocomplete" data-autocomplete-url="{% url 'autocomplete_light:user-autocomplete' %}" class="form-control" id="username" name="username" autocomplete="off">               
                     <button type="submit" class="btn btn-primary">Udostępnij</button>
                 </form>
               </div>
@@ -182,29 +182,4 @@
     });
     </script>
 
-<script>
-
-  new Vue({
-    el: '#app',
-    data: {
-      query: '',
-      results: []
-    },
-    watch: {
-      query: function(newQuery) {
-        axios.get('api/user-autocomplete/', {params: {query: newQuery}})
-          .then(response => {
-            this.results = response.data;
-            console.log("Query updated: " + newQuery);
-          });
-      }
-    },
-    methods: {
-      selectResult(result) {
-        this.query = result;
-        console.log("Result clicked: " + result);
-      },
-    }
-  });
-  </script>
 {% endblock body %}
