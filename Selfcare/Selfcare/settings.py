@@ -33,12 +33,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
 INSTALLED_APPS = [
-    'dal',
-    'dal_select2',
     'django.contrib.admin',
     'welcome',
     'patients',
@@ -51,9 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_celery_results',
     'crispy_forms',
-    'crispy_bootstrap4',
-    'corsheaders'
-    
+    'crispy_bootstrap4',    
 ]
 
 MIDDLEWARE = [

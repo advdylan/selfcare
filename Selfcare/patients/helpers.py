@@ -158,18 +158,7 @@ class testUserAutoComplete(View):
         user_list = [user.username for user in users]
         print(user_list)
         return JsonResponse(user_list, safe=False)
-    
-class UserAutocomplete(autocomplete.Select2QuerySetView):
-    def get(self, request, *args, **kwargs):
-        if not self.request.user.is_authenticated:
-            return User.objects.none()
-               
-        qs = User.objects.all()
 
-        if self.q:
-            qs = qs.filter(username__istartswith=self.q)
-
-        return qs
 
     
 

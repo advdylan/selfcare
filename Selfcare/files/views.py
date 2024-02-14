@@ -10,11 +10,12 @@ from patients.models import Doctor, Patient, Meetings, Image, Document
 from django.utils import timezone
 from datetime import datetime
 from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, inlineformset_factory
 from patients.forms import NewPatient, NewMeeting, NewDoctor, ImageForm, DocumentForm
-from .forms import SearchForm
 from patients.helpers import extract, group_required, testUserAutoComplete
+
 from django.http import JsonResponse
+from django.views import generic
 
 from decouple import config
 
@@ -33,7 +34,6 @@ def upload_images(request):
     users = User.objects.all()
     owned_document = Document.objects.filter(user=request.user)
     received_document = Document.objects.filter(allowed_users = request.user).exclude(user=request.user)
-    user_autocomplete = SearchForm()
     if request.method == "POST":
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
@@ -53,7 +53,6 @@ def upload_images(request):
             'owned_document': owned_document,
             'received_document': received_document,
             'users': users,
-            'user_autocomplete': user_autocomplete
         } )
 
 @group_required('doctors')
