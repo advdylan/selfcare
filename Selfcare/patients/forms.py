@@ -1,6 +1,6 @@
 from django.forms import ModelForm, MultiValueField, FileInput, MultiWidget
 from django import forms
-from .models import Doctor,Patient,Meetings, Image, Document
+from .models import Doctor,Patient,Meetings, Image, Document, User
 
 
 
@@ -99,6 +99,7 @@ class ImageForm(forms.ModelForm):
 
 class DocumentForm(forms.ModelForm):
     document = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-control', 'type': 'file',}))
+    allowed_users = forms.ModelChoiceField(queryset=User.objects.all())
 
     class Meta:
         model = Document
