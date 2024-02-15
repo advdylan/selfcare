@@ -83,6 +83,14 @@ def upload_files(request):
             
     return redirect('upload_images')
 
+def document(request,pk):
+    document = Document.objects.get(id=pk)
+    return render(request, 'files/document.html', {
+        'document': document
+    })
+    
+
+
 def autocomplete_user(request):
     query = request.GET.get('q')
     results = User.objects.filter(username__icontains=query)[:10]
