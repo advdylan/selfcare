@@ -64,12 +64,15 @@ def upload_files(request):
             now = timezone.now()
             
             if form.is_valid():
+                data = request.POST
+                print(f"POST DATA: {data}")
                 document = form.save(commit=False)
                 document.user = request.user
                 document.name = request.FILES['document']
                 document.date = now
                 document.save()
-                document.allowed_users.add(request.user)
+                allowed_users = request.POST.getlist('allowed_users') 
+                document.allowed_users.set(allowed_users)
             
         else:
             file_form = DocumentForm()
@@ -78,7 +81,7 @@ def upload_files(request):
     except Exception as e:
             print(f"Error: {e}")
             
-    return redirect('files/upload_images')
+    return redirect('upload_images')
 
 def autocomplete_user(request):
     query = request.GET.get('q')
