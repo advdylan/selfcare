@@ -41,7 +41,8 @@
 <form method="post" action="{%url 'upload_files'%}" enctype="multipart/form-data">
     <div class="upload-form">
     {% csrf_token %}
-    {{ file_form.document }}
+    
+    {{ file_form|crispy }}
 </div>
     
     <button type="submit" class="btn btn-outline-primary button-nw" style="width: 10rem;">Dodaj plik</button>

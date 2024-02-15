@@ -111,8 +111,8 @@ def add_permission(request):
         data = request.POST
         print(f"POST DATA: {data}")
         try:       
-            username = request.POST.get('username')          
-            user = get_user_by_username(username)
+            allowed_users = request.POST.get('allowed_users')          
+            user = get_user_by_id(allowed_users)
             if user is None:
                 messages.error(request, 'Brak użytkownika o podanej nazwie!')
             else:
@@ -145,6 +145,24 @@ def get_user_by_username(username):
 
     try:
         return Doctor.objects.get(user__username=username)
+    except Doctor.DoesNotExist:
+        pass
+
+    return None
+
+def get_user_by_id(user_id):
+    try:
+        return User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        pass
+
+    try:
+        return Patient.objects.get(user__id=user_id)
+    except Patient.DoesNotExist:
+        pass
+
+    try:
+        return Doctor.objects.get(user__id=user_id)
     except Doctor.DoesNotExist:
         pass
 
