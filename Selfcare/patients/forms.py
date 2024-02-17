@@ -99,11 +99,11 @@ class ImageForm(forms.ModelForm):
 
 class DocumentForm(forms.ModelForm):
     document = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-control', 'type': 'file',}))
-    allowed_users = forms.ModelMultipleChoiceField(queryset=User.objects.all())
-
+    allowed_users = forms.ModelMultipleChoiceField(queryset=User.objects.all(), widget=forms.SelectMultiple(attrs={'class': 'form-select',}))
     class Meta:
         model = Document
-        fields = ('document',)
+        fields = ('document', 'allowed_users',)
         labels = {
-            'Document': 'OMG'
+            'Document': 'Dokument',
+            'allowed_users': 'Udostępnij'
         }

@@ -190,14 +190,15 @@
         var modal = $(this)
         modal.find('.modal-body input[name="docId"]').val(docId)
     })
-    $('#shareModal').on('shown.bs.modal', function () {
-        $("#id_allowed_users").select2();
-    });
     });
 
     </script>
     <script>
-      $("#id_allowed_users").select2()
+      $(document).ready(function() {
+    $("#id_allowed_users").select2({
+      theme: 'bootstrap',
+    });
+    });
     </script>
 
 {% endblock %}

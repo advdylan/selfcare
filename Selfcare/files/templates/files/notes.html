@@ -42,7 +42,8 @@
     <div class="upload-form">
     {% csrf_token %}
     
-    {{ file_form|crispy }}
+    {{ file_form.document|as_crispy_field }}
+    {{ file_form.allowed_users|as_crispy_field }}
 </div>
     
     <button type="submit" class="btn btn-outline-primary button-nw" style="width: 10rem;">Dodaj plik</button>

@@ -14,5 +14,4 @@ urlpatterns = [
     path('upload_files', views.upload_files, name='upload_files'),
     path('add_permission', helpers.add_permission, name="add_permission"),
     path('api/user-autocomplete/', testUserAutoComplete.as_view(), name='user-autocomplete2'),
-    path('document/<str:pk>', views.document, name="document")  
 ]
