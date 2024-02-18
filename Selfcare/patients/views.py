@@ -131,6 +131,7 @@ def newdoctor(request):
         "form": form,
         'user': request.user
     })
+
 @group_required('doctors')
 def newmeeting(request):
     form = NewMeeting
@@ -160,6 +161,7 @@ def newmeeting(request):
         'user': request.user
     })
 
+@group_required('doctors')
 def dashboard(request):
 
     now = timezone.now()
@@ -173,6 +175,7 @@ def dashboard(request):
         'user': request.user
     })
 
+@group_required('doctors')
 def meeting(request, pk):
 
     meeting = Meetings.objects.get(id=pk)
@@ -181,6 +184,7 @@ def meeting(request, pk):
         "meeting": meeting
     })
 
+@group_required('doctors')
 def end_meeting(request):
 
     if request.method == "POST":
@@ -193,6 +197,7 @@ def end_meeting(request):
 
     return redirect('doctors_meetings')
 
+@group_required('doctors')
 def start_meeting(request):
     if request.method == "POST":
         now = timezone.now()
@@ -205,7 +210,7 @@ def start_meeting(request):
     return redirect('doctors_meetings')
 
 
-
+@group_required('doctors')
 def calendar(request):
     form = NewMeeting
     #results = test_calendar()

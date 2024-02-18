@@ -32,6 +32,7 @@ class CreateUserForm(UserCreationForm):
 
         }
 
+
 class LoginUserForm(forms.Form):
 
     fields = ['username', 'password']
