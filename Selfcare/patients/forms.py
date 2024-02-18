@@ -100,12 +100,12 @@ class ImageForm(forms.ModelForm):
 class DocumentForm(forms.ModelForm):
     document = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-control', 'type': 'file',}))
 
-    data = User.objects.all()
-    user_names = [(user.first_name + ' ' + user.last_name, user.username) for user in data]
+
+    
 
 
 
-    allowed_users = forms.ModelMultipleChoiceField(queryset=user_names, widget=forms.SelectMultiple(attrs={'class': 'form-control', }))
+    allowed_users = forms.ModelMultipleChoiceField(queryset = User.objects.all(), widget=forms.SelectMultiple(attrs={'class': 'form-control', }))
     class Meta:
         model = Document
         fields = ('document', 'allowed_users',)
